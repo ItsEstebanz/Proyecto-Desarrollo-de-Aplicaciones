@@ -1,0 +1,43 @@
+{
+  "info": {
+    "name": "VetCare API",
+    "_postman_id": "vetcare-api-collection",
+    "description": "Endpoints REST del sistema VetCare - Proyecto Final SC-403",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "base_url", "value": "http://localhost:8080", "type": "string"}
+  ],
+  "item": [
+    {
+      "name": "GET /api/mascotas (listar)",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Accept", "value": "application/json"}],
+        "url": {
+          "raw": "{{base_url}}/api/mascotas",
+          "host": ["{{base_url}}"],
+          "path": ["api", "mascotas"]
+        },
+        "description": "Lista todas las mascotas activas."
+      }
+    },
+    {
+      "name": "POST /api/citas (crear)",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"mascotaId\": 1,\n  \"veterinarioId\": 1,\n  \"fechaHora\": \"2025-09-25T10:00:00\",\n  \"motivo\": \"Control anual\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/api/citas",
+          "host": ["{{base_url}}"],
+          "path": ["api", "citas"]
+        },
+        "description": "Crea una nueva cita."
+      }
+    }
+  ]
+}
