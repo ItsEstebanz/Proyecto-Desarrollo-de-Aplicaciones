@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomeStore - Iniciar Sesión</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e8c8f0;
+            min-height: 100vh;
+        }
+
+        /* ── Navbar ── */
+        .navbar {
+            border-bottom: 1px solid #f0e0f5;
+        }
+        .nav-link {
+            color: #2d1b6e !important;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .btn-lang {
+            background: none;
+            border: none;
+            color: #2d1b6e;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 0 6px;
+        }
+        .btn-sesion {
+            background: #e8d8f5;
+            color: #2d1b6e;
+            border: none;
+            border-radius: 8px;
+            padding: 0.45rem 1.2rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* ── Hero section ── */
+        .hero-section {
+            padding: 2rem 0 1rem 0;
+        }
+
+        /* ── Login form (lado izquierdo) ── */
+        .login-left {
+            padding: 1rem 2rem 1rem 4rem;
+        }
+
+        .form-title {
+            font-size: 1.05rem;
+            color: #4a3570;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .form-control-custom {
+            background: rgba(255,255,255,0.85);
+            border: 1.5px solid rgba(180,120,220,0.3);
+            border-radius: 10px;
+            padding: 0.65rem 1rem;
+            font-size: 0.95rem;
+            color: #2d1b6e;
+            width: 100%;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            outline: none;
+        }
+        .form-control-custom::placeholder {
+            color: #b09ccc;
+        }
+        .form-control-custom:focus {
+            border-color: #b44fe8;
+            box-shadow: 0 0 0 3px rgba(180, 79, 232, 0.12);
+            background: white;
+        }
+
+        /* Botón "Inicio de Sesion" — gris claro */
+        .btn-iniciar {
+            background: #e0d8ee;
+            color: #2d1b6e;
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 2.2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .btn-iniciar:hover {
+            background: #d0c4e8;
+        }
+
+        /* Botón "Regístrese" — magenta */
+        .btn-registrese {
+            background: linear-gradient(135deg, #d44de8, #b020cc);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 2.2rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .btn-registrese:hover {
+            opacity: 0.9;
+            color: white;
+        }
+
+        /* ── Imagen hero (lado derecho) ── */
+        .hero-right {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 2rem;
+        }
+        .hero-image-wrapper {
+            background: rgba(255,255,255,0.35);
+            border-radius: 20px;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 380px;
+            width: 100%;
+        }
+        .hero-image-wrapper img {
+            width: 100%;
+            max-width: 320px;
+        }
+
+        /* ── Feature cards ── */
+        .features-section {
+            padding: 1.5rem 2rem 2.5rem;
+        }
+        .feature-card {
+            background: white;
+            border-radius: 18px;
+            padding: 1.4rem 1.2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            box-shadow: 0 2px 12px rgba(100,30,150,0.07);
+            height: 100%;
+        }
+        .feature-icon {
+            background: #f0e8fa;
+            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        .feature-title {
+            font-weight: 700;
+            color: #2d1b6e;
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+        .feature-desc {
+            color: #7a6a9a;
+            font-size: 0.82rem;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* Error */
+        .alert-login-error {
+            background: rgba(255,255,255,0.7);
+            border: 1.5px solid #e07ab0;
+            color: #8b1a5a;
+            border-radius: 10px;
+            padding: 0.6rem 0.9rem;
+            font-size: 0.88rem;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ── Navbar ── -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid px-4">
+
+        <a class="navbar-brand" href="/">
+            <img th:src="@{/images/logo.png}"
+                 src="/images/logo.png"
+                 alt="HomeStore"
+                 style="height: 80px;">
+        </a>
+
+        <div class="d-flex align-items-center gap-4 ms-auto">
+            <a class="nav-link" href="/">Inicio</a>
+            <a class="nav-link" href="#">Nosotros</a>
+            <a class="nav-link" href="/productos">Productos</a>
+            <a class="nav-link" href="#">Contacto</a>
+
+            <div class="d-flex gap-1 ms-3">
+                <button class="btn-lang">ES</button>
+                <button class="btn-lang">EN</button>
+            </div>
+
+            <button class="btn-sesion ms-2">Inicio de Sesion</button>
+        </div>
+    </div>
+</nav>
+
+<!-- ── Hero: formulario + imagen ── -->
+<div class="container-fluid hero-section">
+    <div class="row align-items-center">
+
+        <!-- Lado izquierdo: formulario -->
+        <div class="col-lg-6 login-left">
+
+            <div class="alert-login-error mb-3" th:if="${error}" th:text="${error}"></div>
+            <div class="alert alert-success rounded-3 mb-3" th:if="${mensaje}" th:text="${mensaje}"></div>
+
+            <form th:action="@{/login}" method="post">
+
+                <div class="mb-3">
+                    <label class="form-title">Correo electrónico</label>
+                    <input type="email" name="correo" class="form-control-custom" placeholder="tucorreo@ejemplo.com" required autofocus>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-title">Contraseña</label>
+                    <input type="password" name="contrasena" class="form-control-custom" placeholder="••••••••" required>
+                </div>
+
+                <div class="d-flex gap-3 flex-wrap">
+                    <button type="submit" class="btn-iniciar">Inicio de Sesion</button>
+                    <a href="/registro" class="btn-registrese">Registrese</a>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- Lado derecho: imagen hero -->
+        <div class="col-lg-6 hero-right">
+            <div class="hero-image-wrapper">
+                <img th:src="@{/images/hero-home.png}" src="/images/hero-home.png" alt="HomeStore hero">
+            </div>
+        </div>
+    </div>
+
+    <!-- ── Feature cards ── -->
+    <div class="features-section">
+        <div class="row g-3">
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <div class="feature-icon">🛒</div>
+                    <div>
+                        <div class="feature-title">Productos</div>
+                        <p class="feature-desc">Gestiona tu catálogo de Productos</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <div>
+                        <div class="feature-title">Inventario</div>
+                        <p class="feature-desc">Controla el Stock en tiempo real</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <div>
+                        <div class="feature-title">Ventas</div>
+                        <p class="feature-desc">Registra y Consulta tus ventas</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <div>
+                        <div class="feature-title">Reportes</div>
+                        <p class="feature-desc">Obten reportes y estadísticas</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
