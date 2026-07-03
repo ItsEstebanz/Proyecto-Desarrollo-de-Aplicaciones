@@ -10,4 +10,23 @@ public class HomeController {
     public String home() {
         return "home";
     }
+      @GetMapping("/productos")
+    public String productos() {
+        return "productos";
+    }
+
+    @GetMapping("/categorias")
+    public String categorias() {
+        return "categorias";
+    }
+
+    @GetMapping("/carrito")
+    public String carrito() {
+        return "carrito";
+    }
+
+    @GetMapping("/ubicacion")
+    public String ubicacion() {
+        return "ubicacion";
+    }
 }
