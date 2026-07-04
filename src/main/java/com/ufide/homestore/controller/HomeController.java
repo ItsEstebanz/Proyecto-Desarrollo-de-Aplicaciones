@@ -5,28 +5,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-    
+
     @GetMapping("/")
     public String home() {
         return "home";
     }
-      @GetMapping("/productos")
-    public String productos() {
-        return "productos";
+
+    @GetMapping("/products")
+    public String products() {
+        return "products";
     }
 
-    @GetMapping("/categorias")
-    public String categorias() {
-        return "categorias";
+    @GetMapping("/categories")
+    public String categories() {
+        return "categories";
     }
 
-    @GetMapping("/carrito")
-    public String carrito() {
-        return "carrito";
+    @GetMapping("/cart")
+    public String cart() {
+        return "cart";
     }
 
-    @GetMapping("/ubicacion")
-    public String ubicacion() {
-        return "ubicacion";
+    @GetMapping("/location")
+    public String location() {
+        return "location";
     }
 }
