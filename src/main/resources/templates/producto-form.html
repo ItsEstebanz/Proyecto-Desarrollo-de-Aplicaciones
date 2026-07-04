@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Producto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { margin:0; font-family: Arial, sans-serif; background:#efd6f7; }
+        .layout { display:flex; min-height:100vh; }
+        .sidebar { width:220px; background:white; padding:25px 15px; border-right:1px solid #eee; }
+        .logo { text-align:center; margin-bottom:30px; }
+        .logo img { width:95px; }
+        .menu a { display:block; padding:12px 18px; margin-bottom:8px; text-decoration:none; color:#2b195c; border-radius:12px; font-weight:600; }
+        .menu a.active, .menu a:hover { background:#7b35d8; color:white; }
+        .content { flex:1; padding:35px; }
+        .topbar { background:white; border-radius:18px; padding:18px 25px; margin-bottom:25px; display:flex; justify-content:space-between; align-items:center; }
+        .form-card { background:white; max-width:650px; margin:auto; border-radius:18px; padding:30px; box-shadow:0 4px 15px rgba(0,0,0,0.08); }
+        label { font-weight:600; color:#2b195c; }
+        .form-control, .form-select { border-radius:10px; }
+        .btn-purple { background:#b535e6; color:white; border:none; border-radius:10px; padding:9px 25px; }
+        .btn-purple:hover { background:#9828c7; color:white; }
+        .btn-light-custom { background:#f4e9f8; color:#2b195c; border-radius:10px; padding:9px 25px; text-decoration:none; }
+    </style>
+</head>
+<body>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="/images/logo.png" alt="HomeStore">
+        </div>
+
+        <div class="menu">
+            <a href="/">Dashboard</a>
+            <a href="/productos" class="active">Productos</a>
+            <a href="#">Inventario</a>
+            <a href="#">Ventas</a>
+            <a href="#">Clientes</a>
+            <a href="#">Reportes</a>
+            <a href="#">Usuarios</a>
+            <a href="#">Configuración</a>
+            <a href="/">Cerrar Sesión</a>
+        </div>
+    </aside>
+
+    <main class="content">
+
+        <div class="topbar">
+            <h3 th:text="${producto.productId == null ? 'Agregar Producto' : 'Actualizar Producto'}"></h3>
+            <span style="background:#d99af7; color:white; padding:10px 14px; border-radius:50%;">✎</span>
+        </div>
+
+        <div class="form-card">
+            <form th:action="@{/productos/guardar}" th:object="${producto}" method="post">
+
+                <input type="hidden" th:field="*{productId}">
+
+                <div class="mb-3">
+                    <label>Nombre Producto</label>
+                    <input type="text" class="form-control" th:field="*{name}" placeholder="Ej: Silla de Oficina" required>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>Categoría</label>
+                        <select class="form-select" th:field="*{category}" required>
+                            <option value="">Seleccionar categoría</option>
+                            <option th:each="categoria : ${categorias}"
+                                    th:value="${categoria.categoryId}"
+                                    th:text="${categoria.name}">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label>Precio</label>
+                        <input type="number" step="0.01" class="form-control" th:field="*{price}" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label>Stock</label>
+                    <input type="number" class="form-control" th:field="*{stock}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Costo</label>
+                    <input type="number" step="0.01" class="form-control" th:field="*{costPrice}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Proveedor</label>
+                    <select class="form-select" th:field="*{supplier}" required>
+                        <option value="">Seleccionar proveedor</option>
+                        <option th:each="proveedor : ${proveedores}"
+                                th:value="${proveedor.supplierId}"
+                                th:text="${proveedor.name}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label>Descripción</label>
+                    <textarea class="form-control" th:field="*{description}" rows="3" placeholder="Escriba una descripción..."></textarea>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn-purple">Guardar</button>
+                    <a href="/productos" class="btn-light-custom ms-2">Cancelar</a>
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>
