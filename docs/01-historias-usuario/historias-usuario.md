@@ -1,263 +1,281 @@
-# Historias de Usuario — VetCare
+# Historias de Usuario - HomeStore
 
-> **Proyecto:** VetCare — Sistema de Gestión Veterinaria
-> **Cliente potencial:** Clínicas veterinarias pequeñas y medianas
-> **Total de historias:** 20 (muestra mínima requerida)
+## **Proyecto:** HomeStore - Sistema Web de Gestión de Ventas e Inventario
 
-## 🧭 Índice
-
-- [HU-01 a HU-05: Módulo de Usuarios](#módulo-de-usuarios)
-- [HU-06 a HU-10: Módulo de Mascotas](#módulo-de-mascotas)
-- [HU-11 a HU-14: Módulo de Citas (transaccional)](#módulo-de-citas-transaccional)
-- [HU-15 a HU-17: Módulo de Servicios](#módulo-de-servicios)
-- [HU-18 a HU-20: Módulo de Reportes y API](#módulo-de-reportes-y-api)
+> **Cliente potencial:** Pequeñas y medianas tiendas de comercio
+> **Total de historias:** 20
 
 ---
 
-## Módulo de Usuarios
+### HU-01 - Visualización de ventanas
 
-### HU-01 — Registro de cliente
-**Como** cliente nuevo,
-**quiero** registrarme en el sistema con correo y contraseña,
-**para** poder agendar citas para mis mascotas.
+**Como** posible comprador,
+**necesito** poder visualizar las distintas pestañas habilitadas en la página,
+**para** así poder visualizar los productos existentes.
 
 **Criterios de aceptación:**
-- El correo debe ser único en el sistema.
-- La contraseña debe tener mínimo 8 caracteres.
-- La contraseña se almacena cifrada con BCrypt.
-- Al registrarse, el rol asignado por defecto es `CLIENTE`.
-- Se muestra mensaje de confirmación.
+
+- El comprador debe poder navegar entre las distintas pestañas habilitadas.
+- Puede cambiar de pestaña sin inconveniente, siguiendo el flujo correspondiente.
+- Debe visualizarse en la pestaña donde el posible comprador se encuentra.
 
 ---
 
-### HU-02 — Inicio de sesión
-**Como** usuario registrado,
-**quiero** iniciar sesión con mi correo y contraseña,
-**para** acceder a las funcionalidades del sistema según mi rol.
+### HU-02 - Compra en línea
+
+**Como** comprador,
+**necesito** poder ejecutar compras dentro del sistema,
+**para** poder satisfacer mis necesidades (según los productos habilitados).
 
 **Criterios de aceptación:**
-- Si las credenciales son correctas, redirige al dashboard correspondiente.
-- Si son incorrectas, muestra mensaje de error sin revelar cuál campo falló.
-- Se gestiona la sesión con Spring Security.
+
+- El comprador podrá seleccionar el o los artículos que desee para añadirlos al carrito de compras.
+- El comprador podrá disminuir o aumentar las cantidades del producto seleccionado.
 
 ---
 
-### HU-03 — Cierre de sesión
-**Como** usuario autenticado,
-**quiero** cerrar sesión,
-**para** proteger mi cuenta cuando uso una computadora compartida.
+### HU-03 - Gestión del carrito de compras
+
+**Como** comprador,
+**necesito** poder visualizar mi carrito de compras,
+**para** validar si me hace falta algún artículo o si llevo algo demás.
 
 **Criterios de aceptación:**
-- Al cerrar sesión, el usuario es redirigido al login.
-- La sesión queda invalidada.
+
+- El comprador debe poder visualizar los artículos añadidos al carrito de compras, así como el monto subtotal de la compra.
+- El comprador debe poder disminuir o aumentar la cantidad de cada artículo presente en el carrito.
+- El comprador puede aceptar su carrito, para dirigirse a la pestaña de pago.
 
 ---
 
-### HU-04 — Protección de rutas según rol
-**Como** administrador,
-**quiero** que solo los usuarios con rol `ADMIN` puedan acceder a la gestión de usuarios,
-**para** mantener la seguridad del sistema.
+### HU-04 - Opciones de pago
+
+**Como** comprador,
+**necesito** poder observar las opciones de pago disponibles en el sistema,
+**para** así poder elegir la que mejor me convenga.
 
 **Criterios de aceptación:**
-- Un cliente que intente acceder a `/admin/**` recibe 403 Forbidden.
-- Spring Security maneja la autorización con `@PreAuthorize`.
+
+- El comprador debe poder visualizar las opciones de pago que se encuentran disponibles al momento de la compra.
+- El comprador debe poder seleccionar el tipo de pago preferido.
 
 ---
 
-### HU-05 — Gestión de roles (admin)
-**Como** administrador,
-**quiero** asignar y cambiar roles a los usuarios,
-**para** controlar quién puede hacer qué en el sistema.
+### HU-05 - Vista por categorías
+
+**Como** comprador,
+**necesito** poder visualizar los productos por categorías,
+**para** poder organizar mejor mis compras o artículos que necesite acorde a mi lista de necesidades.
 
 **Criterios de aceptación:**
-- Solo el admin ve la lista de usuarios.
-- Puede cambiar el rol entre: ADMIN, VETERINARIO, RECEPCIONISTA, CLIENTE.
+
+- El comprador debe poder visualizar las categorías existentes.
+- El comprador debe poder desplegar los artículos por categoría existente.
+- El comprador debe poder replegar la pestaña con los artículos existentes.
 
 ---
 
-## Módulo de Mascotas
+### HU-06 - Visita a ubicación física
 
-### HU-06 — Registrar mascota nueva
-**Como** cliente autenticado,
-**quiero** registrar a mi mascota con sus datos,
-**para** que la clínica tenga su historial.
+**Como** comprador,
+**necesito** poder acceder fácilmente a la ubicación de la tienda u oficina física,
+**para** poder saber dónde se encuentran ubicados y visitarlos con mayor facilidad.
 
 **Criterios de aceptación:**
-- Datos requeridos: nombre, especie, raza, fecha de nacimiento, peso.
-- La mascota queda asociada al cliente que la registra.
+
+- El comprador podrá visualizar un botón de redireccionamiento a la ubicación física.
+- El comprador, al tocar el botón, deberá ser redirigido a una ubicación en Google Maps.
 
 ---
 
-### HU-07 — Listar mis mascotas
-**Como** cliente,
-**quiero** ver el listado de mis mascotas registradas,
-**para** seleccionar una al agendar una cita.
+### HU-07 - Regreso a página principal
+
+**Como** usuario final de la página,
+**necesito** poder volver a la página principal,
+**para** continuar navegando y buscando artículos que podría necesitar.
 
 **Criterios de aceptación:**
-- Solo muestra las mascotas del cliente autenticado.
-- Lista en formato responsive con cards.
+
+- El usuario deberá visualizar una opción para regresar a la página principal.
+- Al pulsar la opción, el usuario deberá ser redirigido a la página principal, siguiendo el flujo de navegación.
 
 ---
 
-### HU-08 — Ver detalle de mascota
-**Como** cliente o veterinario,
-**quiero** ver el detalle completo de una mascota,
-**para** consultar su historial médico.
+### HU-08 - Confirmación de compra
+
+**Como** comprador,
+**necesito** verificar que mi compra fue realizada con éxito,
+**para** poder tener confianza en que contaré con los artículos que solicité.
 
 **Criterios de aceptación:**
-- Muestra: datos básicos, citas pasadas, tratamientos.
-- El veterinario ve todas las mascotas; el cliente solo las suyas.
+
+- El usuario deberá ver el monto total y tener la opción de aceptar o volver al carrito de compras.
+- El comprador, al pulsar aceptar, deberá observar una pantalla de confirmación con el número de su factura.
 
 ---
 
-### HU-09 — Editar datos de mascota
-**Como** cliente,
-**quiero** actualizar el peso o datos de mi mascota,
-**para** mantener la información al día.
+### HU-09 - Visualización de sistemas de entrega
+
+**Como** comprador,
+**necesito** verificar si cuentan con opciones de envío como mensajería o correo,
+**para** ver cuál opción se adapta más a mis posibilidades.
 
 **Criterios de aceptación:**
-- Solo el dueño y el admin pueden editar.
-- Se valida que los datos sean correctos antes de guardar.
+
+- Al comprador deberá aparecerle si hay opciones de entregas durante su compra.
+- Al comprador deberá aparecerle el monto adicional por la entrega.
 
 ---
 
-### HU-10 — Dar de baja una mascota
-**Como** cliente,
-**quiero** marcar una mascota como inactiva,
-**para** que ya no aparezca en mi lista de mascotas activas.
+### HU-10 - Gestión de promociones
+
+**Como** colaborador de la página,
+**necesito** poder eliminar o agregar promociones de artículos,
+**para** que sean visibles a los clientes y que estos puedan aprovechar los descuentos.
 
 **Criterios de aceptación:**
-- La mascota NO se borra de la BD (preserva historial).
-- Cambia un flag `activa = false`.
-- Se solicita confirmación antes de la acción.
+
+- El colaborador podrá desplegar la ventana de administración para ajustar las promociones.
+- El colaborador deberá ver una pantalla de confirmación, luego de ajustar la promoción requerida.
 
 ---
 
-## Módulo de Citas (transaccional)
+### HU-11 - Gestión de precios
 
-### HU-11 — Agendar una cita
-**Como** cliente,
-**quiero** agendar una cita para mi mascota en una fecha y hora específica,
-**para** llevarla a consulta.
+**Como** colaborador,
+**necesito** poder subir o disminuir el precio de un artículo,
+**para** facturar lo justo acorde al mercado.
 
 **Criterios de aceptación:**
-- Se valida que el horario esté disponible (no haya conflictos).
-- Se selecciona: mascota, fecha, hora, motivo, veterinario.
-- La cita queda en estado `PENDIENTE`.
+
+- El colaborador podrá desplegar la ventana de administración para poder ajustar el precio por artículo.
+- El colaborador podrá seleccionar varios artículos a la vez para ponerles el mismo precio.
+- El colaborador deberá ver una pantalla de confirmación, luego de ajustar el monto requerido.
 
 ---
 
-### HU-12 — Ver agenda del veterinario
-**Como** veterinario,
-**quiero** ver mi agenda del día y la semana,
-**para** organizar mis consultas.
+### HU-12 - Cerrar sesión
+
+**Como** colaborador,
+**requiero** poder cerrar sesión en la página web,
+**para** evitar que otro colaborador haga cambios no deseados en mi nombre.
 
 **Criterios de aceptación:**
-- Muestra las citas asignadas al veterinario autenticado.
-- Filtros por fecha y estado (pendiente, confirmada, completada).
+
+- El colaborador tendrá la opción de cerrar sesión.
+- El colaborador verá un mensaje de confirmación en el cierre de sesión y posteriormente el sistema deberá volver al inicio.
 
 ---
 
-### HU-13 — Cambiar estado de una cita
-**Como** veterinario o recepcionista,
-**quiero** cambiar el estado de una cita (confirmar, completar, cancelar),
-**para** reflejar lo que pasó.
+### HU-13 - Supervisión de colaboradores
+
+**Como** encargado de supervisar a los colaboradores,
+**necesito** poder visualizar los cambios que fueron ejecutados por los colaboradores,
+**para** así poder llevar un orden en cambios ejecutados en los productos.
 
 **Criterios de aceptación:**
-- Estados válidos: PENDIENTE → CONFIRMADA → COMPLETADA / CANCELADA.
-- Solo permite transiciones válidas.
-- Al completar una cita, se genera la factura automáticamente.
+
+- El encargado de supervisión deberá poder observar los cambios ejecutados por sus colaboradores.
+- El encargado podrá revertir los cambios ejecutados por sus colaboradores.
 
 ---
 
-### HU-14 — Cancelar mi cita
-**Como** cliente,
-**quiero** cancelar una cita futura,
-**para** liberar el espacio si no puedo asistir.
+### HU-14 - Soporte técnico al sistema
+
+**Como** encargado de soporte técnico,
+**necesito** poder darle seguimiento a las consultas que tengan los usuarios con respecto al funcionamiento del sistema,
+**para** fomentar un uso adecuado del mismo.
 
 **Criterios de aceptación:**
-- Solo se pueden cancelar citas PENDIENTE o CONFIRMADA.
-- Se pide confirmación antes.
-- El cliente recibe notificación de la cancelación.
+
+- El encargado de soporte técnico podrá ver las consultas de los clientes, mediante correo electrónico.
+- El encargado de soporte técnico deberá guiar a los usuarios dentro del sistema.
 
 ---
 
-## Módulo de Servicios
+### HU-15 - Gestión de descuentos
 
-### HU-15 — Listar servicios disponibles
-**Como** cliente,
-**quiero** ver los servicios y precios que ofrece la clínica,
-**para** decidir qué solicitar.
+**Como** colaborador,
+**necesito** acceder al descuento del 10% otorgado por la empresa al ser empleado de la misma,
+**para** poder realizar mis compras a un menor costo que el real.
 
 **Criterios de aceptación:**
-- Muestra: nombre, descripción, precio, duración estimada.
-- Lista pública (no requiere login).
+
+- El colaborador deberá introducir el código de descuento para obtener el mismo.
+- El colaborador deberá observar una ventana de confirmación con respecto al descuento solicitado.
 
 ---
 
-### HU-16 — Crear/editar servicios (admin)
-**Como** administrador,
-**quiero** crear y editar los servicios que ofrece la clínica,
-**para** mantener actualizado el catálogo.
+### HU-16 - Gestión de facturas
+
+**Como** el gerente de la empresa,
+**necesito** poder observar las facturas generadas por el sistema,
+**para** poder brindar un informe claro de posibles mejoras dentro del sistema.
 
 **Criterios de aceptación:**
-- CRUD completo (Create, Read, Update, Delete).
-- No se permite eliminar un servicio si tiene citas históricas (soft delete).
+
+- El gerente deberá poder visualizar todas las facturas generadas.
+- El gerente deberá visualizar la factura más el monto total.
+- El gerente podrá solicitar el reporte del monto total generado.
 
 ---
 
-### HU-17 — Asociar servicios a una cita
-**Como** veterinario,
-**quiero** registrar qué servicios brindé en una cita,
-**para** generar la facturación correcta.
+### HU-17 - Visualización de colaboradores
+
+**Como** gerente de la empresa,
+**necesito** poder observar la planilla de la compañía,
+**para** poder observar el número de empleados existentes y si se requiere una contratación o un cese.
 
 **Criterios de aceptación:**
-- Puede agregar varios servicios a una misma cita.
-- El total de la factura se calcula automáticamente.
+
+- El gerente deberá poder observar todos los empleados existentes en nómina.
+- El gerente podrá eliminar empleados, en caso de despido o renuncia.
 
 ---
 
-## Módulo de Reportes y API
+### HU-18 - Opinión pública
 
-### HU-18 — Reporte de ingresos del mes
-**Como** administrador,
-**quiero** ver un reporte de ingresos por mes,
-**para** evaluar el desempeño financiero de la clínica.
+**Como** usuario,
+**necesito** generar mi opinión con respecto a la funcionalidad del sistema,
+**para** así poder dar retroalimentación al grupo desarrollador.
 
 **Criterios de aceptación:**
-- Muestra: total facturado, número de citas atendidas, top de servicios.
-- Filtros por rango de fechas.
+
+- El usuario podrá desplegar la ventana de opinión pública.
+- El usuario podrá valorar de 0 a 5 estrellas la funcionalidad del sistema.
 
 ---
 
-### HU-19 — API: consultar mascotas (REST)
-**Como** desarrollador de la app móvil,
-**quiero** consultar las mascotas vía API REST,
-**para** mostrarlas en la app del cliente.
+### HU-19 - Revisión de opiniones
+
+**Como** gerente de la empresa,
+**necesito** poder verificar las reseñas de los clientes,
+**para** así poder implementar mejoras en el sistema.
 
 **Criterios de aceptación:**
-- Endpoint `GET /api/mascotas`.
-- Responde con JSON.
-- Requiere autenticación.
+
+- El gerente deberá poder visualizar las opiniones de los usuarios.
+- El gerente deberá poder analizar las opiniones en base al reporte de nómina.
+- El gerente deberá brindar retroalimentación al equipo.
 
 ---
 
-### HU-20 — API: crear cita (REST)
-**Como** desarrollador de la app móvil,
-**quiero** crear una cita vía API REST,
-**para** que los clientes puedan agendar desde el móvil.
+### HU-20 - Gestión de ganancias o pérdidas
+
+**Como** dueño de la tienda,
+**necesito** saber si mi negocio está generando pérdidas o ganancias,
+**para** poder visualizar acciones a futuro en beneficio de mi estabilidad y la de mi negocio.
 
 **Criterios de aceptación:**
-- Endpoint `POST /api/citas`.
-- Valida los datos en el body.
-- Responde con `201 Created` y el ID de la cita generada.
-- Devuelve `400 Bad Request` si los datos son inválidos.
+
+- El dueño podrá visualizar el total reportado.
+- El dueño podrá visualizar el número de ventas confirmadas.
 
 ---
 
 ## ✅ Resumen
 
 - **Total:** 20 historias de usuario
-- **Roles cubiertos:** Cliente, Veterinario, Recepcionista, Administrador
-- **Módulos:** Usuarios, Mascotas, Citas (transaccional), Servicios, Reportes, API REST
-- **Cumple requisito:** Módulo de Usuarios (4.2), CRUD principal (4.3), Módulo Transaccional (4.4), API REST (4.10)
+- **Roles cubiertos:** comprador/posible comprador, usuario final, colaborador, encargado de supervisión, encargado de soporte técnico, gerente de la empresa, dueño de la tienda
+- **Módulos:** TBA
+- **Cumple requisito:** TBA

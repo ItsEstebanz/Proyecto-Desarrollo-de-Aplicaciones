@@ -1,8 +1,8 @@
 {
   "info": {
-    "name": "VetCare API",
-    "_postman_id": "vetcare-api-collection",
-    "description": "Endpoints REST del sistema VetCare - Proyecto Final SC-403",
+    "name": "HomeStore API",
+    "_postman_id": "homestore-api-collection",
+    "description": "Endpoints REST del sistema HomeStore - Proyecto Final SC-403",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [

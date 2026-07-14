@@ -1,40 +1,45 @@
-# Esqueleto del Informe IEEE — VetCare
+# Esqueleto del Informe IEEE — HomeStore
 
 Esto es un esquema de referencia. El informe final debe entregarse en PDF formato IEEE.
-
+    
 ---
 
 ## Título
 
-**VetCare: Sistema Web Transaccional para la Gestión de Clínicas Veterinarias**
+**HomeStore — Sistema Web de Gestión de Ventas e Inventario**
 
 ## Autores
 
-Juan Pérez, María Rodríguez, Carlos Jiménez
+Josué Azofeifa Chavarria, Alondra Matamoros Matamoros, Luis Sanchez Calderon, Esteban Ricardo Solís Campos
 Universidad Fidélitas, Escuela de Informática
-{juan.perez, maria.rod, carlos.jim}@ufide.ac.cr
+{eazofeifa50055, amatamoros70871, lsanchez70654, esolis50753}@ufide.ac.cr
+
+Curso: CS-403 — Desarrollo de Aplicaciones Web y Patrones
+Profesor: David Barquero
 
 ---
 
 ## Abstract (español)
 
-VetCare es un sistema web transaccional desarrollado con Spring Boot 3.3, MySQL y Bootstrap 5, diseñado para automatizar la gestión de clínicas veterinarias pequeñas y medianas. El sistema implementa un patrón MVC ampliado con capas de Service y Repository, autenticación basada en roles con Spring Security, internacionalización en español e inglés, y una API REST para integración con aplicaciones móviles. Este artículo presenta la metodología de desarrollo, las decisiones de diseño y los resultados obtenidos al implementar las funcionalidades requeridas. *(máx. 250 palabras)*
+HomeStore es un sistema web desarrollado con Spring Boot 3.3.5, Java 21, Thymeleaf y MySQL, diseñado para centralizar la gestión de inventario y ventas de pequeñas y medianas tiendas. El sistema automatiza el registro de productos, el control de existencias, la actualización del inventario tras cada venta y la generación de reportes en tiempo real. Este artículo presenta la metodología de desarrollo, las decisiones arquitectónicas y los resultados obtenidos al implementar las funcionalidades requeridas. *(máx. 250 palabras — falta de completar con resultados de Avance 2/3)*
 
 ## Abstract (English)
 
-VetCare is a transactional web system developed with Spring Boot 3.3, MySQL, and Bootstrap 5, designed to automate the management of small and medium veterinary clinics. The system implements an extended MVC pattern with Service and Repository layers, role-based authentication with Spring Security, Spanish-English internationalization, and a REST API for mobile integration. This article presents the development methodology, design decisions, and results obtained. *(max 250 words)*
+HomeStore is a web system built with Spring Boot 3.3.5, Java 21, Thymeleaf, and MySQL, designed to centralize inventory and sales management for small and medium-sized stores. The system automates product registration, stock control, automatic inventory updates after each sale, and real-time reporting. This article presents the development methodology, architectural decisions, and results obtained while implementing the required functionality. *(max 250 words — pending completion with Avance 2/3 results)*
 
 ## Keywords
 
-`Spring Boot`, `MVC`, `JPA`, `Bootstrap 5`, `web application`, `clinic management`, `REST API`
+`Spring Boot`, `MVC`, `Thymeleaf`, `JPA`, `MySQL`, `Bootstrap 5`, `MVC`, `gestión de inventario`, `sistema de ventas`, `web application`, `REST API`
 
 ---
 
 ## I. Introducción
 
-Las clínicas veterinarias pequeñas suelen manejar sus citas y registros manualmente o con hojas de cálculo. Esto genera problemas de consistencia, pérdida de información y dificultad para escalar el servicio. VetCare propone una solución web moderna...
+Muchas pequeñas y medianas tiendas todavía controlan sus productos y ventas de forma manual o mediante hojas de cálculo. Esta práctica genera errores de inventario, pérdida de información, dificultad para conocer las existencias reales y, en general, un control ineficiente del proceso de ventas.
 
-[1-2 párrafos más sobre el contexto y la motivación]
+HomeStore nace como respuesta a ese problema: una solución web que centraliza el inventario y las ventas de un negocio, cubriendo el registro de productos, el control de existencias, la actualización automática del inventario después de cada venta y la consulta de reportes en tiempo real.
+
+El objetivo del sistema es optimizar los procesos administrativos del negocio, reducir la incidencia de errores humanos, mejorar la organización interna y apoyar la toma de decisiones con información confiable y actualizada.
 
 ## II. Marco Teórico
 
@@ -62,9 +67,8 @@ El desarrollo siguió la metodología ágil con sprints semanales. Cada integran
 
 - IDE: Visual Studio Code
 - Versionado: Git + GitHub
-- Issue tracking: GitHub Issues
 - Diseño: Figma
-- Despliegue: Render.com
+- Testing de API: Postman
 
 ### B. Cronograma
 
@@ -100,26 +104,36 @@ El desarrollo siguió la metodología ágil con sprints semanales. Cada integran
 
 ### C. Métricas
 
-- Líneas de código: ~3,500 LOC
-- Cantidad de commits: 230 (en 14 semanas)
-- Cobertura de tests: 65%
+- Líneas de código: ~X LOC
+- Cantidad de commits: x (en 14 semanas)
+- Cobertura de tests: x%
 
 ## VI. Conclusiones
 
-VetCare demuestra que es posible construir una aplicación web transaccional profesional usando exclusivamente el stack Java + Spring Boot + MySQL. Los principales aprendizajes fueron...
-
-[2-3 párrafos]
+[Pendiente]
 
 ## Referencias
 
-[1] Spring Team, "Spring Boot Reference Documentation," 2025. [En línea]. Disponible: https://docs.spring.io/spring-boot/reference/
+[1] Oracle Corporation, "Java Platform, Standard Edition 21 Documentation," Oracle Corporation, 2025. [En línea]. Disponible: https://docs.oracle.com/en/java/javase/21/
 
-[2] M. Fowler, "Inversion of Control Containers and the Dependency Injection pattern," 2004. [En línea]. Disponible: https://martinfowler.com/articles/injection.html
+[2] Spring, "Spring Boot Reference Documentation," VMware, Inc., 2024. [En línea]. Disponible: https://docs.spring.io/spring-boot/docs/current/reference/html/
 
-[3] E. Evans, *Domain-Driven Design: Tackling Complexity in the Heart of Software*. Boston, MA: Addison-Wesley, 2003.
+[3] Bootstrap Team, "Bootstrap 5," Bootstrap, 2025. [En línea]. Disponible: https://getbootstrap.com/docs/5.3/getting-started/introduction/
 
-[4] Bootstrap Authors, "Bootstrap 5.3 Documentation," 2025. [En línea]. Disponible: https://getbootstrap.com/docs/5.3
+[4] Hibernate, "Hibernate ORM Documentation," 2025. [En línea]. Disponible: https://hibernate.org/orm/documentation/
 
-[5] Hibernate Team, "Hibernate ORM User Guide," 2025. [En línea]. Disponible: https://hibernate.org/orm/documentation/
+[5] Spring, "Spring Data JPA," VMware, Inc., 2026. [En línea]. Disponible: https://spring.io/projects/spring-data-jpa
 
-[Mínimo 5 — agregar más según las tecnologías usadas]
+[6] Hibernate, "Hibernate ORM," 2026. [En línea]. Disponible: https://hibernate.org/orm
+
+[7] Spring, "Spring Security," VMware, Inc., 2026. [En línea]. Disponible: https://spring.io/projects/spring-security
+
+[8] Git Project, "Git reference manual," 2026. [En línea]. Disponible: https://git-scm.com/docs
+
+[9] GitHub, Inc., "GitHub features," 2026. [En línea]. Disponible: https://github.com/features
+
+[10] Figma, Inc., "Figma help center," 2026. [En línea]. Disponible: https://help.figma.com
+
+[11] Postman, Inc., "Postman learning center," 2026. [En línea]. Disponible: https://learning.postman.com
+
+[12] M. Fowler, "Inversion of Control Containers and the Dependency Injection pattern," 2004. [En línea]. Disponible: https://martinfowler.com/articles/injection.html
