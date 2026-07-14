@@ -20,7 +20,7 @@ Y debe incluir **criterios de aceptación**: condiciones que deben cumplirse par
 ## 🎯 Roles del sistema
 
 | Rol | Descripción |
-|---|---|
+| --- | --- |
 | **Cliente** | Dueño/a de las mascotas. Puede agendar citas y consultar el historial. |
 | **Veterinario/a** | Profesional que atiende citas, registra tratamientos. |
 | **Recepcionista** | Maneja agenda, registro de clientes, cobros. |

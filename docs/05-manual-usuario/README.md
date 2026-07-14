@@ -5,7 +5,7 @@ Guía para los usuarios finales (clientes, veterinarios, recepcionistas).
 ## 📄 Archivos en esta carpeta
 
 | Archivo | Para quién |
-|---|---|
+| --- | --- |
 | `manual.md` | Manual general con capturas |
 | `manual-cliente.md` | Específico para clientes |
 | `manual-veterinario.md` | Específico para veterinarios |

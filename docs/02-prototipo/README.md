@@ -1,11 +1,11 @@
-# 🎨 Prototipo Visual
+# 🎨 Prototipo Visual - WIP
 
 Mockups y wireframes del sistema antes de empezar a programar.
 
 ## 📄 Archivos en esta carpeta
 
 | Archivo | Pantalla |
-|---|---|
+| --- | --- |
 | `01-home.png` | Página principal con menú |
 | `02-login.png` | Formulario de inicio de sesión |
 | `03-registro.png` | Formulario de registro |
@@ -23,8 +23,9 @@ Mockups y wireframes del sistema antes de empezar a programar.
 
 ## 🔗 Acceso al diseño Figma
 
-🔗 https://www.figma.com/file/[ID-DEL-PROYECTO]/VetCare-Mockups
-*(El link debe ser público para que el docente pueda verlo)*
+🔗 [Prototipo en Figma](https://www.figma.com/design/hT1TWvrjkdPtKU14Z3xIPp/prototipo-dise%C3%B1o-app-web?m=auto&t=gvF4JEFh2gboYaXD-1)
+
+🔑 Contraseña: "HomeStore-SC-403-2026"
 
 ## 📐 Convenciones visuales
 

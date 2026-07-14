@@ -5,7 +5,7 @@ Cómo está organizado el código y por qué.
 ## 📄 Archivos en esta carpeta
 
 | Archivo | Contenido |
-|---|---|
+| --- | --- |
 | `arquitectura.md` | Capas, patrones aplicados |
 | `tecnologias.md` | Stack tecnológico con justificación |
 | `diagrama-componentes.png` | Diagrama visual *(placeholder)* |
@@ -14,7 +14,7 @@ Cómo está organizado el código y por qué.
 
 El proyecto sigue el patrón **MVC con 4 capas** que vimos en clase:
 
-```
+```text
 ┌─────────────────────────────────┐
 │      Controller (Web)           │  ← recibe HTTP, llama al Service
 ├─────────────────────────────────┤

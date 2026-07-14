@@ -2,7 +2,7 @@
 
 Diagrama de cómo se conectan las pantallas del sistema.
 
-```
+```text
                         ┌─────────────┐
                         │   HOME (/)  │
                         │  publica    │
@@ -44,7 +44,7 @@ Diagrama de cómo se conectan las pantallas del sistema.
 
 ### 1. Cliente nuevo agenda una cita
 
-```
+```text
 HOME → /registro → (auto-login) → /dashboard →
   /mascotas → /mascotas/nueva → (registro mascota) →
   /citas/nueva → (seleccionar mascota, servicio, fecha) →
@@ -53,7 +53,7 @@ HOME → /registro → (auto-login) → /dashboard →
 
 ### 2. Veterinario atiende una cita
 
-```
+```text
 HOME → /login → /dashboard (vet) →
   /citas → (cita del día) → /citas/{id} →
   (registrar servicios atendidos) → COMPLETAR →
@@ -62,7 +62,7 @@ HOME → /login → /dashboard (vet) →
 
 ### 3. Admin genera reporte
 
-```
+```text
 HOME → /login (admin) → /dashboard →
   /admin/reportes → (filtros) →
   reporte mensual
@@ -70,7 +70,7 @@ HOME → /login (admin) → /dashboard →
 
 ## Estados de una cita
 
-```
+```text
    ┌────────────┐
    │ PENDIENTE  │  ← se crea
    └─────┬──────┘

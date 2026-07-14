@@ -1,17 +1,17 @@
-# API REST — VetCare
+# API REST — HomeStore - WIP
 
 Documentación de los endpoints REST. La colección Postman está en [`postman/`](../../postman/).
 
 ## Base URL
 
-- **Local:** `http://localhost:8080`
-- **Producción:** `https://vetcare.onrender.com`
+- **Local:** `http://localhost:8081`
+- **Producción:** `https://homestore.onrender.com`
 
 ## Autenticación
 
 Los endpoints `/api/**` requieren Basic Auth o token JWT.
 
-```
+```text
 Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
 ```
 
@@ -24,12 +24,14 @@ Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
 Lista todas las mascotas activas del usuario autenticado.
 
 **Request:**
+
 ```http
 GET /api/mascotas HTTP/1.1
 Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
 ```
 
 **Response 200 OK:**
+
 ```json
 [
   {
@@ -52,6 +54,7 @@ Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
 ```
 
 **Errores:**
+
 - `401 Unauthorized` — no se envió token / credenciales inválidas.
 
 ---
@@ -61,6 +64,7 @@ Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
 Crea una nueva cita.
 
 **Request:**
+
 ```http
 POST /api/citas HTTP/1.1
 Content-Type: application/json
@@ -75,6 +79,7 @@ Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
 ```
 
 **Response 201 Created:**
+
 ```json
 {
   "id": 42,
@@ -88,6 +93,7 @@ Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
 ```
 
 **Errores:**
+
 - `400 Bad Request` — datos inválidos en el body.
 - `409 Conflict` — el veterinario ya tiene una cita en ese horario.
 
@@ -95,12 +101,12 @@ Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
 
 ## Pruebas
 
-Importar `postman/vetcare-api.postman_collection.json` en Postman para probar todos los endpoints con ejemplos.
+Importar `postman/homestore-api.postman_collection.json` en Postman para probar todos los endpoints con ejemplos.
 
 ## Status codes usados
 
 | Código | Significado |
-|---|---|
+| --- | --- |
 | 200 | OK |
 | 201 | Created (POST exitoso) |
 | 400 | Bad Request (datos inválidos) |

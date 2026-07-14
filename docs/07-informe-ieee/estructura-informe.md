@@ -1,12 +1,12 @@
 # Esqueleto del Informe IEEE — HomeStore
 
 Esto es un esquema de referencia. El informe final debe entregarse en PDF formato IEEE.
-    
+
 ---
 
 ## Título
 
-**HomeStore — Sistema Web de Gestión de Ventas e Inventario**
+### **HomeStore — Sistema Web de Gestión de Ventas e Inventario**
 
 ## Autores
 
@@ -114,26 +114,26 @@ El desarrollo siguió la metodología ágil con sprints semanales. Cada integran
 
 ## Referencias
 
-[1] Oracle Corporation, "Java Platform, Standard Edition 21 Documentation," Oracle Corporation, 2025. [En línea]. Disponible: https://docs.oracle.com/en/java/javase/21/
+[1] Oracle Corporation, "Java Platform, Standard Edition 21 Documentation," 2025. [Online]. Available: [https://docs.oracle.com/en/java/javase/21/](https://docs.oracle.com/en/java/javase/21/)
 
-[2] Spring, "Spring Boot Reference Documentation," VMware, Inc., 2024. [En línea]. Disponible: https://docs.spring.io/spring-boot/docs/current/reference/html/
+[2] Spring, "Spring Boot Reference Documentation," VMware, Inc., 2024. [Online]. Available: [https://docs.spring.io/spring-boot/docs/current/reference/html/](https://docs.spring.io/spring-boot/docs/current/reference/html/)
 
-[3] Bootstrap Team, "Bootstrap 5," Bootstrap, 2025. [En línea]. Disponible: https://getbootstrap.com/docs/5.3/getting-started/introduction/
+[3] Bootstrap Team, "Bootstrap 5," Bootstrap, 2025. [Online]. Available: [https://getbootstrap.com/docs/5.3/getting-started/introduction/](https://getbootstrap.com/docs/5.3/getting-started/introduction/)
 
-[4] Hibernate, "Hibernate ORM Documentation," 2025. [En línea]. Disponible: https://hibernate.org/orm/documentation/
+[4] Hibernate, "Hibernate ORM Documentation," 2025. [Online]. Available: [https://hibernate.org/orm/documentation/](https://hibernate.org/orm/documentation/)
 
-[5] Spring, "Spring Data JPA," VMware, Inc., 2026. [En línea]. Disponible: https://spring.io/projects/spring-data-jpa
+[5] Spring, "Spring Data JPA," VMware, Inc., 2026. [Online]. Available: [https://spring.io/projects/spring-data-jpa](https://spring.io/projects/spring-data-jpa)
 
-[6] Hibernate, "Hibernate ORM," 2026. [En línea]. Disponible: https://hibernate.org/orm
+[6] Hibernate, "Hibernate ORM," 2026. [Online]. Available: [https://hibernate.org/orm](https://hibernate.org/orm)
 
-[7] Spring, "Spring Security," VMware, Inc., 2026. [En línea]. Disponible: https://spring.io/projects/spring-security
+[7] Spring, "Spring Security," VMware, Inc., 2026. [Online]. Available: [https://spring.io/projects/spring-security](https://spring.io/projects/spring-security)
 
-[8] Git Project, "Git reference manual," 2026. [En línea]. Disponible: https://git-scm.com/docs
+[8] Git Project, "Git reference manual," 2026. [Online]. Available: [https://git-scm.com/docs](https://git-scm.com/docs)
 
-[9] GitHub, Inc., "GitHub features," 2026. [En línea]. Disponible: https://github.com/features
+[9] GitHub, Inc., "GitHub features," 2026. [Online]. Available: [https://github.com/features](https://github.com/features)
 
-[10] Figma, Inc., "Figma help center," 2026. [En línea]. Disponible: https://help.figma.com
+[10] Figma, Inc., "Figma help center," 2026. [Online]. Available: [https://help.figma.com](https://help.figma.com)
 
-[11] Postman, Inc., "Postman learning center," 2026. [En línea]. Disponible: https://learning.postman.com
+[11] Postman, Inc., "Postman learning center," 2026. [Online]. Available: [https://learning.postman.com](https://learning.postman.com)
 
-[12] M. Fowler, "Inversion of Control Containers and the Dependency Injection pattern," 2004. [En línea]. Disponible: https://martinfowler.com/articles/injection.html
+[12] M. Fowler, "Inversion of Control Containers and the Dependency Injection pattern," 2004. [Online]. Available: [https://martinfowler.com/articles/injection.html](https://martinfowler.com/articles/injection.html)

@@ -5,7 +5,7 @@ Slides para la defensa del proyecto (Avance 4).
 ## 📄 Archivos en esta carpeta
 
 | Archivo | Contenido |
-|---|---|
+| --- | --- |
 | `presentacion.pdf` | PDF final de la presentación |
 | `presentacion.pptx` | Versión editable PowerPoint |
 | `guion-defensa.md` | Guión con lo que se dirá en cada slide |
@@ -13,7 +13,7 @@ Slides para la defensa del proyecto (Avance 4).
 ## 🎯 Estructura recomendada (10-15 min)
 
 | Slide | Contenido | Tiempo |
-|---|---|---|
+| --- | --- | --- |
 | 1 | Portada (proyecto, equipo) | 30s |
 | 2 | Problema y cliente | 1 min |
 | 3 | Solución propuesta | 1 min |
@@ -31,10 +31,11 @@ Slides para la defensa del proyecto (Avance 4).
 Cada miembro presenta su parte del código y responde preguntas sobre ella:
 
 | Integrante | Sección |
-|---|---|
-| Juan | Arquitectura + Seguridad |
-| María | CRUD principal + Vistas |
-| Carlos | Módulo transaccional + API REST |
+| --- | --- |
+| Esteban Solís | API REST + Base de datos |
+| Josué Azofeifa | Seguridad (autenticación y autorización) |
+| Luis Sanchez | CRUD principal + Vistas |
+| Alondra Matamoros | Arquitectura general + Módulo transaccional (carrito, checkout, facturación, reportes) |
 
 ## 💡 Consejos para la defensa
 

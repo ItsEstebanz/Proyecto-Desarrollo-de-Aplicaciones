@@ -1,4 +1,4 @@
-# Modelo Relacional — VetCare
+# Modelo Relacional — HomeStore - WIP
 
 Descripción textual de cada tabla con sus columnas, tipos y relaciones.
 
@@ -7,7 +7,7 @@ Descripción textual de cada tabla con sus columnas, tipos y relaciones.
 ## Tabla: `rol`
 
 | Columna | Tipo | Nulo | PK | FK | Descripción |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | id | BIGINT | NO | ✅ | | Llave primaria |
 | nombre | VARCHAR(50) | NO | | | ADMIN, VETERINARIO, RECEPCIONISTA, CLIENTE |
 
@@ -16,7 +16,7 @@ Descripción textual de cada tabla con sus columnas, tipos y relaciones.
 ## Tabla: `usuario`
 
 | Columna | Tipo | Nulo | PK | FK | Descripción |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | id | BIGINT | NO | ✅ | | Llave primaria |
 | correo | VARCHAR(150) | NO | | | UNIQUE |
 | password | VARCHAR(60) | NO | | | BCrypt hash |
@@ -29,7 +29,7 @@ Descripción textual de cada tabla con sus columnas, tipos y relaciones.
 ## Tabla: `cliente`
 
 | Columna | Tipo | Nulo | PK | FK | Descripción |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | id | BIGINT | NO | ✅ | | Llave primaria |
 | usuario_id | BIGINT | NO | | ✅ usuario(id) | UNIQUE, 1:1 con usuario |
 | nombre | VARCHAR(100) | NO | | | |
@@ -42,7 +42,7 @@ Descripción textual de cada tabla con sus columnas, tipos y relaciones.
 ## Tabla: `especie`
 
 | Columna | Tipo | Nulo | PK | FK | Descripción |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | id | BIGINT | NO | ✅ | | Llave primaria |
 | nombre | VARCHAR(50) | NO | | | Perro, Gato, Ave, Reptil, etc. |
 
@@ -51,7 +51,7 @@ Descripción textual de cada tabla con sus columnas, tipos y relaciones.
 ## Tabla: `mascota`
 
 | Columna | Tipo | Nulo | PK | FK | Descripción |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | id | BIGINT | NO | ✅ | | Llave primaria |
 | nombre | VARCHAR(100) | NO | | | |
 | especie_id | BIGINT | NO | | ✅ especie(id) | |
@@ -66,7 +66,7 @@ Descripción textual de cada tabla con sus columnas, tipos y relaciones.
 ## Tabla: `veterinario`
 
 | Columna | Tipo | Nulo | PK | FK | Descripción |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | id | BIGINT | NO | ✅ | | Llave primaria |
 | usuario_id | BIGINT | NO | | ✅ usuario(id) | UNIQUE, 1:1 con usuario |
 | nombre | VARCHAR(100) | NO | | | |
@@ -78,7 +78,7 @@ Descripción textual de cada tabla con sus columnas, tipos y relaciones.
 ## Tabla: `servicio`
 
 | Columna | Tipo | Nulo | PK | FK | Descripción |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | id | BIGINT | NO | ✅ | | Llave primaria |
 | nombre | VARCHAR(100) | NO | | | |
 | descripcion | TEXT | SÍ | | | |
@@ -91,7 +91,7 @@ Descripción textual de cada tabla con sus columnas, tipos y relaciones.
 ## Tabla: `cita` (transaccional)
 
 | Columna | Tipo | Nulo | PK | FK | Descripción |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | id | BIGINT | NO | ✅ | | Llave primaria |
 | mascota_id | BIGINT | NO | | ✅ mascota(id) | |
 | veterinario_id | BIGINT | NO | | ✅ veterinario(id) | |
@@ -106,7 +106,7 @@ Descripción textual de cada tabla con sus columnas, tipos y relaciones.
 ## Tabla: `cita_servicio` (N:M)
 
 | Columna | Tipo | Nulo | PK | FK | Descripción |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | cita_id | BIGINT | NO | ✅ | ✅ cita(id) | |
 | servicio_id | BIGINT | NO | ✅ | ✅ servicio(id) | |
 | precio_aplicado | DECIMAL(10,2) | NO | | | Precio al momento de la cita |
@@ -118,7 +118,7 @@ PK compuesta: (`cita_id`, `servicio_id`)
 ## Tabla: `factura` (transaccional)
 
 | Columna | Tipo | Nulo | PK | FK | Descripción |
-|---|---|---|---|---|---|
+| --- | --- | --- | --- | --- | --- |
 | id | BIGINT | NO | ✅ | | Llave primaria |
 | cita_id | BIGINT | NO | | ✅ cita(id) | UNIQUE, 1:1 con cita |
 | subtotal | DECIMAL(10,2) | NO | | | |

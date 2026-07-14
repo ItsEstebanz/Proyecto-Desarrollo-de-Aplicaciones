@@ -5,7 +5,7 @@ Avance 3 del proyecto. Artículo académico que documenta el desarrollo del sist
 ## 📄 Archivos en esta carpeta
 
 | Archivo | Contenido |
-|---|---|
+| --- | --- |
 | `informe.pdf` | PDF final del artículo en formato IEEE |
 | `informe.docx` | Versión editable en Word |
 | `informe.tex` | (opcional) Versión LaTeX |
@@ -14,7 +14,7 @@ Avance 3 del proyecto. Artículo académico que documenta el desarrollo del sist
 ## 📋 Estructura requerida del artículo
 
 | Sección | Contenido |
-|---|---|
+| --- | --- |
 | Título y autores | Nombre del proyecto + equipo |
 | Abstract (ES + EN) | Máx. 250 palabras |
 | Keywords | Mínimo 5 |
@@ -35,7 +35,7 @@ Avance 3 del proyecto. Artículo académico que documenta el desarrollo del sist
 
 ## 🔗 Plantilla oficial IEEE
 
-https://www.ieee.org/conferences/publishing/templates.html
+[Link a la Plantilla oficial IEEE](https://www.ieee.org/conferences/publishing/templates.html)
 
 - Versión Word: descargar `IEEE-conference-template.docx`
 - Versión LaTeX: descargar la plantilla del repositorio Overleaf

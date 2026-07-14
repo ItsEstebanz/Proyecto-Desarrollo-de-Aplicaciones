@@ -1,8 +1,8 @@
-# Manual de Usuario — VetCare
+# Manual de Usuario — HomeStore - WIP
 
 ## 1. Inicio
 
-Acceder a `https://vetcare.onrender.com` desde un navegador moderno (Chrome, Firefox, Edge).
+Acceder a [https://homestore.onrender.com](https://homestore.onrender.com) desde un navegador moderno (Chrome, Firefox, Edge).
 
 > *(Aquí va una captura de la página principal del sistema)*
 
@@ -81,5 +81,5 @@ En la esquina superior derecha hay un selector ES / EN.
 
 ## 8. Soporte
 
-📧 soporte@vetcare.com
+📧 [soporte@homestore.com](mailto:soporte@homestore.com)
 📱 +506 8888-9999
