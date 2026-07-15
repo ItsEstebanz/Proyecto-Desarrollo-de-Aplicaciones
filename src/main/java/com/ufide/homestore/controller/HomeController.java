@@ -11,6 +11,21 @@ public class HomeController {
         return "home";
     }
 
+    @GetMapping("/nosotros")
+    public String nosotros() {
+        return "nosotros";
+    }
+
+@GetMapping("/contacto")
+    public String contacto() {
+        return "contacto";
+    }   
+
+@GetMapping("/ubicacion")
+    public String ubicacion() {
+        return "ubicacion";
+    }
+}
     @GetMapping("/products")
     public String products() {
         return "products";

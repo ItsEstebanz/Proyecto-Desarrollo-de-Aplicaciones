@@ -16,11 +16,14 @@
         .navbar {
             border-bottom: 1px solid #f0e0f5;
         }
+        .nav-link {     
 
         .nav-link {
             color: #2d1b6e !important;
             font-weight: 500;
             font-size: 0.95rem;
+            position: relative;
+            z-index: 10;
         }
 
         .btn-lang {
@@ -228,6 +231,28 @@
 
 <body>
 
+<!-- ── Navbar ── -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid px-4">
+
+        <a class="navbar-brand" href="/">
+            <img th:src="@{/images/logo.png}"
+                 src="/images/logo.png"
+                 alt="HomeStore"
+                 style="height: 80px;">
+        </a>
+
+        <div class="d-flex align-items-center gap-4 ms-auto">
+            <a class="nav-link" th:href="@{/}">Inicio</a>
+            <a class="nav-link" th:href="@{/productos}">Productos</a>
+            <a class="nav-link" th:href="@{/nosotros}">Nosotros</a>
+            <a class="nav-link" th:href="@{/contacto}">Contacto</a>
+            <a class="nav-link" th:href="@{/ubicacion}">Ubicación</a>
+
+            <div class="d-flex gap-1 ms-3">
+                <button class="btn-lang">ES</button>
+                <button class="btn-lang">EN</button>
+            </div>
     <!-- ── Navbar ── -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <div class="container-fluid px-4">
