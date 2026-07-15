@@ -5,7 +5,7 @@ Toda la documentación está organizada por avance y por tema. Cada carpeta tien
 ## 🗂️ Índice general
 
 | Carpeta | Contenido | Avance |
-|---|---|---|
+| --- | --- | --- |
 | [`01-historias-usuario/`](./01-historias-usuario/) | Historias de usuario en formato Como/Quiero/Para | Avance 1 |
 | [`02-prototipo/`](./02-prototipo/) | Mockups y wireframes de las pantallas principales | Avance 1 |
 | [`03-diagrama-er/`](./03-diagrama-er/) | Diagrama Entidad-Relación de la base de datos | Avance 1 |
@@ -18,7 +18,7 @@ Toda la documentación está organizada por avance y por tema. Cada carpeta tien
 ## 📋 Mapeo con la rúbrica del curso
 
 | Requisito del enunciado | Documento que lo respalda |
-|---|---|
+| --- | --- |
 | Historias de usuario (mín. 20) | `01-historias-usuario/historias-usuario.md` |
 | Prototipo visual | `02-prototipo/` |
 | Diagrama ER | `03-diagrama-er/diagrama-er.png` |

@@ -25,7 +25,6 @@ public class HomeController {
     public String ubicacion() {
         return "ubicacion";
     }
-}
     @GetMapping("/products")
     public String products() {
         return "products";

@@ -3,7 +3,7 @@
 ## 📄 Archivos
 
 | Archivo | Para qué |
-|---|---|
+| --- | --- |
 | `schema.sql` | Crear todas las tablas (DDL) |
 | `seed-data.sql` | Insertar datos de prueba |
 
