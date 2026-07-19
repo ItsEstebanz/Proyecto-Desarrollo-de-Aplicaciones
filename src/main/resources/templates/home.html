@@ -243,11 +243,13 @@
             </a>
 
             <div class="d-flex align-items-center gap-4 ms-auto">
-                <a class="nav-link active" href="/">Inicio</a>
-                <a class="nav-link" href="/products">Productos</a>
-                <a class="nav-link" href="/categories">Categorías</a>
-                <a class="nav-link" href="/cart">Carrito</a>
-                <a class="nav-link" href="/location">Ubicación</a>
+                <a class="nav-link active" th:href="@{/}">Inicio</a>
+                <a class="nav-link" th:href="@{/productos}">Productos</a>
+                <a class="nav-link" th:href="@{/categories}">Categorías</a>
+                <a class="nav-link" th:href="@{/cart}">Carrito</a>
+                <a class="nav-link" th:href="@{/nosotros}">Nosotros</a>
+                <a class="nav-link" th:href="@{/contacto}">Contacto</a>
+                <a class="nav-link" th:href="@{/location}">Ubicación</a>
 
                 <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#opinionModal">
                     Opinión
