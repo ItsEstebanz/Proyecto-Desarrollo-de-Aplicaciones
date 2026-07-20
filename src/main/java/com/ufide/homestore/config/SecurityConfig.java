@@ -8,38 +8,51 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http)
-            throws Exception {
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http)
+                        throws Exception {
 
-        http
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/",
-                                "/inicio",
-                                "/login",
-                                "/registro",
-                                "/error",
-                                "/images/**",
-                                "/css/**",
-                                "/js/**")
-                        .permitAll()
-                        .anyRequest().authenticated())
+                /*
+                 * CONFIGURACIÓN DE SEGURIDAD DEFINITIVA
+                 * Se activará cuando login y registro funcionen correctamente.
+                 *
+                 * http
+                 * .authorizeHttpRequests(auth -> auth
+                 * .requestMatchers(
+                 * "/",
+                 * "/inicio",
+                 * "/login",
+                 * "/registro",
+                 * "/error",
+                 * "/images/**",
+                 * "/css/**",
+                 * "/js/**")
+                 * .permitAll()
+                 * .anyRequest().authenticated())
+                 *
+                 * .formLogin(form -> form
+                 * .loginPage("/inicio")
+                 * .loginProcessingUrl("/login")
+                 * .usernameParameter("correo")
+                 * .passwordParameter("contrasena")
+                 * .defaultSuccessUrl("/", true)
+                 * .failureUrl("/inicio?error=true")
+                 * .permitAll())
+                 *
+                 * .logout(logout -> logout
+                 * .logoutUrl("/logout")
+                 * .logoutSuccessUrl("/")
+                 * .permitAll());
+                 */
 
-                .formLogin(form -> form
-                        .loginPage("/inicio")
-                        .loginProcessingUrl("/login")
-                        .usernameParameter("correo")
-                        .passwordParameter("contrasena")
-                        .defaultSuccessUrl("/", true)
-                        .failureUrl("/inicio?error=true")
-                        .permitAll())
+                http
+                                .authorizeHttpRequests(auth -> auth
+                                                .anyRequest().permitAll())
+                                .formLogin(form -> form.disable())
+                                .httpBasic(httpBasic -> httpBasic.disable())
+                                .logout(logout -> logout.disable())
+                                .csrf(csrf -> csrf.disable());
 
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/")
-                        .permitAll());
-
-        return http.build();
-    }
+                return http.build();
+        }
 }
