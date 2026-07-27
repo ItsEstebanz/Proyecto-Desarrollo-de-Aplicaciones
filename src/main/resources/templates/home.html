@@ -320,8 +320,8 @@
             <!-- Formulario -->
             <div class="col-lg-6 login-left">
 
-                <div class="alert-login-error mb-3" th:if="${error}" th:text="${error}">
-                </div>
+               <div class="alert-login-error mb-3" th:if="${param.error}"> Correo o contraseña incorrectos
+               </div>
 
                 <div class="alert alert-success rounded-3 mb-3" th:if="${mensaje}" th:text="${mensaje}">
                 </div>
