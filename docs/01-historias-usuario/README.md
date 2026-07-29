@@ -4,8 +4,8 @@ Las historias de usuario definen QUIÉN quiere QUÉ y PARA QUÉ. Son la base del
 
 ## 📄 Archivos en esta carpeta
 
-- [`historias-usuario.md`](./historias-usuario.md) — listado completo (mínimo 20)
-- *(opcional)* `criterios-aceptacion.md` — criterios extendidos por historia
+- [`historias-usuario.md`](./historias-usuario.md) - listado completo (mínimo 20)
+- *(opcional)* `criterios-aceptacion.md` - criterios extendidos por historia
 
 ## 📋 Formato
 

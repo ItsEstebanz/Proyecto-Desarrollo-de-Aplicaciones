@@ -1,19 +1,10 @@
--- ================================================================
--- homestoredb - Schema
--- Proyecto Final SC-403 - Universidad Fidelitas
--- ================================================================
-
--- ----------------------------------------------------------------
+-- ======================================================================
+-- homestoredb - Estructura de base de datos
+-- Proyecto Final SC-403 - Universidad Fidélitas
 -- DLL: Database Initialization
--- ----------------------------------------------------------------
+-- ======================================================================
 
--- BORRAR LA DATABASE, PRUEBAS ONLY
--- DROP DATABASE IF EXISTS homestoredb;
-
--- Crear database con soperte para unicode, solo 1 vez se necesita, si no es borrada.
-CREATE DATABASE homestoredb
-  CHARACTER SET utf8mb4
-  COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS homestoredb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 USE homestoredb;
 

@@ -1,13 +1,15 @@
-# 🗃️ Scripts de Base de Datos
+# 🗃️ Base de datos
 
-## 📄 Archivos
+## Archivos
 
-| Archivo | Para qué |
+| Archivo | Propósito |
 | --- | --- |
 | `schema.sql` | Crear todas las tablas (DDL) |
 | `seed-data.sql` | Insertar datos de prueba |
 
-## Cómo aplicar
+## Aplicación del esquema
+
+Ejecutar primero `schema.sql` y, cuando esté listo, cargar los datos iniciales en una ejecución separada:
 
 ### Desde MySQL Workbench
 
@@ -17,8 +19,8 @@
 ### Desde terminal
 
 ```bash
-mysql -u root -p < schema.sql
-mysql -u root -p vetcaredb < seed-data.sql
+mysql -u root -p < database/schema.sql
+mysql -u root -p homestoredb < database/seed-data.sql
 ```
 
 ## Hibernate vs `schema.sql`

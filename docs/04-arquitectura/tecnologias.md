@@ -1,7 +1,7 @@
-# Stack Tecnológico — Justificación
+# Stack Tecnológico - Justificación
 
 | Tecnología | Versión | Por qué la elegimos |
-|---|---|---|
+| --- | --- | --- |
 | Java | 21 | Última LTS, requerido por el curso. |
 | Spring Boot | 3.3.5 | Framework backend obligatorio. Convención sobre configuración. |
 | Spring Data JPA | 3.x | ORM con repositorios automáticos. |
@@ -19,9 +19,9 @@
 
 ## Tecnologías NO usadas (y por qué)
 
-- **React / Angular** — el frontend se hace con Thymeleaf según requisito del curso.
-- **Node.js** — el backend obligatorio es Java + Spring Boot.
-- **Lombok** — opcional, lo evitamos para que los getters/setters sean visibles.
+- **React / Angular** - el frontend se hace con Thymeleaf según requisito del curso.
+- **Node.js** - el backend obligatorio es Java + Spring Boot.
+- **Lombok** - opcional, lo evitamos para que los getters/setters sean visibles.
 
 ## Dependencias clave del `pom.xml`
 

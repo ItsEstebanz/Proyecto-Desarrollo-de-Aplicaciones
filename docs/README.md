@@ -1,6 +1,6 @@
-# 📚 Documentación del Proyecto VetCare
+# 📚 Documentación del Proyecto HomeStore
 
-Toda la documentación está organizada por avance y por tema. Cada carpeta tiene su propio `README.md` con índice.
+HomeStore es un sistema web para la gestión de productos, inventario y ventas. Esta carpeta reúne la documentación generada durante el curso y diferencia entre lo ya implementado y el modelo funcional que se completará en los siguientes avances.
 
 ## 🗂️ Índice general
 
@@ -31,6 +31,8 @@ Toda la documentación está organizada por avance y por tema. Cada carpeta tien
 
 ## ✍️ Convenciones
 
-- Toda la documentación está en **markdown** (`.md`) para que se vea bien en GitHub.
-- Las imágenes van en la carpeta correspondiente, no en `assets/` (excepto logos).
+- La documentación se mantiene en **Markdown** para su consulta en GitHub.
+- Las imágenes y diagramas se guardan en la carpeta del avance al que pertenecen (excepto los logos).
+- Las tablas y columnas de la base de datos se nombran en `snake_case`; las claves primarias terminan en `_id`.
+- Los scripts de estructura y los datos de prueba se mantienen separados en [`database/`](../database/).
 - Los PDFs (informe IEEE, presentación) se incluyen pero también su fuente editable si se puede.

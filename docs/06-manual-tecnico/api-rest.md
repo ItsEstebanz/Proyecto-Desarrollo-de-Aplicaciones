@@ -1,4 +1,4 @@
-# API REST — HomeStore - WIP
+# API REST - HomeStore - WIP
 
 Documentación de los endpoints REST. La colección Postman está en [`postman/`](../../postman/).
 
@@ -55,7 +55,7 @@ Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
 
 **Errores:**
 
-- `401 Unauthorized` — no se envió token / credenciales inválidas.
+- `401 Unauthorized` - no se envió token / credenciales inválidas.
 
 ---
 
@@ -94,8 +94,8 @@ Authorization: Basic dXN1YXJpbzpwYXNzd29yZA==
 
 **Errores:**
 
-- `400 Bad Request` — datos inválidos en el body.
-- `409 Conflict` — el veterinario ya tiene una cita en ese horario.
+- `400 Bad Request` - datos inválidos en el body.
+- `409 Conflict` - el veterinario ya tiene una cita en ese horario.
 
 ---
 

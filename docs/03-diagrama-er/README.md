@@ -1,33 +1,20 @@
 # 🗃️ Diagrama Entidad-Relación
 
-Modelo de la base de datos del sistema VetCare.
+El modelo entidad-relación de HomeStore representa la gestión de catálogo, usuarios, ventas, inventario, promociones y soporte al cliente.
 
-## 📄 Archivos en esta carpeta
+## 📄 Archivos
 
 | Archivo | Contenido |
-|---|---|
-| `diagrama-er.png` | Diagrama visual (placeholder en este ejemplo) |
-| `modelo-relacional.md` | Descripción textual de tablas y relaciones |
-| `diagrama-er.mwb` | Archivo nativo de MySQL Workbench (opcional) |
+| --- | --- |
+| [`MER_SistemaVentas_v3.5.svg`](./MER_SistemaVentas_v3.5.svg) | Diagrama visual fuente del modelo de ventas. |
+| [`modelo-relacional.md`](./modelo-relacional.md) | Tablas, relaciones y reglas de integridad. |
+| [`../../database/schema.sql`](../../database/schema.sql) | Script MySQL 8 para crear la estructura. |
 
 ## 📊 Resumen del modelo
 
 **8 tablas** (cumple el mínimo requerido por el enunciado):
 
-| # | Tabla | Tipo |
-|---|---|---|
-| 1 | `usuario` | Entidad principal |
-| 2 | `rol` | Catálogo |
-| 3 | `cliente` | Entidad principal |
-| 4 | `mascota` | Entidad principal |
-| 5 | `especie` | Catálogo |
-| 6 | `veterinario` | Entidad principal |
-| 7 | `servicio` | Entidad principal |
-| 8 | `cita` | **Transaccional** |
-| 9 | `cita_servicio` | Tabla puente (N:M entre cita y servicio) |
-| 10 | `factura` | **Transaccional** (derivada de cita) |
-
-> En el repo real, ver `diagrama-er.png` para la representación visual.
+> **Nota:** Esta es la representación visual. [MER_SistemaVentas_v3.5.svg](./MER_SistemaVentas_v3.5.svg)
 
 ## 🔗 Relaciones principales
 
