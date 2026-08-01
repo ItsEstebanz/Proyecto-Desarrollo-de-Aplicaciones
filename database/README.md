@@ -4,8 +4,8 @@
 
 | Archivo | Propósito |
 | --- | --- |
-| `schema.sql` | Crear todas las tablas (DDL) |
-| `seed-data.sql` | Insertar datos de prueba |
+| [`schema.sql`](./schema.sql) | Crea `homestoredb` y las 19 tablas del modelo de ventas. (DDL) |
+| [`seed-data.sql`](./seed-data.sql) | Insertar datos de prueba. (DML) |
 
 ## Aplicación del esquema
 
@@ -23,6 +23,10 @@ mysql -u root -p < database/schema.sql
 mysql -u root -p homestoredb < database/seed-data.sql
 ```
 
-## Hibernate vs `schema.sql`
+El script usa `CREATE ... IF NOT EXISTS`, por lo que puede ejecutarse de nuevo sin intentar recrear tablas existentes. Si se necesita cambiar una tabla que ya existe, debe prepararse una migración explícita; el script no altera estructuras ya creadas.
 
-Hibernate también crea las tablas a partir de las `@Entity` con `ddl-auto=update`. El `schema.sql` es la **referencia oficial** del esquema y es lo que se aplica en producción.
+## Relación con Spring Boot
+
+La aplicación utiliza `spring.jpa.hibernate.ddl-auto=validate`. Por tanto, no crea ni actualiza tablas al arrancar: el esquema debe aplicarse antes de iniciar la aplicación. Las entidades actuales usan las tablas `role`, `user`, `category`, `supplier` y `product`.
+
+El detalle completo de las tablas y relaciones está en [`docs/03-diagrama-er/modelo-relacional.md`](../docs/03-diagrama-er/modelo-relacional.md).
