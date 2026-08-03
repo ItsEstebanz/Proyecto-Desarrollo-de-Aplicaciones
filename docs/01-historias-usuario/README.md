@@ -13,6 +13,7 @@ Actualmente el sistema ya cuenta con los siguientes elementos:
 - Gestión de categorías y proveedores como parte del modelo del negocio.
 - Navegación por vistas de productos, categorías y carrito.
 - Diseño de base de datos orientado a ventas, promociones, inventario, pagos y soporte.
+- Carrito de compras integrado y funcional, con validaciones de cantidad y montos acorde a stock.
 
 ## 📄 Archivos en esta carpeta
 
@@ -41,7 +42,7 @@ Y debe incluir **criterios de aceptación**: condiciones que deben cumplirse par
 
 Las historias futuras del proyecto se enfocan en completar el flujo de ventas y operación, incluyendo:
 
-- Implementar el flujo completo de compra: carrito, selección de cantidades, checkout y confirmación de compra.
+- Implementar confirmación de compra.
 - Incorporar métodos de pago y opciones de envío con cálculo de costos adicionales.
 - Gestionar descuentos y promociones, incluyendo códigos de descuento aplicables durante la compra.
 - Desarrollar módulos de administración para ajustar precios, gestionar promociones y revisar inventario.
