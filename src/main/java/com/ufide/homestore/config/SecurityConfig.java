@@ -19,7 +19,7 @@ public class SecurityConfig {
                  * Las demás rutas conservan el comportamiento actual.
                  */
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/inicio").authenticated()
+                        .requestMatchers("/inicio", "/cart/**").authenticated()
                         .anyRequest().permitAll()
                 )
 
@@ -32,7 +32,7 @@ public class SecurityConfig {
                         .loginProcessingUrl("/login")
                         .usernameParameter("correo")
                         .passwordParameter("contrasena")
-                        .defaultSuccessUrl("/inicio", true)
+                        .defaultSuccessUrl("/productos", true)
                         .failureUrl("/?error=true")
                         .permitAll()
                 )

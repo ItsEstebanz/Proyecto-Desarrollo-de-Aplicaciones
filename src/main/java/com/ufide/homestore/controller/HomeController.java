@@ -16,15 +16,16 @@ public class HomeController {
         return "nosotros";
     }
 
-@GetMapping("/contacto")
+    @GetMapping("/contacto")
     public String contacto() {
         return "contacto";
-    }   
+    }
 
-@GetMapping("/ubicacion")
+    @GetMapping("/ubicacion")
     public String ubicacion() {
         return "ubicacion";
     }
+
     @GetMapping("/products")
     public String products() {
         return "products";
@@ -33,11 +34,6 @@ public class HomeController {
     @GetMapping("/categories")
     public String categories() {
         return "categories";
-    }
-
-    @GetMapping("/cart")
-    public String cart() {
-        return "cart";
     }
 
     @GetMapping("/location")
