@@ -1,4 +1,4 @@
-# 📄 Informe Científico — Formato IEEE
+# 📄 Informe Científico - Formato IEEE
 
 Avance 3 del proyecto. Artículo académico que documenta el desarrollo del sistema.
 

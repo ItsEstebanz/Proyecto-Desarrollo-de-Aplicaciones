@@ -1,4 +1,4 @@
-# Esqueleto del Informe IEEE — HomeStore
+# Esqueleto del Informe IEEE - HomeStore
 
 Esto es un esquema de referencia. El informe final debe entregarse en PDF formato IEEE.
 
@@ -6,7 +6,7 @@ Esto es un esquema de referencia. El informe final debe entregarse en PDF format
 
 ## Título
 
-### **HomeStore — Sistema Web de Gestión de Ventas e Inventario**
+### **HomeStore - Sistema Web de Gestión de Ventas e Inventario**
 
 ## Autores
 
@@ -14,18 +14,18 @@ Josué Azofeifa Chavarria, Alondra Matamoros Matamoros, Luis Sanchez Calderon, E
 Universidad Fidélitas, Escuela de Informática
 {eazofeifa50055, amatamoros70871, lsanchez70654, esolis50753}@ufide.ac.cr
 
-Curso: CS-403 — Desarrollo de Aplicaciones Web y Patrones
+Curso: CS-403 - Desarrollo de Aplicaciones Web y Patrones
 Profesor: David Barquero
 
 ---
 
 ## Abstract (español)
 
-HomeStore es un sistema web desarrollado con Spring Boot 3.3.5, Java 21, Thymeleaf y MySQL, diseñado para centralizar la gestión de inventario y ventas de pequeñas y medianas tiendas. El sistema automatiza el registro de productos, el control de existencias, la actualización del inventario tras cada venta y la generación de reportes en tiempo real. Este artículo presenta la metodología de desarrollo, las decisiones arquitectónicas y los resultados obtenidos al implementar las funcionalidades requeridas. *(máx. 250 palabras — falta de completar con resultados de Avance 2/3)*
+HomeStore es un sistema web desarrollado con Spring Boot 3.3.5, Java 21, Thymeleaf y MySQL, diseñado para centralizar la gestión de inventario y ventas de pequeñas y medianas tiendas. El sistema automatiza el registro de productos, el control de existencias, la actualización del inventario tras cada venta y la generación de reportes en tiempo real. Este artículo presenta la metodología de desarrollo, las decisiones arquitectónicas y los resultados obtenidos al implementar las funcionalidades requeridas. *(máx. 250 palabras - falta de completar con resultados de Avance 2/3)*
 
 ## Abstract (English)
 
-HomeStore is a web system built with Spring Boot 3.3.5, Java 21, Thymeleaf, and MySQL, designed to centralize inventory and sales management for small and medium-sized stores. The system automates product registration, stock control, automatic inventory updates after each sale, and real-time reporting. This article presents the development methodology, architectural decisions, and results obtained while implementing the required functionality. *(max 250 words — pending completion with Avance 2/3 results)*
+HomeStore is a web system built with Spring Boot 3.3.5, Java 21, Thymeleaf, and MySQL, designed to centralize inventory and sales management for small and medium-sized stores. The system automates product registration, stock control, automatic inventory updates after each sale, and real-time reporting. This article presents the development methodology, architectural decisions, and results obtained while implementing the required functionality. *(max 250 words - pending completion with Avance 2/3 results)*
 
 ## Keywords
 

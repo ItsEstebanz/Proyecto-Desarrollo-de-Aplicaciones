@@ -18,8 +18,8 @@ Mockups y wireframes del sistema antes de empezar a programar.
 
 ## 🎨 Herramientas usadas
 
-- **Figma** — diseño principal (link al proyecto público abajo)
-- **Mockflow** — wireframes iniciales
+- **Figma** - diseño principal (link al proyecto público abajo)
+- **Mockflow** - wireframes iniciales
 
 ## 🔗 Acceso al diseño Figma
 
@@ -34,7 +34,7 @@ Mockups y wireframes del sistema antes de empezar a programar.
 - **Tipografía:** Inter (Bootstrap default)
 - **Iconos:** Bootstrap Icons
 - **Espaciado:** sistema de Bootstrap (`p-3`, `m-2`, etc.)
-- **Grid:** Bootstrap 5 — `col-12 col-md-6 col-lg-4` para responsive
+- **Grid:** Bootstrap 5 - `col-12 col-md-6 col-lg-4` para responsive
 
 ## 📱 Pantallas mínimas requeridas (según el enunciado)
 

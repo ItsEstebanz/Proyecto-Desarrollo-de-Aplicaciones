@@ -1,89 +1,74 @@
 # 🔀 Flujo de Navegación
 
-Diagrama de cómo se conectan las pantallas del sistema.
+Este documento refleja las rutas disponibles actualmente en HomeStore. Los módulos de carrito, ventas, inventario, promociones y reportes están definidos en el modelo de datos, pero todavía no tienen flujo implementado.
 
 ```text
-                        ┌─────────────┐
-                        │   HOME (/)  │
-                        │  publica    │
-                        └──────┬──────┘
-                               │
-                ┌──────────────┼──────────────┐
-                ▼              ▼              ▼
-         ┌──────────┐   ┌──────────┐   ┌──────────────┐
-         │  /login  │   │/registro │   │ /servicios   │
-         └─────┬────┘   └─────┬────┘   │   publica    │
-               │              │        └──────────────┘
-               └──────┬───────┘
-                      ▼
-            ┌─────────────────────┐
-            │   /dashboard         │
-            │  (segun rol)         │
-            └─────────┬────────────┘
-                      │
-        ┌─────────────┼─────────────┬─────────────┐
-        ▼             ▼             ▼             ▼
-   ┌─────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐
-   │/mascotas│  │ /citas   │  │/servicios│  │ /admin/* │
-   │         │  │transacc. │  │          │  │(ADMIN)   │
-   └────┬────┘  └────┬─────┘  └──────────┘  └──────────┘
-        │            │
-        ▼            ▼
-   ┌────────┐  ┌──────────┐
-   │CRUD    │  │/citas/   │
-   │mascotas│  │ nueva    │
-   └────────┘  └────┬─────┘
-                    ▼
-              ┌──────────────┐
-              │ /citas/{id}  │
-              │ + factura    │
-              └──────────────┘
+                              ┌─────────────┐
+                              │   HOME (/)  │
+                              │   pública   │
+                              └──────┬──────┘
+                                     │
+       ┌─────────────────────┬───────┼─────────┬────────────────┐
+       ▼                     ▼       ▼         ▼                ▼
+ ┌───────────┐        ┌──────────┐   │   ┌──────────┐      ┌──────────┐
+ │POST /login│        │/registro │   │   │/nosotros │      │/contacto │
+ └─────┬─────┘        └──────────┘   │   └──────────┘      └──────────┘
+       │                             │
+       ▼                             ▼
+ ┌─────────────┐        ┌───────────────────────────────┐
+ │  /inicio    │        │ Navegación pública            │
+ │ autenticada │        │ /categories, /cart, /location │
+ └─────────────┘        │ /ubicacion, /products         │
+                        └───────────────────────────────┘
+
+                              ┌────────────────────┐
+                              │    /productos      │
+                              │ listado con datos  │
+                              └─────────┬──────────┘
+                                        │
+                       ┌────────────────┼────────────────┐
+                       ▼                ▼                ▼
+             ┌────────────────┐ ┌─────────────┐ ┌─────────────────┐
+             │/productos/nuevo│ │/editar/{id} │ │/eliminar/{id}   │
+             │ formulario     │ │ formulario  │ │ elimina y vuelve│
+             └───────┬────────┘ └───────┬─────┘ └─────────────────┘
+                     └──────────┬───────┘
+                                ▼
+                    ┌─────────────────────────┐
+                    │ POST /productos/guardar │
+                    │ → redirección a listado │
+                    └─────────────────────────┘
 ```
 
-## Casos de uso principales
+## Flujos implementados
 
-### 1. Cliente nuevo agenda una cita
+### 1. Inicio de sesión
 
 ```text
-HOME → /registro → (auto-login) → /dashboard →
-  /mascotas → /mascotas/nueva → (registro mascota) →
-  /citas/nueva → (seleccionar mascota, servicio, fecha) →
-  CONFIRMACIÓN
+HOME → POST /login → credenciales válidas → /inicio
+                     credenciales inválidas → /?error=true
 ```
 
-### 2. Veterinario atiende una cita
+`/inicio` es la única ruta que la configuración actual exige autenticar. El registro solo muestra el formulario; todavía no guarda usuarios ni inicia sesión automáticamente.
+
+### 2. Gestión de productos
 
 ```text
-HOME → /login → /dashboard (vet) →
-  /citas → (cita del día) → /citas/{id} →
-  (registrar servicios atendidos) → COMPLETAR →
-  factura generada automáticamente
+/productos → /productos/nuevo → POST /productos/guardar → /productos
+
+/productos → /productos/editar/{id} → POST /productos/guardar → /productos
+
+/productos → /productos/eliminar/{id} → /productos
 ```
 
-### 3. Admin genera reporte
+El formulario de producto utiliza las categorías y proveedores registrados en la base de datos. La autorización específica por rol y la conversión de la eliminación a una solicitud segura se documentarán al implementar el módulo de administración.
 
-```text
-HOME → /login (admin) → /dashboard →
-  /admin/reportes → (filtros) →
-  reporte mensual
-```
+## Rutas pendientes
 
-## Estados de una cita
+El modelo relacional ya contempla los siguientes flujos, pero no se presentan como funcionalidad disponible todavía (WIP):
 
-```text
-   ┌────────────┐
-   │ PENDIENTE  │  ← se crea
-   └─────┬──────┘
-         │
-   ┌─────▼──────┐
-   │ CONFIRMADA │  ← recepcionista valida
-   └─────┬──────┘
-         │
-   ┌─────▼──────┐
-   │ COMPLETADA │  ← veterinario termina + factura
-   └────────────┘
-
-   ┌────────────┐
-   │ CANCELADA  │  ← cliente o recepcionista
-   └────────────┘
-```
+- carrito y sus artículos;
+- checkout, pago, entrega y factura de venta;
+- movimientos de inventario;
+- promociones y códigos de descuento;
+- reseñas, tickets de soporte y auditoría.

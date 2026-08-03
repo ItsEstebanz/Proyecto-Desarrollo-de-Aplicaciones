@@ -1,50 +1,44 @@
 # 🗃️ Diagrama Entidad-Relación
 
-Modelo de la base de datos del sistema VetCare.
+El modelo entidad-relación de HomeStore representa la gestión de catálogo, usuarios, ventas, inventario, promociones y soporte al cliente.
 
-## 📄 Archivos en esta carpeta
+## 📄 Archivos
 
 | Archivo | Contenido |
-|---|---|
-| `diagrama-er.png` | Diagrama visual (placeholder en este ejemplo) |
-| `modelo-relacional.md` | Descripción textual de tablas y relaciones |
-| `diagrama-er.mwb` | Archivo nativo de MySQL Workbench (opcional) |
+| --- | --- |
+| [`MER_SistemaVentas_v3.5.svg`](./MER_SistemaVentas_v3.5.svg) | Diagrama visual fuente del modelo de ventas. |
+| [`modelo-relacional.md`](./modelo-relacional.md) | Tablas, relaciones y reglas de integridad. |
+| [`../../database/schema.sql`](../../database/schema.sql) | Script MySQL 8 para crear la estructura. |
 
 ## 📊 Resumen del modelo
 
-**8 tablas** (cumple el mínimo requerido por el enunciado):
+El diagrama contiene **19 tablas**:
 
-| # | Tabla | Tipo |
-|---|---|---|
-| 1 | `usuario` | Entidad principal |
-| 2 | `rol` | Catálogo |
-| 3 | `cliente` | Entidad principal |
-| 4 | `mascota` | Entidad principal |
-| 5 | `especie` | Catálogo |
-| 6 | `veterinario` | Entidad principal |
-| 7 | `servicio` | Entidad principal |
-| 8 | `cita` | **Transaccional** |
-| 9 | `cita_servicio` | Tabla puente (N:M entre cita y servicio) |
-| 10 | `factura` | **Transaccional** (derivada de cita) |
+| Módulo | Tablas |
+| --- | --- |
+| Seguridad y catálogo | `role`, `user`, `category`, `supplier`, `product` |
+| Carrito y promociones | `cart`, `cart_item`, `discount_code`, `promotion`, `product_promotion` |
+| Ventas e inventario | `store_location`, `payment_method`, `shipping_method`, `sale`, `sale_detail`, `inventory_movement` |
+| Soporte y trazabilidad | `support_ticket`, `review`, `audit_log` |
 
-> En el repo real, ver `diagrama-er.png` para la representación visual.
+Las tablas ya conectadas a la aplicación son `role`, `user`, `category`, `supplier` y `product`. Las demás ya están definidas en el script de esquema para que se implementen en módulos posteriores.
+
+> **Nota:** Esta es la representación visual. [MER_SistemaVentas_v3.5.svg](./MER_SistemaVentas_v3.5.svg)
 
 ## 🔗 Relaciones principales
 
-- `usuario` 1:1 `cliente` / `veterinario` (un usuario puede ser cliente, vet o admin)
-- `cliente` 1:N `mascota`
-- `especie` 1:N `mascota`
-- `mascota` 1:N `cita`
-- `veterinario` 1:N `cita`
-- `cita` N:M `servicio` (vía `cita_servicio`)
-- `cita` 1:1 `factura`
+- `role` 1:N `user`.
+- `category` 1:N `product` y `supplier` 1:N `product`.
+- `user` 1:N `cart`, `sale`, `support_ticket`, `review`, `promotion`, `inventory_movement` y `audit_log`.
+- `cart` 1:N `cart_item`; cada `cart_item` referencia un `product`.
+- `product` N:M `promotion` mediante `product_promotion`.
+- `sale` 1:N `sale_detail`; cada detalle conserva el precio aplicado al momento de la venta.
+- `product` 1:N `inventory_movement`.
 
-## ✅ Cumplimiento de requisitos
+## ✅ Criterios cubiertos
 
-- ✅ **Mínimo 8 tablas:** sí (10)
-- ✅ **Relaciones 1:N:** sí (cliente-mascota, mascota-cita)
-- ✅ **Relaciones N:M:** sí (cita-servicio)
-- ✅ **Llaves primarias:** todas las tablas tienen PK
-- ✅ **Llaves foráneas:** correctamente definidas
-- ✅ **Integridad referencial:** ON DELETE CASCADE en `cita_servicio`, ON UPDATE CASCADE en FKs
-- ✅ **Tabla transaccional:** `cita` y `factura`
+- ✅ Más de 8 tablas y relaciones 1:N.
+- ✅ Relación N:M entre productos y promociones.
+- ✅ Tablas transaccionales: `cart`, `sale`, `sale_detail` e `inventory_movement`.
+- ✅ Llaves primarias, foráneas, restricciones únicas y validaciones básicas de datos.
+- ✅ Auditoría y soporte ligados al usuario cuando corresponde.

@@ -1,4 +1,4 @@
-# Manual de Usuario — HomeStore - WIP
+# Manual de Usuario - HomeStore - WIP
 
 ## 1. Inicio
 
@@ -65,15 +65,15 @@ En **"Mis mascotas"**, click sobre una mascota para ver su historial completo.
 
 ### 6.1 Gestionar usuarios
 
-`/admin/usuarios` — lista, edita y asigna roles.
+`/admin/usuarios` - lista, edita y asigna roles.
 
 ### 6.2 Gestionar servicios
 
-`/admin/servicios` — CRUD completo del catálogo.
+`/admin/servicios` - CRUD completo del catálogo.
 
 ### 6.3 Reportes
 
-`/admin/reportes` — ingresos mensuales, citas por veterinario, etc.
+`/admin/reportes` - ingresos mensuales, citas por veterinario, etc.
 
 ## 7. Cambiar de idioma
 
