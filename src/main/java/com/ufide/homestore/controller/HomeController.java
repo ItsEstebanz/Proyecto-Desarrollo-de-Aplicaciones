@@ -23,8 +23,9 @@ public class HomeController {
 
 @GetMapping("/ubicacion")
     public String ubicacion() {
-        return "ubicacion";
+        return "location";
     }
+    
     @GetMapping("/products")
     public String products() {
         return "products";
@@ -38,10 +39,5 @@ public class HomeController {
     @GetMapping("/cart")
     public String cart() {
         return "cart";
-    }
-
-    @GetMapping("/location")
-    public String location() {
-        return "location";
     }
 }

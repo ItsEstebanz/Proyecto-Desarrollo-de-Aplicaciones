@@ -93,20 +93,50 @@
             </a>
 
             <div class="d-flex align-items-center gap-4 ms-auto">
-                <a class="nav-link" href="/">Inicio</a>
-                <a class="nav-link" href="/productos">Productos</a>
-                <a class="nav-link" href="/categories">Categorías</a>
-                <a class="nav-link" href="/cart">Carrito</a>
-                <a class="nav-link active" href="/location">Ubicación</a>
+                  <a class="nav-link active" th:href="@{/}" th:text="#{menu.inicio}">
+                    Inicio
+                </a>
 
-                <div class="d-flex gap-1 ms-3">
-                    <button class="btn-lang">ES</button>
-                    <button class="btn-lang">EN</button>
-                </div>
+                <a class="nav-link" th:href="@{/productos}" th:text="#{menu.productos}">
+                    Productos
+                </a>
 
-                <button class="btn-sesion ms-2">
-                    Inicio de Sesion
-                </button>
+                <a class="nav-link" th:href="@{/categories}" th:text="#{menu.categorias}">
+                    Categorías
+                </a>
+
+                <a class="nav-link" th:href="@{/cart}" th:text="#{menu.carrito}">
+                    Carrito
+                </a>
+
+                <a class="nav-link" th:href="@{/nosotros}" th:text="#{menu.nosotros}">
+                    Nosotros
+                </a>
+
+                <a class="nav-link" th:href="@{/contacto}" th:text="#{menu.contacto}">
+                    Contacto
+                </a>
+
+                <a class="nav-link" th:href="@{/ubicacion}" th:text="#{menu.ubicacion}">
+                    Ubicación
+                </a>
+
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#opinionModal"
+                    th:text="#{menu.opinion}">
+                    Opinión
+                </a>
+
+                <a class="btn-lang text-decoration-none" href="/?lang=es">
+                    ES
+                </a>
+
+                <a class="btn-lang text-decoration-none" href="/?lang=en">
+                    EN
+                </a>
+
+                <a class="btn-sesion ms-2 text-decoration-none" th:href="@{/inicio}" th:text="#{menu.iniciarSesion}">
+                    Inicio de Sesión
+                </a>
             </div>
         </div>
     </nav>
