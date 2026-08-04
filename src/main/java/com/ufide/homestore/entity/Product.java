@@ -8,6 +8,11 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.math.BigDecimal;
 
 /**
@@ -21,30 +26,41 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productId;
 
+    @NotBlank(message = "El nombre es obligatorio")
+    @Size(min = 3, max = 150, message = "El nombre debe tener entre 3 y 150 caracteres")
     @Column(nullable = false, length = 150)
     private String name;
 
     // "TEXT" permite almacenar descripciones largas, a diferencia de "VARCHAR" que tiene un límite de longitud.
+    @Size(max = 1000, message = "La descripción no puede superar 1000 caracteres")
     @Column(columnDefinition = "TEXT")
     private String description;
 
     // BIGDecimal hace que el precio y el costo sean más precisos que float o double, evitando errores de redondeo.
     // "precision" indica el número total de dígitos y "scale" indica el número de dígitos a la derecha del punto decimal.
+    @NotNull(message = "El precio es obligatorio")
+    @DecimalMin(value = "0.01", message = "El precio debe ser mayor que cero")
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
 
+    @NotNull(message = "El costo es obligatorio")
+    @DecimalMin(value = "0.00", message = "El costo no puede ser negativo")
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal costPrice;
 
+    @NotNull(message = "El stock es obligatorio")
+    @Min(value = 0, message = "El stock no puede ser negativo")
     @Column(nullable = false)
     private Integer stock = 0;
 
     // FK hacia la tabla category
+    @NotNull(message = "Debe seleccionar una categoría")
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     // FK hacia la tabla supplier
+    @NotNull(message = "Debe seleccionar un proveedor")
     @ManyToOne
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
