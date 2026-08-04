@@ -306,11 +306,13 @@
                         </span>
                     </div>
 
-                    <button type="button"
-                            class="btn btn-purple w-100"
-                            disabled>
-                        Continuar al pago
-                    </button>
+                   <a th:href="@{/checkout}"
+                     href="/checkout"
+                     class="btn btn-purple w-100"
+                     th:classappend="${items.isEmpty()} ? ' disabled'"
+                     th:attr="aria-disabled=${items.isEmpty()}">
+                     Continuar al pago
+                </a>
 
                 </div>
 
