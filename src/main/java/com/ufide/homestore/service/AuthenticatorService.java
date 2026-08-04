@@ -50,7 +50,7 @@ public class AuthenticatorService implements UserDetailsService {
                  * Las contraseñas actuales están almacenadas como texto normal.
                  * {noop} permite usarlas sin cambiar la base de datos.
                  */
-                "{noop}" + usuario.getPassword(),
+                usuario.getPassword(),
 
                 Boolean.TRUE.equals(usuario.getIsActive()),
                 true,
