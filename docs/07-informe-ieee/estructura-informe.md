@@ -75,6 +75,13 @@ El desarrollo siguió la metodología ágil con sprints semanales. Cada integran
 [Tabla del cronograma]
 
 ## IV. Desarrollo
+### Implementación del módulo de checkout y ventas
+
+Se implementó el flujo completo de compra de HomeStore, iniciando desde la selección de productos y su incorporación al carrito. El usuario autenticado puede visualizar los productos agregados, aumentar o disminuir cantidades, eliminar artículos y continuar al proceso de pago.
+
+En la pantalla de checkout se muestran los productos seleccionados y se calcula el subtotal. Además, el usuario puede elegir un método de pago, un método de envío y una sucursal antes de confirmar la compra.
+
+Para almacenar la información se incorporaron las entidades `Sale`, `SaleDetail`, `PaymentMethod`, `ShippingMethod` y `StoreLocation`, junto con sus respectivos repositorios. También se desarrollaron los servicios y controladores necesarios para procesar la compra y guardar la venta en la base de datos.
 
 ### A. Arquitectura por capas
 
@@ -93,6 +100,11 @@ El desarrollo siguió la metodología ágil con sprints semanales. Cada integran
 [Endpoints implementados]
 
 ## V. Resultados
+### Resultados del proceso de compra
+
+El módulo implementado permite completar una compra desde el carrito hasta la confirmación final. Al confirmar la operación, el sistema genera un número de factura, registra la venta y almacena los detalles de cada producto comprado.
+
+El sistema también descuenta del inventario las unidades adquiridas y cambia el estado del carrito para evitar que una compra completada vuelva a utilizarse. Finalmente, se muestra una pantalla de compra exitosa con el número de factura, estado, método de pago, método de envío, sucursal y total pagado.
 
 ### A. Funcionalidades implementadas
 
@@ -109,6 +121,7 @@ El desarrollo siguió la metodología ágil con sprints semanales. Cada integran
 - Cobertura de tests: x%
 
 ## VI. Conclusiones
+La implementación del módulo de checkout permitió integrar el carrito, el inventario y el registro de ventas dentro de un mismo proceso. Las validaciones aplicadas reducen errores relacionados con carritos vacíos, cantidades inválidas y falta de existencias. Además, la separación por entidades, repositorios, servicios y controladores facilita el mantenimiento y la ampliación futura del sistema.
 
 [Pendiente]
 
