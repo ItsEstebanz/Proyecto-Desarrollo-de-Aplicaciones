@@ -83,3 +83,30 @@ En la esquina superior derecha hay un selector ES / EN.
 
 📧 [soporte@homestore.com](mailto:soporte@homestore.com)
 📱 +506 8888-9999
+
+## 9. Registrar una cuenta
+
+1. Ingresar a la página principal.
+2. Presionar el botón “Regístrese”.
+3. Completar nombre, correo electrónico y contraseña.
+4. Presionar “Crear cuenta”.
+5. Iniciar sesión con las credenciales registradas.
+
+## 10. Agregar productos al carrito
+
+1. Iniciar sesión.
+2. Ingresar a la sección Productos.
+3. Seleccionar el producto.
+4. Presionar “Agregar”.
+5. Ingresar al carrito para revisar los productos.
+
+## 11. Confirmar una compra
+
+1. Ingresar al carrito.
+2. Revisar los productos y cantidades.
+3. Presionar “Continuar al pago”.
+4. Seleccionar el método de pago.
+5. Seleccionar el método de envío.
+6. Seleccionar una sucursal.
+7. Presionar “Confirmar compra”.
+8. Revisar la pantalla de compra exitosa.
