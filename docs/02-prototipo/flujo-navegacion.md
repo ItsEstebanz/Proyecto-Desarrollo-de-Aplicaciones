@@ -65,10 +65,41 @@ El formulario de producto utiliza las categorías y proveedores registrados en l
 
 ## Rutas pendientes
 
-El modelo relacional ya contempla los siguientes flujos, pero no se presentan como funcionalidad disponible todavía (WIP):
+Este documento refleja las rutas disponibles actualmente en HomeStore. Los módulos de registro, productos, carrito, checkout y confirmación de compra ya cuentan con un flujo funcional. Los módulos de inventario, promociones y reportes continúan pendientes de implementación completa.
 
 - carrito y sus artículos;
 - checkout, pago, entrega y factura de venta;
 - movimientos de inventario;
 - promociones y códigos de descuento;
 - reseñas, tickets de soporte y auditoría.
+
+---
+
+## Flujo de compra implementado
+
+```text
+Inicio
+  ↓
+Registro o inicio de sesión
+  ↓
+Listado de productos
+  ↓
+Agregar producto al carrito
+  ↓
+Visualizar carrito
+  ↓
+Aumentar, disminuir o eliminar productos
+  ↓
+Continuar al pago
+  ↓
+Checkout
+  ↓
+Seleccionar método de pago
+  ↓
+Seleccionar método de envío
+  ↓
+Seleccionar sucursal
+  ↓
+Confirmar compra
+  ↓
+Compra exitosa
