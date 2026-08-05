@@ -3,7 +3,7 @@
 ## 📄 Archivos
 
 | Archivo | Contenido |
-|---|---|
+| --- | --- |
 | `homestore-api.postman_collection.json` | Colección importable a Postman con todos los endpoints REST |
 
 ## Cómo importar
@@ -16,7 +16,7 @@
 ## Variables
 
 | Variable | Valor por defecto |
-|---|---|
+| --- | --- |
 | `base_url` | `http://localhost:8081` |
 
 Para apuntar a producción, cambiar a `https://homestore.onrender.com`.
