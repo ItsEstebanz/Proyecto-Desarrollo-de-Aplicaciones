@@ -84,3 +84,19 @@ mvnw.cmd spring-boot:run      # Windows
 ./mvnw clean package -DskipTests
 java -jar target/homestore-0.0.1-SNAPSHOT.jar
 ```
+## Requisitos
+
+- Java 21
+- Maven
+- MySQL
+- Spring Boot
+- Visual Studio Code
+- Navegador web
+
+## Configuración de la base de datos
+
+La aplicación utiliza variables de entorno para evitar exponer las credenciales:
+
+```properties
+spring.datasource.username=${DB_USERNAME:root}
+spring.datasource.password=${DB_PASSWORD:}
