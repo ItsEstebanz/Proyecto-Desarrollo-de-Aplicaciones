@@ -2,7 +2,7 @@
 
 ## Capas del sistema
 
-```txt
+```
 [Cliente (Navegador)] ─HTTP─> [Controller] ─> [Service] ─> [Repository] ─> [MySQL]
                                                                  │
                                                           [Entity Java]
@@ -27,7 +27,6 @@ public class MascotaController {
 ```
 
 Responsabilidades:
-
 - Routing de URLs
 - Validación de forma de los inputs
 - Selección de la vista
@@ -55,7 +54,6 @@ public class CitaService {
 ```
 
 Responsabilidades:
-
 - Reglas del negocio (estados de cita, cálculos, validaciones)
 - Transacciones (`@Transactional`)
 - Coordinación entre repositories
@@ -72,7 +70,6 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 ```
 
 Responsabilidades:
-
 - Acceso a datos
 - Query methods derivados
 - `@Query` para casos complejos
@@ -102,7 +99,7 @@ public class Mascota {
 ## Patrones de diseño aplicados
 
 | Patrón | Dónde se aplica | Por qué |
-| --- | --- | --- |
+|---|---|---|
 | **MVC** | Toda la app | Separación Model / View / Controller |
 | **Repository** | `repository/` | Abstrae el acceso a datos |
 | **Service Layer** | `service/` | Centraliza lógica de negocio |
@@ -115,7 +112,6 @@ public class Mascota {
 ## Seguridad
 
 Spring Security configurado con:
-
 - `BCryptPasswordEncoder` para passwords.
 - Filtros de URL por rol (`@PreAuthorize`).
 - Login form-based con sesión.
@@ -137,7 +133,7 @@ public class SecurityConfig {
 Endpoints `/api/**` separados de la web tradicional:
 
 | Endpoint | Método | Devuelve |
-| --- | --- | --- |
+|---|---|---|
 | `/api/mascotas` | GET | Lista JSON de mascotas |
 | `/api/citas` | POST | Crea cita, devuelve 201 |
 
@@ -146,7 +142,6 @@ Documentados con Postman (ver `postman/`).
 ## Internacionalización
 
 Archivos en `src/main/resources/`:
-
 - `messages.properties` — español (default)
 - `messages_en.properties` — inglés
 
