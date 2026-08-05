@@ -272,10 +272,50 @@
 - El dueño podrá visualizar el número de ventas confirmadas.
 
 ---
+## HU21 – Registro de usuario
 
+Como visitante, quiero registrarme en el sistema mediante mi nombre, correo electrónico y contraseña, para poder iniciar sesión y realizar compras.
+
+### Criterios de aceptación
+
+- El usuario debe completar nombre, correo y contraseña.
+- El correo electrónico no puede estar vacío.
+- El correo electrónico no puede estar registrado previamente.
+- La contraseña debe cumplir con la longitud mínima establecida.
+- La contraseña debe almacenarse de forma segura mediante BCrypt.
+- Después del registro, el usuario debe poder iniciar sesión.
+
+- --
+## HU22 – Realizar checkout
+
+Como cliente autenticado, quiero seleccionar el método de pago, método de envío y sucursal, para confirmar mi compra.
+
+### Criterios de aceptación
+
+- El carrito no puede estar vacío.
+- El sistema debe mostrar los productos del carrito.
+- El sistema debe calcular el subtotal.
+- El usuario debe seleccionar un método de pago.
+- El usuario debe seleccionar un método de envío.
+- El usuario debe seleccionar una sucursal.
+- El sistema debe calcular el total final.
+
+
+  ## HU23 – Confirmar compra
+
+Como cliente, quiero recibir una confirmación con los datos de mi compra, para verificar que la transacción fue registrada correctamente.
+
+### Criterios de aceptación
+
+- El sistema debe generar un número de factura.
+- La venta debe almacenarse en la base de datos.
+- Los detalles de los productos deben almacenarse.
+- El stock debe disminuir según la cantidad comprada.
+- El carrito debe marcarse como completado.
+- Debe mostrarse una pantalla de compra exitosa.
 ## ✅ Resumen
 
-- **Total:** 20 historias de usuario
+- **Total:** 23 historias de usuario
 - **Roles cubiertos:** comprador/posible comprador, usuario final, colaborador, encargado de supervisión, encargado de soporte técnico, gerente de la empresa, dueño de la tienda
 - **Módulos:** TBA
 - **Cumple requisito:** TBA
