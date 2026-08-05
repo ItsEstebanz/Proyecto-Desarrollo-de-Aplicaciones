@@ -166,4 +166,16 @@ public class CartService {
             );
         }
     }
+    @Transactional(readOnly = true)
+public Cart obtenerCarritoActivo(User usuario) {
+    return cartRepository
+            .findFirstByUserAndStatusOrderByCreatedAtDesc(
+                    usuario,
+                    ESTADO_ACTIVO
+            )
+            .orElseThrow(() -> new IllegalStateException(
+                    "No existe un carrito activo."
+            ));
+}
+
 }

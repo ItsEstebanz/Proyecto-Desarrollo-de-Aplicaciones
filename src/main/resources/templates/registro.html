@@ -1,29 +1,418 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Registro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registro | HomeStore</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(135deg, #f4eaff, #dfc6f2);
+            color: #281760;
+        }
+
+        .navbar {
+            width: 100%;
+            min-height: 88px;
+            padding: 15px 5%;
+            background-color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 3px 12px rgba(58, 31, 107, 0.10);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #281760;
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #7437d1, #c93ddd);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 29px;
+        }
+
+        .logo-text {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .home-link {
+            padding: 12px 22px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #402278;
+            background-color: #eee3f8;
+            font-weight: 700;
+            transition: 0.2s;
+        }
+
+        .home-link:hover {
+            background-color: #dbc2ef;
+            transform: translateY(-1px);
+        }
+
+        .page-container {
+            min-height: calc(100vh - 88px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 20px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 1020px;
+            background-color: #ffffff;
+            border-radius: 25px;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            box-shadow: 0 18px 45px rgba(64, 34, 120, 0.20);
+        }
+
+        .form-section {
+            padding: 55px;
+        }
+
+        .form-section h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: #29165e;
+        }
+
+        .subtitle {
+            color: #76678f;
+            line-height: 1.5;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 21px;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #3f2870;
+        }
+
+        input {
+            width: 100%;
+            height: 50px;
+            padding: 0 15px;
+            border: 2px solid #e4d9ee;
+            border-radius: 11px;
+            font-size: 16px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #a23ee0;
+            box-shadow: 0 0 0 4px rgba(162, 62, 224, 0.12);
+        }
+
+        input:invalid:not(:placeholder-shown) {
+            border-color: #d9534f;
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            padding-right: 55px;
+        }
+
+        .show-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 20px;
+            padding: 7px;
+        }
+
+        .help-text {
+            display: block;
+            margin-top: 7px;
+            font-size: 13px;
+            color: #817490;
+        }
+
+        .register-button {
+            width: 100%;
+            height: 52px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient(90deg, #8b35d5, #c239d8);
+            color: #ffffff;
+            font-size: 17px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .register-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 18px rgba(153, 53, 211, 0.28);
+        }
+
+        .login-text {
+            text-align: center;
+            margin-top: 23px;
+            color: #716584;
+        }
+
+        .login-text a {
+            color: #8b35d5;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        .visual-section {
+            padding: 45px;
+            background: linear-gradient(150deg, #ead6fa, #cda6ed);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .visual-icon {
+            width: 190px;
+            height: 190px;
+            margin-bottom: 28px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 94px;
+            box-shadow: 0 12px 30px rgba(81, 37, 132, 0.14);
+        }
+
+        .visual-section h2 {
+            font-size: 29px;
+            margin-bottom: 13px;
+        }
+
+        .visual-section p {
+            max-width: 360px;
+            line-height: 1.6;
+            color: #5f4779;
+        }
+
+        .alert {
+            padding: 13px 15px;
+            margin-bottom: 20px;
+            border-radius: 9px;
+            font-weight: 600;
+        }
+
+        .alert-success {
+            color: #17643b;
+            background-color: #d9f5e5;
+            border: 1px solid #a9dfbf;
+        }
+
+        .alert-error {
+            color: #8f2525;
+            background-color: #fde0e0;
+            border: 1px solid #f0b2b2;
+        }
+
+        @media (max-width: 800px) {
+            .register-card {
+                grid-template-columns: 1fr;
+                max-width: 560px;
+            }
+
+            .visual-section {
+                display: none;
+            }
+
+            .form-section {
+                padding: 38px 28px;
+            }
+
+            .form-section h1 {
+                font-size: 30px;
+            }
+
+            .logo-text {
+                font-size: 21px;
+            }
+
+            .home-link {
+                padding: 10px 14px;
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-    <h1>Registro de Usuario</h1>
+<header class="navbar">
+    <a th:href="@{/}" href="/" class="logo-container">
+        <div class="logo-icon">🏠</div>
+        <span class="logo-text">HomeStore</span>
+    </a>
 
-    <form>
-        <label>Nombre:</label><br>
-        <input type="text"><br><br>
+    <a th:href="@{/}" href="/" class="home-link">
+        Volver al inicio
+    </a>
+</header>
 
-        <label>Correo:</label><br>
-        <input type="email"><br><br>
+<main class="page-container">
 
-        <label>Contraseña:</label><br>
-        <input type="password"><br><br>
+    <section class="register-card">
 
-        <button type="submit">Registrarse</button>
-    </form>
+        <div class="form-section">
 
-    <br>
+            <h1>Crear una cuenta</h1>
 
-    <a href="/">Volver al inicio</a>
+            <p class="subtitle">
+                Regístrate para realizar compras y administrar tu información.
+            </p>
+
+            <div class="alert alert-success"
+                 th:if="${mensajeExito}"
+                 th:text="${mensajeExito}">
+            </div>
+
+            <div class="alert alert-error"
+                 th:if="${mensajeError}"
+                 th:text="${mensajeError}">
+            </div>
+
+            <form th:action="@{/registro}"
+                  action="/registro"
+                  method="post">
+
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+
+                    <input
+                        type="text"
+                        id="nombre"
+                        name="nombre"
+                        placeholder="Ejemplo: María Rodríguez"
+                        minlength="3"
+                        maxlength="100"
+                        autocomplete="name"
+                        required>
+
+                    <small class="help-text">
+                        Ingresa al menos 3 caracteres.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo electrónico</label>
+
+                    <input
+                        type="email"
+                        id="correo"
+                        name="correo"
+                        placeholder="nombre@correo.com"
+                        maxlength="120"
+                        autocomplete="email"
+                        required>
+                </div>
+
+                <div class="form-group">
+                    <label for="contrasena">Contraseña</label>
+
+                    <div class="password-wrapper">
+                        <input
+                            type="password"
+                            id="contrasena"
+                            name="contrasena"
+                            placeholder="Crea una contraseña segura"
+                            minlength="6"
+                            maxlength="100"
+                            autocomplete="new-password"
+                            required>
+
+                        <button
+                            type="button"
+                            class="show-password"
+                            id="showPassword"
+                            aria-label="Mostrar u ocultar contraseña">
+                            👁️
+                        </button>
+                    </div>
+
+                    <small class="help-text">
+                        Debe contener al menos 6 caracteres.
+                    </small>
+                </div>
+
+                <button type="submit" class="register-button">
+                    Crear mi cuenta
+                </button>
+
+            </form>
+
+            <p class="login-text">
+                ¿Ya tienes una cuenta?
+                <a th:href="@{/}" href="/">Inicia sesión</a>
+            </p>
+
+        </div>
+
+        <div class="visual-section">
+            <div class="visual-icon">🛒</div>
+
+            <h2>Bienvenido a HomeStore</h2>
+
+            <p>
+                Crea tu cuenta para explorar productos, utilizar el carrito
+                y disfrutar de una experiencia de compra más sencilla.
+            </p>
+        </div>
+
+    </section>
+
+</main>
+
+<script>
+    const passwordInput = document.getElementById("contrasena");
+    const showPasswordButton = document.getElementById("showPassword");
+
+    showPasswordButton.addEventListener("click", function () {
+        const isPassword = passwordInput.type === "password";
+
+        passwordInput.type = isPassword ? "text" : "password";
+        showPasswordButton.textContent = isPassword ? "🙈" : "👁️";
+    });
+</script>
 
 </body>
 </html>

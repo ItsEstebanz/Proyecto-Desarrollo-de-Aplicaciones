@@ -6,7 +6,11 @@ import com.ufide.homestore.repository.ProductRepository;
 import com.ufide.homestore.repository.SupplierRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import jakarta.validation.Valid;
+
 
 @Controller
 @RequestMapping("/productos")
@@ -39,9 +43,28 @@ public class ProductController {
     }
 
     @PostMapping("/guardar")
-    public String guardar(@ModelAttribute Product producto) {
-        productRepository.save(producto);
-        return "redirect:/productos";
+    public String guardar(
+        @Valid @ModelAttribute("producto") Product producto,
+        BindingResult bindingResult,
+        Model model,
+        RedirectAttributes redirectAttributes) {
+
+    if (bindingResult.hasErrors()) {
+        model.addAttribute("categorias", categoryRepository.findAll());
+        model.addAttribute("proveedores", supplierRepository.findAll());
+        return "producto-form";
+    }
+
+    productRepository.save(producto);
+
+    redirectAttributes.addFlashAttribute(
+            "mensajeExito",
+            producto.getProductId() == null
+                    ? "Producto creado correctamente."
+                    : "Producto actualizado correctamente."
+    );
+
+    return "redirect:/productos";
     }
 
     @GetMapping("/editar/{id}")
