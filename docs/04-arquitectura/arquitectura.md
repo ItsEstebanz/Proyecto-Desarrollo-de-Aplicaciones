@@ -151,3 +151,50 @@ Archivos en `src/main/resources/`:
 - `messages_en.properties` — inglés
 
 Usado en HTML con `th:text="#{clave}"`.
+
+## Capa de entidades
+
+- Sale
+- SaleDetail
+- PaymentMethod
+- ShippingMethod
+- StoreLocation
+- Cart
+- CartItem
+
+## Capa de repositorios
+
+- SaleRepository
+- SaleDetailRepository
+- PaymentMethodRepository
+- ShippingMethodRepository
+- StoreLocationRepository
+
+## Capa de servicios
+
+- CartService
+- CheckoutService
+- UserService
+
+## Capa de controladores
+
+- CheckoutController
+- RegistroController
+- CartController
+- ProductController
+
+## Capa de presentación
+
+- registro.html
+- cart.html
+- checkout.html
+- compra-exitosa.html
+- producto-form.html
+
+El sistema utiliza una arquitectura por capas:
+
+1. Las vistas envían solicitudes a los controladores.
+2. Los controladores procesan las solicitudes.
+3. Los servicios contienen las reglas del negocio.
+4. Los repositorios realizan el acceso a MySQL.
+5. Las entidades representan las tablas de la base de datos.
