@@ -21,10 +21,10 @@ Slides para la defensa del proyecto (Avance 4).
 | 5 | Arquitectura por capas | 2 min |
 | 6 | Diagrama ER | 1 min |
 | 7-10 | Demo en vivo (módulos clave) | 4-5 min |
-| 11 | Demo API REST con Postman | 1-2 min |
-| 12 | Muestra del repositorio GitHub | 1 min |
-| 13 | Aprendizajes y trabajo futuro | 1 min |
-| 14 | Gracias / preguntas | — |
+| 11| Implementación de Spring Security y autenticación | 1-2 min |
+| 12| Muestra del repositorio GitHub | 1 min |
+| 13| Aprendizajes y trabajo futuro | 1 min |
+| 14 | Gracias / preguntas | —
 
 ## 🎤 Distribución entre integrantes
 

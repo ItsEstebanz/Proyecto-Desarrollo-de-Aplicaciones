@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import jakarta.validation.Valid;
 
-
 @Controller
 @RequestMapping("/productos")
 public class ProductController {
@@ -21,8 +20,8 @@ public class ProductController {
     private final SupplierRepository supplierRepository;
 
     public ProductController(ProductRepository productRepository,
-                             CategoryRepository categoryRepository,
-                             SupplierRepository supplierRepository) {
+            CategoryRepository categoryRepository,
+            SupplierRepository supplierRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.supplierRepository = supplierRepository;
@@ -32,6 +31,16 @@ public class ProductController {
     public String listar(Model model) {
         model.addAttribute("productos", productRepository.findAll());
         return "productos";
+    }
+
+    @GetMapping("/inventario")
+    public String inventario(Model model) {
+
+        model.addAttribute(
+                "productos",
+                productRepository.findAll());
+
+        return "inventario";
     }
 
     @GetMapping("/nuevo")
@@ -44,27 +53,26 @@ public class ProductController {
 
     @PostMapping("/guardar")
     public String guardar(
-        @Valid @ModelAttribute("producto") Product producto,
-        BindingResult bindingResult,
-        Model model,
-        RedirectAttributes redirectAttributes) {
+            @Valid @ModelAttribute("producto") Product producto,
+            BindingResult bindingResult,
+            Model model,
+            RedirectAttributes redirectAttributes) {
 
-    if (bindingResult.hasErrors()) {
-        model.addAttribute("categorias", categoryRepository.findAll());
-        model.addAttribute("proveedores", supplierRepository.findAll());
-        return "producto-form";
-    }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("categorias", categoryRepository.findAll());
+            model.addAttribute("proveedores", supplierRepository.findAll());
+            return "producto-form";
+        }
 
-    productRepository.save(producto);
+        productRepository.save(producto);
 
-    redirectAttributes.addFlashAttribute(
-            "mensajeExito",
-            producto.getProductId() == null
-                    ? "Producto creado correctamente."
-                    : "Producto actualizado correctamente."
-    );
+        redirectAttributes.addFlashAttribute(
+                "mensajeExito",
+                producto.getProductId() == null
+                        ? "Producto creado correctamente."
+                        : "Producto actualizado correctamente.");
 
-    return "redirect:/productos";
+        return "redirect:/productos";
     }
 
     @GetMapping("/editar/{id}")

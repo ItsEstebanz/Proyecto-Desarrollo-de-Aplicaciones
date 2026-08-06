@@ -1,6 +1,6 @@
 # Despliegue en Render.com
 
-Cómo publicar VetCare en producción.
+Cómo publicar HomeStore en producción.
 
 ## Requisitos previos
 
