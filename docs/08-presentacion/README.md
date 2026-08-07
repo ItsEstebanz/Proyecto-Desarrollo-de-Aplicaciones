@@ -32,7 +32,7 @@ Cada miembro presenta su parte del código y responde preguntas sobre ella:
 
 | Integrante | Sección |
 | --- | --- |
-| Esteban Solís | API REST + Base de datos |
+| Esteban Solís | Base de datos, inventario y flujo de compra |
 | Josué Azofeifa | Seguridad (autenticación y autorización) |
 | Luis Sanchez | CRUD principal + Vistas |
 | Alondra Matamoros | Arquitectura general + Módulo transaccional (carrito, checkout, facturación, reportes) |
@@ -41,6 +41,6 @@ Cada miembro presenta su parte del código y responde preguntas sobre ella:
 
 - Practicar la demo varias veces antes del día.
 - Tener el sistema corriendo localmente Y desplegado (por si falla la red).
-- Tener Postman abierto con la colección lista.
+-  Tener Postman abierto con la colección lista.
 - Cada uno debe saber explicar SU código sin leer.
 - Llevar plan B: capturas de pantalla por si el deploy se cae.
