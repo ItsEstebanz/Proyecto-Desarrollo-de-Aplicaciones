@@ -1,47 +1,56 @@
-# 🎨 Prototipo Visual - WIP
+# 🎨 Prototipo Visual - HomeStore
 
-Mockups y wireframes del sistema antes de empezar a programar.
+Esta carpeta contiene los mockups y wireframes utilizados para el diseño de la interfaz de HomeStore antes del desarrollo de la aplicación.
 
-## 📄 Archivos en esta carpeta
+## 📄 Archivos de esta carpeta
 
 | Archivo | Pantalla |
-| --- | --- |
-| `01-home.png` | Página principal con menú |
-| `02-login.png` | Formulario de inicio de sesión |
-| `03-registro.png` | Formulario de registro |
-| `04-dashboard-cliente.png` | Panel del cliente |
-| `05-listado-mascotas.png` | Listado tipo CRUD |
-| `06-formulario-mascota.png` | Formulario de mascota |
-| `07-agendar-cita.png` | Pantalla transaccional |
-| `08-detalle-cita.png` | Detalle con factura |
-| `flujo-navegacion.md` | Diagrama de flujo entre pantallas |
+|---------|----------|
+| `01-home.png` | Página principal |
+| `02-login.png` | Inicio de sesión |
+| `03-registro.png` | Registro de usuarios |
+| `04-dashboard.png` | Panel principal |
+| `05-productos.png` | Listado de productos |
+| `06-producto-form.png` | Formulario de creación y edición de productos |
+| `07-carrito.png` | Carrito de compras |
+| `08-checkout.png` | Proceso de pago |
+| `09-confirmacion-compra.png` | Confirmación de compra |
+| `10-inventario.png` | Gestión de inventario *(en desarrollo)* |
+| `flujo-navegacion.md` | Flujo de navegación del sistema |
 
-## 🎨 Herramientas usadas
+## 🎨 Herramientas utilizadas
 
-- **Figma** - diseño principal (link al proyecto público abajo)
-- **Mockflow** - wireframes iniciales
+- **Figma** para el diseño de las interfaces.
+- **Bootstrap 5** como referencia para el diseño responsivo.
 
-## 🔗 Acceso al diseño Figma
+## 🎨 Guía visual
 
-🔗 [Prototipo en Figma](https://www.figma.com/design/hT1TWvrjkdPtKU14Z3xIPp/prototipo-dise%C3%B1o-app-web?m=auto&t=gvF4JEFh2gboYaXD-1)
+- **Color principal:** Morado (#A855F7)
+- **Color secundario:** Lavanda claro
+- **Tipografía:** Inter
+- **Iconografía:** Bootstrap Icons
+- **Framework CSS:** Bootstrap 5
 
-🔑 Contraseña: "HomeStore-SC-403-2026"
+## 📱 Pantallas implementadas
 
-## 📐 Convenciones visuales
+Actualmente el prototipo contempla las siguientes vistas:
 
-- **Color primario:** `#1B5E20` (verde clínica veterinaria)
-- **Color secundario:** `#FFC107` (amarillo cálido)
-- **Tipografía:** Inter (Bootstrap default)
-- **Iconos:** Bootstrap Icons
-- **Espaciado:** sistema de Bootstrap (`p-3`, `m-2`, etc.)
-- **Grid:** Bootstrap 5 - `col-12 col-md-6 col-lg-4` para responsive
+- Página principal (Home)
+- Inicio de sesión
+- Registro de usuarios
+- Dashboard
+- Gestión de productos
+- Carrito de compras
+- Checkout
+- Confirmación de compra
 
-## 📱 Pantallas mínimas requeridas (según el enunciado)
+## 🚧 Pantallas en desarrollo
 
-- ✅ Pantalla principal / home
-- ✅ Formulario de registro y login
-- ✅ Vista del CRUD principal (listado y formulario)
-- ✅ Vista del módulo transaccional (agendar cita)
-- ✅ Flujo general de navegación
+Las siguientes vistas forman parte de la siguiente iteración del proyecto:
 
-> **Nota:** los PNG son **placeholders en este repo de ejemplo**. En un proyecto real, exporten desde Figma y reemplacen estos archivos.
+- Gestión de inventario
+- Promociones y descuentos
+- Reportes
+- Administración de usuarios
+
+> **Nota:** Los archivos de imágenes corresponden a los prototipos del proyecto HomeStore y sirven como apoyo visual durante el desarrollo de la aplicación.

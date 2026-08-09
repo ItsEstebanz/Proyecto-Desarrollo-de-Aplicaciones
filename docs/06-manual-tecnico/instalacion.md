@@ -74,9 +74,8 @@ mvnw.cmd spring-boot:run      # Windows
 
 | Rol | Correo | Password |
 | --- | --- | --- |
-| Admin | [admin@homestore.com](mailto:admin@homestore.com) | admin123 |
-| Veterinario | [vet@homestore.com](mailto:vet@homestore.com) | vet12345 |
-| Cliente | [cliente@homestore.com](mailto:cliente@homestore.com) | cliente1 |
+| Administrador | admin@homestore.com | admin123 |
+| Cliente | cliente@homestore.com | cliente1 |
 
 ## Compilar el JAR de producción
 

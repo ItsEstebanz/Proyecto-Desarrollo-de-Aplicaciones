@@ -1,12 +1,43 @@
-# 🔧 Manual Técnico - WIP
+# API REST - HomeStore
 
-Para desarrolladores y para el docente que quiera correr o desplegar el proyecto.
+Actualmente HomeStore utiliza una arquitectura MVC basada en Spring Boot y Thymeleaf.
 
-## 📄 Archivos en esta carpeta
+La interacción con el sistema se realiza mediante controladores MVC (`@Controller`) y vistas renderizadas con Thymeleaf.
 
-| Archivo | Contenido |
-| --- | --- |
-| [`instalacion.md`](./instalacion.md) | Cómo correr el proyecto local |
-| [`deployment.md`](./deployment.md) | Cómo desplegar en Render.com |
-| [`api-rest.md`](./api-rest.md) | Documentación de los endpoints REST |
-| [`troubleshooting.md`](./troubleshooting.md) | Problemas comunes y soluciones |
+## Arquitectura utilizada
+
+- Spring Boot
+- Spring MVC
+- Thymeleaf
+- Spring Data JPA
+- Spring Security
+- MySQL
+
+## Estado actual
+
+En la versión actual del proyecto no se implementan servicios REST públicos (`@RestController`).
+
+Todas las operaciones del sistema se realizan mediante formularios HTML y controladores MVC.
+
+## Funcionalidades implementadas
+
+- Registro de usuarios.
+- Inicio de sesión.
+- Gestión de productos.
+- Gestión de categorías.
+- Gestión de proveedores.
+- Carrito de compras.
+- Checkout.
+- Confirmación de compra.
+- Gestión de inventario.
+
+## Futuras implementaciones
+
+En futuras versiones podrán incorporarse servicios REST para:
+
+- Productos.
+- Inventario.
+- Promociones.
+- Reportes.
+- Opiniones.
+- Soporte técnico.

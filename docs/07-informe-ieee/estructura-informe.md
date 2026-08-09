@@ -29,7 +29,7 @@ HomeStore is a web system built with Spring Boot 3.3.5, Java 21, Thymeleaf, and 
 
 ## Keywords
 
-`Spring Boot`, `MVC`, `Thymeleaf`, `JPA`, `MySQL`, `Bootstrap 5`, `MVC`, `gestión de inventario`, `sistema de ventas`, `web application`, `REST API`
+`Spring Boot`, `Spring MVC`, `Thymeleaf`, `Spring Security`, `JPA`, `MySQL`, `Bootstrap 5`, `gestión de inventario`, `sistema de ventas`, `web application`
 
 ---
 

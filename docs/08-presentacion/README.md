@@ -21,10 +21,10 @@ Slides para la defensa del proyecto (Avance 4).
 | 5 | Arquitectura por capas | 2 min |
 | 6 | Diagrama ER | 1 min |
 | 7-10 | Demo en vivo (módulos clave) | 4-5 min |
-| 11 | Demo API REST con Postman | 1-2 min |
-| 12 | Muestra del repositorio GitHub | 1 min |
-| 13 | Aprendizajes y trabajo futuro | 1 min |
-| 14 | Gracias / preguntas | — |
+| 11| Implementación de Spring Security y autenticación | 1-2 min |
+| 12| Muestra del repositorio GitHub | 1 min |
+| 13| Aprendizajes y trabajo futuro | 1 min |
+| 14 | Gracias / preguntas | —
 
 ## 🎤 Distribución entre integrantes
 
@@ -32,7 +32,7 @@ Cada miembro presenta su parte del código y responde preguntas sobre ella:
 
 | Integrante | Sección |
 | --- | --- |
-| Esteban Solís | API REST + Base de datos |
+| Esteban Solís | Base de datos, inventario y flujo de compra |
 | Josué Azofeifa | Seguridad (autenticación y autorización) |
 | Luis Sanchez | CRUD principal + Vistas |
 | Alondra Matamoros | Arquitectura general + Módulo transaccional (carrito, checkout, facturación, reportes) |
@@ -41,6 +41,6 @@ Cada miembro presenta su parte del código y responde preguntas sobre ella:
 
 - Practicar la demo varias veces antes del día.
 - Tener el sistema corriendo localmente Y desplegado (por si falla la red).
-- Tener Postman abierto con la colección lista.
+-  Tener Postman abierto con la colección lista.
 - Cada uno debe saber explicar SU código sin leer.
 - Llevar plan B: capturas de pantalla por si el deploy se cae.

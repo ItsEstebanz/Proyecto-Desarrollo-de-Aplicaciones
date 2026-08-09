@@ -1,105 +1,177 @@
 # 🔀 Flujo de Navegación
 
-Este documento refleja las rutas disponibles actualmente en HomeStore. Los módulos de carrito, ventas, inventario, promociones y reportes están definidos en el modelo de datos, pero todavía no tienen flujo implementado.
+Este documento describe el flujo de navegación implementado actualmente en **HomeStore**. El sistema cuenta con autenticación de usuarios, gestión de productos, carrito de compras, checkout y confirmación de compra. Los módulos de promociones, reportes y administración avanzada continúan en desarrollo.
 
 ```text
-                              ┌─────────────┐
-                              │   HOME (/)  │
-                              │   pública   │
-                              └──────┬──────┘
-                                     │
-       ┌─────────────────────┬───────┼─────────┬────────────────┐
-       ▼                     ▼       ▼         ▼                ▼
- ┌───────────┐        ┌──────────┐   │   ┌──────────┐      ┌──────────┐
- │POST /login│        │/registro │   │   │/nosotros │      │/contacto │
- └─────┬─────┘        └──────────┘   │   └──────────┘      └──────────┘
-       │                             │
-       ▼                             ▼
- ┌─────────────┐        ┌───────────────────────────────┐
- │  /inicio    │        │ Navegación pública            │
- │ autenticada │        │ /categories, /cart, /location │
- └─────────────┘        │ /ubicacion, /products         │
-                        └───────────────────────────────┘
-
-                              ┌────────────────────┐
-                              │    /productos      │
-                              │ listado con datos  │
-                              └─────────┬──────────┘
-                                        │
-                       ┌────────────────┼────────────────┐
-                       ▼                ▼                ▼
-             ┌────────────────┐ ┌─────────────┐ ┌─────────────────┐
-             │/productos/nuevo│ │/editar/{id} │ │/eliminar/{id}   │
-             │ formulario     │ │ formulario  │ │ elimina y vuelve│
-             └───────┬────────┘ └───────┬─────┘ └─────────────────┘
-                     └──────────┬───────┘
-                                ▼
-                    ┌─────────────────────────┐
-                    │ POST /productos/guardar │
-                    │ → redirección a listado │
-                    └─────────────────────────┘
+                               ┌───────────────┐
+                               │   HOME (/)    │
+                               │   Pública     │
+                               └───────┬───────┘
+                                       │
+        ┌───────────────┬──────────────┼──────────────┬──────────────┐
+        ▼               ▼              ▼              ▼              ▼
+  /registro        /nosotros      /contacto     /categories    /location
+        │
+        ▼
+   POST /login
+        │
+        ├────────────── Credenciales válidas ──────────────┐
+        │                                                  │
+        ▼                                                  ▼
+ /productos (autenticado)                         /?error=true
+        │
+        ├──────────────────────────────┐
+        │                              │
+        ▼                              ▼
+     /cart                   /productos/inventario
+        │                              │
+        ▼                              ▼
+   Checkout                  Administración de inventario
 ```
+
+---
 
 ## Flujos implementados
 
 ### 1. Inicio de sesión
 
 ```text
-HOME → POST /login → credenciales válidas → /inicio
-                     credenciales inválidas → /?error=true
+HOME
+   │
+   ▼
+POST /login
+   │
+   ├── Credenciales válidas
+   │        ▼
+   │   /productos
+   │
+   └── Credenciales inválidas
+            ▼
+      /?error=true
 ```
 
-`/inicio` es la única ruta que la configuración actual exige autenticar. El registro solo muestra el formulario; todavía no guarda usuarios ni inicia sesión automáticamente.
+El acceso a los módulos administrativos se encuentra protegido mediante Spring Security. Los usuarios autenticados pueden acceder a la gestión de productos, inventario y carrito de compras.
+
+---
 
 ### 2. Gestión de productos
 
 ```text
-/productos → /productos/nuevo → POST /productos/guardar → /productos
-
-/productos → /productos/editar/{id} → POST /productos/guardar → /productos
-
-/productos → /productos/eliminar/{id} → /productos
+/productos
+      │
+      ├── Nuevo producto
+      │         │
+      │         ▼
+      │  POST /productos/guardar
+      │         │
+      │         ▼
+      │    /productos
+      │
+      ├── Editar producto
+      │         │
+      │         ▼
+      │  POST /productos/guardar
+      │         │
+      │         ▼
+      │    /productos
+      │
+      └── Eliminar producto
+                │
+                ▼
+           /productos
 ```
 
-El formulario de producto utiliza las categorías y proveedores registrados en la base de datos. La autorización específica por rol y la conversión de la eliminación a una solicitud segura se documentarán al implementar el módulo de administración.
-
-## Rutas pendientes
-
-Este documento refleja las rutas disponibles actualmente en HomeStore. Los módulos de registro, productos, carrito, checkout y confirmación de compra ya cuentan con un flujo funcional. Los módulos de inventario, promociones y reportes continúan pendientes de implementación completa.
-
-- carrito y sus artículos;
-- checkout, pago, entrega y factura de venta;
-- movimientos de inventario;
-- promociones y códigos de descuento;
-- reseñas, tickets de soporte y auditoría.
+El módulo de productos permite registrar, modificar y eliminar productos utilizando las categorías y proveedores almacenados en la base de datos.
 
 ---
 
-## Flujo de compra implementado
+### 3. Gestión del carrito
+
+```text
+/productos
+      │
+      ▼
+Agregar producto
+      │
+      ▼
+/cart
+      │
+      ├── Aumentar cantidad
+      ├── Disminuir cantidad
+      ├── Eliminar producto
+      │
+      ▼
+Continuar al checkout
+```
+
+El sistema valida automáticamente el stock disponible antes de agregar o modificar las cantidades de los productos.
+
+---
+
+### 4. Flujo de compra
 
 ```text
 Inicio
-  ↓
+   │
+   ▼
 Registro o inicio de sesión
-  ↓
+   │
+   ▼
 Listado de productos
-  ↓
-Agregar producto al carrito
-  ↓
+   │
+   ▼
+Agregar productos al carrito
+   │
+   ▼
 Visualizar carrito
-  ↓
-Aumentar, disminuir o eliminar productos
-  ↓
-Continuar al pago
-  ↓
+   │
+   ▼
 Checkout
-  ↓
-Seleccionar método de pago
-  ↓
-Seleccionar método de envío
-  ↓
-Seleccionar sucursal
-  ↓
+   │
+   ├── Método de pago
+   ├── Método de envío
+   └── Sucursal
+   │
+   ▼
 Confirmar compra
-  ↓
+   │
+   ▼
 Compra exitosa
+   │
+   ▼
+Actualización del inventario
+```
+
+Durante la confirmación de compra el sistema genera la venta, registra el detalle de los productos, actualiza el inventario y muestra la confirmación correspondiente.
+
+---
+
+## Funcionalidades en desarrollo
+
+Las siguientes funcionalidades forman parte de las siguientes iteraciones del proyecto:
+
+- Gestión de promociones y descuentos.
+- Reportes administrativos.
+- Gestión de ganancias y pérdidas.
+- Auditoría de cambios.
+- Gestión de opiniones de usuarios.
+- Soporte técnico.
+
+---
+
+## Seguridad
+
+Las siguientes rutas requieren autenticación mediante Spring Security:
+
+- `/productos/**`
+- `/cart/**`
+- `/productos/inventario`
+
+Las vistas públicas del sistema permanecen disponibles para cualquier visitante:
+
+- `/`
+- `/registro`
+- `/nosotros`
+- `/contacto`
+- `/categories`
+- `/location`
