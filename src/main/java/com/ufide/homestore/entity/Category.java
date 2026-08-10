@@ -7,9 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
-/**
- * Representa una categoría de productos. Tabla catálogo, sin dependencias.
- */
 @Entity
 @Table(name = "category")
 public class Category {
@@ -24,7 +21,8 @@ public class Category {
     @Column(length = 500)
     private String description;
 
-    public Category() {}
+    public Category() {
+    }
 
     public Category(String name, String description) {
         this.name = name;
