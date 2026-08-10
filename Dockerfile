@@ -29,13 +29,13 @@ COPY --from=build \
 
 USER spring:spring
 
-EXPOSE 8080
+EXPOSE 8081
 
 HEALTHCHECK \
     --interval=10s \
     --timeout=3s \
     --start-period=30s \
     --retries=6 \
-    CMD curl --fail --silent http://localhost:8080/actuator/health || exit 1
+    CMD curl --fail --silent http://localhost:8081/actuator/health || exit 1
 
 ENTRYPOINT ["java", "-jar", "/app/application.jar"]
