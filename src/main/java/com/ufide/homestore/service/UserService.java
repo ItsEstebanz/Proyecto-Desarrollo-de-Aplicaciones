@@ -15,22 +15,23 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserService(
-            UserRepository userRepository,
-            RoleRepository roleRepository,
-            PasswordEncoder passwordEncoder) {
-
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
     public boolean existeCorreo(String email) {
-        return userRepository.findByEmail(email.trim().toLowerCase()).isPresent();
+        return userRepository.findByEmail(
+                email.trim().toLowerCase()
+        ).isPresent();
     }
 
     @Transactional
-    public User registrar(String name, String email, String password) {
+    public User registrar(
+            String name,
+            String email,
+            String password) {
 
         String correoNormalizado = email.trim().toLowerCase();
 
@@ -40,18 +41,22 @@ public class UserService {
             );
         }
 
-        Role rolCliente = roleRepository.findByName("ROLE_USER")
-                .orElseGet(() -> roleRepository.findByName("USER")
-                        .orElseThrow(() -> new IllegalStateException(
-                                "No se encontró el rol de cliente en la base de datos."
-                        )));
+        Role rolComprador = roleRepository.findByName("Comprador")
+                        .orElseThrow(() ->
+                                new IllegalStateException(
+                                        "No se encontró el rol Comprador en la base de datos."
+                                )
+                        );
 
         User usuario = new User();
+
         usuario.setName(name.trim());
         usuario.setEmail(correoNormalizado);
-        usuario.setPassword(passwordEncoder.encode(password));
+        usuario.setPassword(
+                passwordEncoder.encode(password)
+        );
         usuario.setIsActive(true);
-        usuario.setRole(rolCliente);
+        usuario.setRole(rolComprador);
 
         return userRepository.save(usuario);
     }
