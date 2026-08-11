@@ -11,85 +11,73 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class SecurityConfig {
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests(auth -> auth
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http
+                                .authorizeHttpRequests(auth -> auth
 
-                        .requestMatchers(
-                                "/",
-                                "/registro",
-                                "/nosotros",
-                                "/contacto",
-                                "/ubicacion",
-                                "/images/**",
-                                "/css/**",
-                                "/js/**"
-                        )
-                        .permitAll()
+                                                .requestMatchers(
+                                                                "/",
+                                                                "/registro",
+                                                                "/nosotros",
+                                                                "/contacto",
+                                                                "/location",
+                                                                "/images/**",
+                                                                "/css/**",
+                                                                "/js/**")
+                                                .permitAll()
 
-                        .requestMatchers(
-                                "/productos/nuevo",
-                                "/productos/guardar",
-                                "/productos/editar/**",
-                                "/productos/eliminar/**"
-                        )
-                        .hasAnyRole(
-                                "ADMIN",
-                                "Supervisor",
-                                "Gerente",
-                                "Dueno"
-                        )
+                                                .requestMatchers(
+                                                                "/productos/nuevo",
+                                                                "/productos/guardar",
+                                                                "/productos/editar/**",
+                                                                "/productos/eliminar/**")
+                                                .hasAnyRole(
+                                                                "ADMIN",
+                                                                "Supervisor",
+                                                                "Gerente",
+                                                                "Dueno")
 
-                        .requestMatchers(
-                                "/inicio",
-                                "/productos/**",
-                                "/cart/**",
-                                "/checkout/**"
-                        )
-                        .authenticated()
+                                                .requestMatchers(
+                                                                "/inicio",
+                                                                "/productos/**",
+                                                                "/cart/**",
+                                                                "/checkout/**")
+                                                .authenticated()
 
-                        .anyRequest()
-                        .permitAll()
-                )
+                                                .anyRequest()
+                                                .permitAll())
 
-                .formLogin(form -> form
-                        .loginPage("/")
-                        .loginProcessingUrl("/login")
-                        .usernameParameter("correo")
-                        .passwordParameter("contrasena")
-                        .defaultSuccessUrl(
-                                "/productos",
-                                true
-                        )
-                        .failureUrl("/?error=true")
-                        .permitAll()
-                )
+                                .formLogin(form -> form
+                                                .loginPage("/")
+                                                .loginProcessingUrl("/login")
+                                                .usernameParameter("correo")
+                                                .passwordParameter("contrasena")
+                                                .defaultSuccessUrl(
+                                                                "/productos",
+                                                                true)
+                                                .failureUrl("/?error=true")
+                                                .permitAll())
 
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher(
-                                        "/logout",
-                                        "GET"
-                                )
-                        )
-                        .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true)
-                        .clearAuthentication(true)
-                        .deleteCookies("JSESSIONID")
-                        .permitAll()
-                )
+                                .logout(logout -> logout
+                                                .logoutRequestMatcher(new AntPathRequestMatcher(
+                                                                "/logout",
+                                                                "GET"))
+                                                .logoutSuccessUrl("/")
+                                                .invalidateHttpSession(true)
+                                                .clearAuthentication(true)
+                                                .deleteCookies("JSESSIONID")
+                                                .permitAll())
 
-                .httpBasic(httpBasic ->
-                        httpBasic.disable()
-                )
+                                .httpBasic(httpBasic -> httpBasic.disable())
 
-                .csrf(csrf -> csrf.disable());
+                                .csrf(csrf -> csrf.disable());
 
-        return http.build();
-    }
+                return http.build();
+        }
 }
