@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,32 +77,30 @@
 
 <body>
 
-<div class="contenedor-inicio">
+    <div class="contenedor-inicio">
 
-    <div class="card-inicio">
+        <div class="card-inicio">
 
-        <img th:src="@{/images/logo.png}"
-             src="/images/logo.png"
-             alt="HomeStore"
-             class="logo-inicio">
+            <img th:src="@{/images/logo.png}" src="/images/logo.png" alt="HomeStore" class="logo-inicio">
 
-        <h1 class="titulo">¡Bienvenido!</h1>
+            <h1 class="titulo">¡Bienvenido!</h1>
 
-        <h2 class="usuario" th:text="${usuario.name}">
-            Usuario
-        </h2>
+            <h2 class="usuario" th:text="${usuario.name}">
+                Usuario
+            </h2>
 
-        <p class="mensaje">
-            Has iniciado sesión correctamente en HomeStore.
-        </p>
+            <p class="mensaje">
+                Has iniciado sesión correctamente en HomeStore.
+            </p>
 
-        <a th:href="@{/logout}" class="btn-salir">
-            Cerrar sesión
-        </a>
+            <a th:href="@{/logout}" class="btn-salir">
+                Cerrar sesión
+            </a>
+
+        </div>
 
     </div>
 
-</div>
-
 </body>
+
 </html>

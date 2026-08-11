@@ -24,147 +24,136 @@ import com.ufide.homestore.service.CheckoutService;
 @Controller
 public class CheckoutController {
 
-    private final CheckoutService checkoutService;
-    private final CartService cartService;
-    private final UserRepository userRepository;
-    private final PaymentMethodRepository paymentMethodRepository;
-    private final ShippingMethodRepository shippingMethodRepository;
-    private final StoreLocationRepository storeLocationRepository;
-    private final SaleRepository saleRepository;
+        private final CheckoutService checkoutService;
+        private final CartService cartService;
+        private final UserRepository userRepository;
+        private final PaymentMethodRepository paymentMethodRepository;
+        private final ShippingMethodRepository shippingMethodRepository;
+        private final StoreLocationRepository storeLocationRepository;
+        private final SaleRepository saleRepository;
 
-    public CheckoutController(
-            CheckoutService checkoutService,
-            CartService cartService,
-            UserRepository userRepository,
-            PaymentMethodRepository paymentMethodRepository,
-            ShippingMethodRepository shippingMethodRepository,
-            StoreLocationRepository storeLocationRepository,
-            SaleRepository saleRepository) {
+        public CheckoutController(
+                        CheckoutService checkoutService,
+                        CartService cartService,
+                        UserRepository userRepository,
+                        PaymentMethodRepository paymentMethodRepository,
+                        ShippingMethodRepository shippingMethodRepository,
+                        StoreLocationRepository storeLocationRepository,
+                        SaleRepository saleRepository) {
 
-        this.checkoutService = checkoutService;
-        this.cartService = cartService;
-        this.userRepository = userRepository;
-        this.paymentMethodRepository = paymentMethodRepository;
-        this.shippingMethodRepository = shippingMethodRepository;
-        this.storeLocationRepository = storeLocationRepository;
-        this.saleRepository = saleRepository;
-    }
-
-    @GetMapping("/checkout")
-    public String mostrarCheckout(
-            Principal principal,
-            Model model,
-            RedirectAttributes redirectAttributes) {
-
-        if (principal == null) {
-            return "redirect:/login";
+                this.checkoutService = checkoutService;
+                this.cartService = cartService;
+                this.userRepository = userRepository;
+                this.paymentMethodRepository = paymentMethodRepository;
+                this.shippingMethodRepository = shippingMethodRepository;
+                this.storeLocationRepository = storeLocationRepository;
+                this.saleRepository = saleRepository;
         }
 
-        User usuario = userRepository.findByEmail(principal.getName())
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "No se encontró el usuario autenticado."
-                ));
+        @GetMapping("/checkout")
+        public String mostrarCheckout(
+                        Principal principal,
+                        Model model,
+                        RedirectAttributes redirectAttributes) {
 
-        Cart carrito = cartService.obtenerCarritoActivo(usuario);
+                if (principal == null) {
+                        return "redirect:/login";
+                }
 
-        if (carrito.getItems() == null || carrito.getItems().isEmpty()) {
-            redirectAttributes.addFlashAttribute(
-                    "mensajeError",
-                    "El carrito está vacío."
-            );
+                User usuario = userRepository.findByEmail(principal.getName())
+                                .orElseThrow(() -> new IllegalArgumentException(
+                                                "No se encontró el usuario autenticado."));
 
-            return "redirect:/cart";
+                Cart carrito = cartService.obtenerCarritoActivo(usuario);
+
+                if (carrito.getItems() == null || carrito.getItems().isEmpty()) {
+                        redirectAttributes.addFlashAttribute(
+                                        "mensajeError",
+                                        "El carrito está vacío.");
+
+                        return "redirect:/cart";
+                }
+
+                model.addAttribute("carrito", carrito);
+
+                model.addAttribute(
+                                "subtotal",
+                                cartService.calcularTotal(carrito.getItems()));
+
+                model.addAttribute(
+                                "metodosPago",
+                                paymentMethodRepository.findByIsActiveTrue());
+
+                model.addAttribute(
+                                "metodosEnvio",
+                                shippingMethodRepository.findByIsActiveTrue());
+
+                model.addAttribute(
+                                "sucursales",
+                                storeLocationRepository.findByIsActiveTrue());
+
+                return "checkout";
         }
 
-        model.addAttribute("carrito", carrito);
+        @PostMapping("/checkout/confirmar")
+        public String confirmarCompra(
+                        Principal principal,
+                        @RequestParam Integer paymentMethodId,
+                        @RequestParam Integer shippingMethodId,
+                        @RequestParam Integer locationId,
+                        RedirectAttributes redirectAttributes) {
 
-        model.addAttribute(
-                "subtotal",
-                cartService.calcularTotal(carrito.getItems())
-        );
+                if (principal == null) {
+                        return "redirect:/login";
+                }
 
-        model.addAttribute(
-                "metodosPago",
-                paymentMethodRepository.findByIsActiveTrue()
-        );
+                try {
+                        Sale venta = checkoutService.confirmarCompra(
+                                        principal.getName(),
+                                        paymentMethodId,
+                                        shippingMethodId,
+                                        locationId);
 
-        model.addAttribute(
-                "metodosEnvio",
-                shippingMethodRepository.findByIsActiveTrue()
-        );
+                        redirectAttributes.addFlashAttribute(
+                                        "mensajeExito",
+                                        "Compra confirmada correctamente.");
 
-        model.addAttribute(
-                "sucursales",
-                storeLocationRepository.findByIsActiveTrue()
-        );
+                        return "redirect:/compra-exitosa/" + venta.getSaleId();
 
-        return "checkout";
-    }
+                } catch (IllegalArgumentException | IllegalStateException e) {
 
-    @PostMapping("/checkout/confirmar")
-    public String confirmarCompra(
-            Principal principal,
-            @RequestParam Integer paymentMethodId,
-            @RequestParam Integer shippingMethodId,
-            @RequestParam Integer locationId,
-            RedirectAttributes redirectAttributes) {
+                        redirectAttributes.addFlashAttribute(
+                                        "mensajeError",
+                                        e.getMessage());
 
-        if (principal == null) {
-            return "redirect:/login";
+                        return "redirect:/checkout";
+                }
         }
 
-        try {
-            Sale venta = checkoutService.confirmarCompra(
-                    principal.getName(),
-                    paymentMethodId,
-                    shippingMethodId,
-                    locationId
-            );
+        @GetMapping("/compra-exitosa/{id}")
+        public String mostrarCompraExitosa(
+                        @PathVariable Integer id,
+                        Principal principal,
+                        Model model) {
 
-            redirectAttributes.addFlashAttribute(
-                    "mensajeExito",
-                    "Compra confirmada correctamente."
-            );
+                if (principal == null) {
+                        return "redirect:/login";
+                }
 
-            return "redirect:/compra-exitosa/" + venta.getSaleId();
+                Sale venta = saleRepository.findById(id)
+                                .orElseThrow(() -> new IllegalArgumentException(
+                                                "No se encontró la compra."));
 
-        } catch (IllegalArgumentException | IllegalStateException e) {
+                if (venta.getUser() == null
+                                || venta.getUser().getEmail() == null
+                                || !venta.getUser().getEmail().equals(principal.getName())) {
 
-            redirectAttributes.addFlashAttribute(
-                    "mensajeError",
-                    e.getMessage()
-            );
+                        throw new IllegalArgumentException(
+                                        "No tienes permiso para ver esta compra.");
+                }
 
-            return "redirect:/checkout";
+                model.addAttribute("venta", venta);
+
+                return "compra-exitosa";
         }
-    }
-
-    @GetMapping("/compra-exitosa/{id}")
-    public String mostrarCompraExitosa(
-            @PathVariable Integer id,
-            Principal principal,
-            Model model) {
-
-        if (principal == null) {
-            return "redirect:/login";
-        }
-
-        Sale venta = saleRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "No se encontró la compra."
-                ));
-
-        if (venta.getUser() == null
-                || venta.getUser().getEmail() == null
-                || !venta.getUser().getEmail().equals(principal.getName())) {
-
-            throw new IllegalArgumentException(
-                    "No tienes permiso para ver esta compra."
-            );
-        }
-
-        model.addAttribute("venta", venta);
-
-        return "compra-exitosa";
-    }
 }

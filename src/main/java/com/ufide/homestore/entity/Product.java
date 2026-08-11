@@ -1,5 +1,7 @@
 package com.ufide.homestore.entity;
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,7 +15,6 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import java.math.BigDecimal;
 
 /**
  * Representa un producto del catálogo. FK hacia category y supplier.
@@ -31,13 +32,16 @@ public class Product {
     @Column(nullable = false, length = 150)
     private String name;
 
-    // "TEXT" permite almacenar descripciones largas, a diferencia de "VARCHAR" que tiene un límite de longitud.
+    // "TEXT" permite almacenar descripciones largas, a diferencia de "VARCHAR" que
+    // tiene un límite de longitud.
     @Size(max = 1000, message = "La descripción no puede superar 1000 caracteres")
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    // BIGDecimal hace que el precio y el costo sean más precisos que float o double, evitando errores de redondeo.
-    // "precision" indica el número total de dígitos y "scale" indica el número de dígitos a la derecha del punto decimal.
+    // BIGDecimal hace que el precio y el costo sean más precisos que float o
+    // double, evitando errores de redondeo.
+    // "precision" indica el número total de dígitos y "scale" indica el número de
+    // dígitos a la derecha del punto decimal.
     @NotNull(message = "El precio es obligatorio")
     @DecimalMin(value = "0.01", message = "El precio debe ser mayor que cero")
     @Column(nullable = false, precision = 10, scale = 2)
@@ -65,17 +69,17 @@ public class Product {
     @JoinColumn(name = "supplier_id", nullable = false)
     private Supplier supplier;
 
-    public Product() {}
+    public Product() {
+    }
 
     public Product(
-        String name,
-        String description,
-        BigDecimal price,
-        BigDecimal costPrice,
-        Integer stock,
-        Category category,
-        Supplier supplier
-    ) {
+            String name,
+            String description,
+            BigDecimal price,
+            BigDecimal costPrice,
+            Integer stock,
+            Category category,
+            Supplier supplier) {
         this.name = name;
         this.description = description;
         this.price = price;
