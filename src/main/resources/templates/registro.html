@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es"
+      th:lang="${#locale.language}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Registro | HomeStore</title>
+    <title th:text="#{registro.pagina.titulo}">
+        Registro | HomeStore
+    </title>
 
     <style>
         * {
@@ -279,14 +283,26 @@
 <body>
 
 <header class="navbar">
-    <a th:href="@{/}" href="/" class="logo-container">
+
+    <a th:href="@{/}"
+       href="/"
+       class="logo-container">
+
         <div class="logo-icon">🏠</div>
-        <span class="logo-text">HomeStore</span>
+
+        <span class="logo-text">
+            HomeStore
+        </span>
+
     </a>
 
-    <a th:href="@{/}" href="/" class="home-link">
+    <a th:href="@{/}"
+       href="/"
+       class="home-link"
+       th:text="#{registro.volverInicio}">
         Volver al inicio
     </a>
+
 </header>
 
 <main class="page-container">
@@ -295,9 +311,12 @@
 
         <div class="form-section">
 
-            <h1>Crear una cuenta</h1>
+            <h1 th:text="#{registro.titulo}">
+                Crear una cuenta
+            </h1>
 
-            <p class="subtitle">
+            <p class="subtitle"
+               th:text="#{registro.subtitulo}">
                 Regístrate para realizar compras y administrar tu información.
             </p>
 
@@ -316,44 +335,63 @@
                   method="post">
 
                 <div class="form-group">
-                    <label for="nombre">Nombre completo</label>
+
+                    <label for="nombre"
+                           th:text="#{registro.nombre}">
+                        Nombre completo
+                    </label>
 
                     <input
                         type="text"
                         id="nombre"
                         name="nombre"
+                        th:placeholder="#{registro.nombre.placeholder}"
                         placeholder="Ejemplo: María Rodríguez"
                         minlength="3"
                         maxlength="100"
                         autocomplete="name"
                         required>
 
-                    <small class="help-text">
+                    <small class="help-text"
+                           th:text="#{registro.nombre.ayuda}">
                         Ingresa al menos 3 caracteres.
                     </small>
+
                 </div>
 
                 <div class="form-group">
-                    <label for="correo">Correo electrónico</label>
+
+                    <label for="correo"
+                           th:text="#{registro.correo}">
+                        Correo electrónico
+                    </label>
 
                     <input
                         type="email"
                         id="correo"
                         name="correo"
+                        th:placeholder="#{registro.correo.placeholder}"
                         placeholder="nombre@correo.com"
                         maxlength="120"
                         autocomplete="email"
                         required>
+
                 </div>
 
                 <div class="form-group">
-                    <label for="contrasena">Contraseña</label>
+
+                    <label for="contrasena"
+                           th:text="#{registro.contrasena}">
+                        Contraseña
+                    </label>
 
                     <div class="password-wrapper">
+
                         <input
                             type="password"
                             id="contrasena"
                             name="contrasena"
+                            th:placeholder="#{registro.contrasena.placeholder}"
                             placeholder="Crea una contraseña segura"
                             minlength="6"
                             maxlength="100"
@@ -364,38 +402,59 @@
                             type="button"
                             class="show-password"
                             id="showPassword"
+                            th:attr="aria-label=#{registro.contrasena.mostrar}"
                             aria-label="Mostrar u ocultar contraseña">
                             👁️
                         </button>
+
                     </div>
 
-                    <small class="help-text">
+                    <small class="help-text"
+                           th:text="#{registro.contrasena.ayuda}">
                         Debe contener al menos 6 caracteres.
                     </small>
+
                 </div>
 
-                <button type="submit" class="register-button">
+                <button type="submit"
+                        class="register-button"
+                        th:text="#{registro.crearCuenta}">
                     Crear mi cuenta
                 </button>
 
             </form>
 
             <p class="login-text">
-                ¿Ya tienes una cuenta?
-                <a th:href="@{/}" href="/">Inicia sesión</a>
+
+                <span th:text="#{registro.yaCuenta}">
+                    ¿Ya tienes una cuenta?
+                </span>
+
+                <a th:href="@{/}"
+                   href="/"
+                   th:text="#{registro.iniciarSesion}">
+                    Inicia sesión
+                </a>
+
             </p>
 
         </div>
 
         <div class="visual-section">
-            <div class="visual-icon">🛒</div>
 
-            <h2>Bienvenido a HomeStore</h2>
+            <div class="visual-icon">
+                🛒
+            </div>
 
-            <p>
+            <h2 th:text="#{registro.bienvenida}">
+                Bienvenido a HomeStore
+            </h2>
+
+            <p th:text="#{registro.bienvenida.descripcion}">
                 Crea tu cuenta para explorar productos, utilizar el carrito
                 y disfrutar de una experiencia de compra más sencilla.
             </p>
+
         </div>
 
     </section>

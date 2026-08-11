@@ -1,4 +1,4 @@
-# Arquitectura Técnica — VetCare
+# Arquitectura Técnica — HomeStore
 
 ## Capas del sistema
 
@@ -14,14 +14,25 @@ Recibe peticiones HTTP, extrae parámetros, llama al Service, devuelve la vista 
 
 ```java
 @Controller
-@RequestMapping("/mascotas")
-public class MascotaController {
-    @Autowired private MascotaService service;
+@RequestMapping("/cart")
+public class CartController {
+
+    private final CartService cartService;
+
+    public CartController(CartService cartService) {
+        this.cartService = cartService;
+    }
 
     @GetMapping
-    public String listar(Model model) {
-        model.addAttribute("mascotas", service.listarTodas());
-        return "mascotas/lista";
+    public String verCarrito(Authentication authentication, Model model) {
+
+        List<CartItem> items =
+                cartService.listarItems(authentication.getName());
+
+        model.addAttribute("items", items);
+        model.addAttribute("total", cartService.calcularTotal(items));
+
+        return "cart";
     }
 }
 ```
@@ -40,16 +51,34 @@ Lógica de negocio. Coordina llamadas a varios repositories cuando hace falta.
 
 ```java
 @Service
-public class CitaService {
-    @Autowired private CitaRepository citaRepo;
-    @Autowired private FacturaService facturaService;
+public class CartService {
+
+    private final CartRepository cartRepository;
+    private final CartItemRepository cartItemRepository;
+    private final ProductRepository productRepository;
+    private final UserRepository userRepository;
+
+    public CartService(CartRepository cartRepository,
+                       CartItemRepository cartItemRepository,
+                       ProductRepository productRepository,
+                       UserRepository userRepository) {
+
+        this.cartRepository = cartRepository;
+        this.cartItemRepository = cartItemRepository;
+        this.productRepository = productRepository;
+        this.userRepository = userRepository;
+    }
 
     @Transactional
-    public Cita completar(Long citaId) {
-        Cita c = citaRepo.findById(citaId).orElseThrow();
-        c.setEstado(EstadoCita.COMPLETADA);
-        facturaService.generarPara(c);  // efecto secundario
-        return citaRepo.save(c);
+    public void agregarProducto(String correo, Integer productId, Integer cantidad) {
+
+        User usuario = userRepository.findByEmail(correo)
+                .orElseThrow();
+
+        Product producto = productRepository.findById(productId)
+                .orElseThrow();
+
+        // Aqui se aplican las reglas del carrito.
     }
 }
 ```
@@ -65,9 +94,10 @@ Responsabilidades:
 Interfaces que extienden `JpaRepository`. Spring genera la implementación.
 
 ```java
-public interface MascotaRepository extends JpaRepository<Mascota, Long> {
-    List<Mascota> findByClienteIdAndActivaTrue(Long clienteId);
-    List<Mascota> findByNombreContainingIgnoreCase(String nombre);
+public interface CartRepository
+        extends JpaRepository<Cart, Integer> {
+
+    Optional<Cart> findFirstByUserAndStatusOrderByCreatedAtDesc(User user,String status);
 }
 ```
 
@@ -83,19 +113,24 @@ Clases Java que representan las tablas. Anotaciones JPA.
 
 ```java
 @Entity
-@Table(name = "mascota")
-public class Mascota {
+@Table(name = "cart")
+public class Cart {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false)
-    private String nombre;
+    private Integer cartId;
 
     @ManyToOne
-    @JoinColumn(name = "cliente_id")
-    private Cliente cliente;
-    // ...
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(nullable = false)
+    private LocalDateTime createdAt;
+
+    @Column(nullable = false)
+    private String status;
+
+    // Getters y setters
 }
 ```
 

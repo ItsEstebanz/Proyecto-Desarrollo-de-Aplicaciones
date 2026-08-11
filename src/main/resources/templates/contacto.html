@@ -1,42 +1,103 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es"
+      th:lang="${#locale.language}"
+      xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
-    <title>Contacto | HomeStore</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        body { background-color: #e8c8f0; min-height: 100vh; }
-        .card-info {
-            background: rgba(255,255,255,0.9);
-            border-radius: 18px;
-            box-shadow: 0 20px 45px rgba(100, 30, 150, 0.18);
-            padding: 3rem;
-        }
-        .titulo { color: #2d1b6e; font-weight: 800; }
-        .dato { color: #4a3570; font-size: 1.2rem; }
-        .btn-volver {
-            background: linear-gradient(135deg, #d44de8, #b020cc);
-            color: white;
-            border-radius: 10px;
-            padding: 0.7rem 1.6rem;
-            text-decoration: none;
-            font-weight: 600;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title th:text="#{contacto.pagina.titulo}">
+        Contacto | HomeStore
+    </title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 </head>
+
 <body>
 
 <div class="container py-5">
-    <div class="card-info">
-        <img th:src="@{/images/logo.png}" src="/images/logo.png" alt="HomeStore" style="height: 90px;" class="mb-4">
 
-        <h1 class="titulo mb-4">Contacto</h1>
+    <div class="card shadow-sm border-0 rounded-4 p-4 p-md-5">
 
-        <p class="dato"><strong>Correo:</strong> contacto@homestore.com</p>
-        <p class="dato"><strong>Teléfono:</strong> (506) 12345678</p>
+        <h1 class="mb-3"
+            th:text="#{contacto.titulo}">
+            Contáctanos
+        </h1>
 
-        <a href="/" class="btn-volver">Volver al inicio</a>
+        <p class="text-muted mb-4"
+           th:text="#{contacto.descripcion}">
+            Si tienes alguna consulta, puedes comunicarte con nosotros.
+        </p>
+
+        <form>
+
+            <div class="mb-3">
+
+                <label for="nombre"
+                       class="form-label"
+                       th:text="#{contacto.nombre}">
+                    Nombre
+                </label>
+
+                <input type="text"
+                       id="nombre"
+                       class="form-control"
+                       th:placeholder="#{contacto.nombre.placeholder}"
+                       placeholder="Ingresa tu nombre">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label for="correo"
+                       class="form-label"
+                       th:text="#{contacto.correo}">
+                    Correo electrónico
+                </label>
+
+                <input type="email"
+                       id="correo"
+                       class="form-control"
+                       th:placeholder="#{contacto.correo.placeholder}"
+                       placeholder="Ingresa tu correo electrónico">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label for="mensaje"
+                       class="form-label"
+                       th:text="#{contacto.mensaje}">
+                    Mensaje
+                </label>
+
+                <textarea id="mensaje"
+                          class="form-control"
+                          rows="5"
+                          th:placeholder="#{contacto.mensaje.placeholder}"
+                          placeholder="Escribe tu mensaje"></textarea>
+
+            </div>
+
+            <button type="submit"
+                    class="btn btn-primary"
+                    th:text="#{contacto.enviar}">
+                Enviar mensaje
+            </button>
+
+            <a th:href="@{/}"
+               href="/"
+               class="btn btn-outline-secondary ms-2"
+               th:text="#{contacto.volverInicio}">
+                Volver al inicio
+            </a>
+
+        </form>
+
     </div>
+
 </div>
 
 </body>
