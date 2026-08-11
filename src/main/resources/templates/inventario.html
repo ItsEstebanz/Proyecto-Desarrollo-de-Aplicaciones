@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org" th:lang="${#locale.language}">
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      th:lang="${#locale.language}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Inventario | HomeStore</title>
+    <title th:text="#{inventario.pagina.titulo}">
+        Inventario | HomeStore
+    </title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 
     <style>
         body {
@@ -16,7 +21,6 @@
             color: #2d1b6e;
         }
 
-        /* Barra superior */
         .navbar {
             border-bottom: 1px solid #f0e0f5;
             box-shadow: 0 2px 10px rgba(100, 30, 150, 0.06);
@@ -65,7 +69,6 @@
             color: #2d1b6e;
         }
 
-        /* Contenido */
         .inventory-container {
             padding: 2.5rem 4%;
         }
@@ -89,7 +92,6 @@
             margin-bottom: 0;
         }
 
-        /* Tarjetas */
         .summary-card {
             background: white;
             border: none;
@@ -133,7 +135,6 @@
             background: #fde7e7;
         }
 
-        /* Tabla */
         .inventory-box {
             background: white;
             border-radius: 18px;
@@ -229,7 +230,6 @@
         }
 
         @media (max-width: 1199px) {
-
             .navbar .container-fluid,
             .navbar .d-flex {
                 flex-wrap: wrap;
@@ -256,188 +256,273 @@
 
 <body>
 
-    <!-- Barra superior del Home -->
-    <nav class="navbar navbar-expand-xl navbar-light bg-white">
-        <div class="container-fluid px-4">
+<nav class="navbar navbar-expand-xl navbar-light bg-white">
 
-            <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/images/logo.png}" src="/images/logo.png" alt="HomeStore" style="height: 80px;">
+    <div class="container-fluid px-4">
+
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/images/logo.png}"
+                 src="/images/logo.png"
+                 alt="HomeStore"
+                 style="height: 80px;">
+        </a>
+
+        <div class="d-flex align-items-center gap-4 ms-auto">
+
+            <a class="nav-link"
+               th:href="@{/}"
+               th:text="#{menu.inicio}">
+                Inicio
             </a>
 
-            <div class="d-flex align-items-center gap-4 ms-auto">
+            <a class="nav-link"
+               th:href="@{/productos}"
+               th:text="#{menu.productos}">
+                Productos
+            </a>
 
-                <a class="nav-link" th:href="@{/}">
-                    Inicio
-                </a>
+            <a class="nav-link active"
+               th:href="@{/productos/inventario}"
+               th:text="#{inventario.menu.inventario}">
+                Inventario
+            </a>
 
-                <a class="nav-link" th:href="@{/productos}">
-                    Productos
-                </a>
+            <a class="nav-link"
+               th:href="@{/categories}"
+               th:text="#{menu.categorias}">
+                Categorías
+            </a>
 
-                <a class="nav-link active" th:href="@{/productos/inventario}">
-                    Inventario
-                </a>
+            <a class="nav-link"
+               th:href="@{/cart}"
+               th:text="#{menu.carrito}">
+                Carrito
+            </a>
 
-                <a class="nav-link" th:href="@{/categories}">
-                    Categorías
-                </a>
+            <a class="nav-link"
+               th:href="@{/nosotros}"
+               th:text="#{menu.nosotros}">
+                Nosotros
+            </a>
 
-                <a class="nav-link" th:href="@{/cart}">
-                    Carrito
-                </a>
+            <a class="nav-link"
+               th:href="@{/contacto}"
+               th:text="#{menu.contacto}">
+                Contacto
+            </a>
 
-                <a class="nav-link" th:href="@{/nosotros}">
-                    Nosotros
-                </a>
+            <a class="nav-link"
+               th:href="@{/location}"
+               th:text="#{menu.ubicacion}">
+                Ubicación
+            </a>
 
-                <a class="nav-link" th:href="@{/contacto}">
-                    Contacto
-                </a>
+            <a class="btn-lang text-decoration-none"
+               th:href="@{/productos/inventario(lang='es')}">
+                ES
+            </a>
 
-                <a class="nav-link" th:href="@{/location}">
-                    Ubicación
-                </a>
+            <a class="btn-lang text-decoration-none"
+               th:href="@{/productos/inventario(lang='en')}">
+                EN
+            </a>
 
-                <a class="btn-lang text-decoration-none" th:href="@{/productos/inventario(lang='es')}">
-                    ES
-                </a>
+            <a class="btn-sesion ms-2 text-decoration-none"
+               th:href="@{/logout}"
+               th:text="#{inventario.cerrarSesion}">
+                Cerrar sesión
+            </a>
 
-                <a class="btn-lang text-decoration-none" th:href="@{/productos/inventario(lang='en')}">
-                    EN
-                </a>
-
-                <a class="btn-sesion ms-2 text-decoration-none" th:href="@{/logout}">
-                    Cerrar sesión
-                </a>
-
-            </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
-    <main class="inventory-container">
+<main class="inventory-container">
 
-        <!-- Encabezado -->
-        <section class="page-header">
-            <div class="d-flex flex-column flex-md-row
+    <section class="page-header">
+
+        <div class="d-flex flex-column flex-md-row
                     justify-content-between align-items-md-center gap-3">
 
-                <div>
-                    <h1 class="page-title">Inventario</h1>
+            <div>
 
-                    <p class="page-description">
-                        Revisa las existencias, los precios y los productos
-                        que necesitan reabastecimiento.
-                    </p>
-                </div>
+                <h1 class="page-title"
+                    th:text="#{inventario.titulo}">
+                    Inventario
+                </h1>
 
-                <a th:href="@{/productos}" class="btn-products">
-                    Ver productos
-                </a>
+                <p class="page-description"
+                   th:text="#{inventario.descripcion}">
+                    Revisa las existencias, los precios y los productos que necesitan reabastecimiento.
+                </p>
 
             </div>
-        </section>
 
-        <!-- Resumen -->
-        <section class="row g-4">
+            <a th:href="@{/productos}"
+               class="btn-products"
+               th:text="#{inventario.verProductos}">
+                Ver productos
+            </a>
 
-            <div class="col-12 col-md-4">
-                <div class="summary-card">
-                    <div class="d-flex justify-content-between align-items-center">
+        </div>
 
-                        <div>
-                            <p class="summary-label">Disponibles</p>
+    </section>
 
-                            <p class="summary-number text-success" th:text="${#lists.size(
+    <section class="row g-4">
+
+        <div class="col-12 col-md-4">
+
+            <div class="summary-card">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <p class="summary-label"
+                           th:text="#{inventario.disponibles}">
+                            Disponibles
+                        </p>
+
+                        <p class="summary-number text-success"
+                           th:text="${#lists.size(
                                productos.?[
                                    stock != null and stock > 10
                                ]
                            )}">
-                                0
-                            </p>
-                        </div>
-
-                        <div class="status-icon icon-available">
-                            ✅
-                        </div>
+                            0
+                        </p>
 
                     </div>
+
+                    <div class="status-icon icon-available">
+                        ✅
+                    </div>
+
                 </div>
+
             </div>
 
-            <div class="col-12 col-md-4">
-                <div class="summary-card">
-                    <div class="d-flex justify-content-between align-items-center">
+        </div>
 
-                        <div>
-                            <p class="summary-label">Poco stock</p>
+        <div class="col-12 col-md-4">
 
-                            <p class="summary-number text-warning" th:text="${#lists.size(
+            <div class="summary-card">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <p class="summary-label"
+                           th:text="#{inventario.pocoStock}">
+                            Poco stock
+                        </p>
+
+                        <p class="summary-number text-warning"
+                           th:text="${#lists.size(
                                productos.?[
                                    stock != null
                                    and stock > 0
                                    and stock <= 10
                                ]
                            )}">
-                                0
-                            </p>
-                        </div>
-
-                        <div class="status-icon icon-warning">
-                            ⚠️
-                        </div>
+                            0
+                        </p>
 
                     </div>
+
+                    <div class="status-icon icon-warning">
+                        ⚠️
+                    </div>
+
                 </div>
+
             </div>
 
-            <div class="col-12 col-md-4">
-                <div class="summary-card">
-                    <div class="d-flex justify-content-between align-items-center">
+        </div>
 
-                        <div>
-                            <p class="summary-label">Agotados</p>
+        <div class="col-12 col-md-4">
 
-                            <p class="summary-number text-danger" th:text="${#lists.size(
+            <div class="summary-card">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <p class="summary-label"
+                           th:text="#{inventario.agotados}">
+                            Agotados
+                        </p>
+
+                        <p class="summary-number text-danger"
+                           th:text="${#lists.size(
                                productos.?[
                                    stock == null or stock <= 0
                                ]
                            )}">
-                                0
-                            </p>
-                        </div>
-
-                        <div class="status-icon icon-empty">
-                            ❌
-                        </div>
+                            0
+                        </p>
 
                     </div>
+
+                    <div class="status-icon icon-empty">
+                        ❌
+                    </div>
+
                 </div>
+
             </div>
 
-        </section>
+        </div>
 
-        <!-- Tabla -->
-        <section class="inventory-box">
+    </section>
 
-            <div class="table-responsive" th:if="${productos != null and !productos.isEmpty()}">
+    <section class="inventory-box">
 
-                <table class="table align-middle mb-0">
+        <div class="table-responsive"
+             th:if="${productos != null and !productos.isEmpty()}">
 
-                    <thead>
-                        <tr>
-                            <th>Código</th>
-                            <th>Producto</th>
-                            <th>Precio</th>
-                            <th>Costo</th>
-                            <th>Stock</th>
-                            <th>Estado</th>
-                            <th>Administrar</th>
-                        </tr>
-                    </thead>
+            <table class="table align-middle mb-0">
 
-                    <tbody>
+                <thead>
 
-                        <tr th:each="producto : ${productos}" th:classappend="${
+                <tr>
+
+                    <th th:text="#{inventario.tabla.codigo}">
+                        Código
+                    </th>
+
+                    <th th:text="#{inventario.tabla.producto}">
+                        Producto
+                    </th>
+
+                    <th th:text="#{inventario.tabla.precio}">
+                        Precio
+                    </th>
+
+                    <th th:text="#{inventario.tabla.costo}">
+                        Costo
+                    </th>
+
+                    <th th:text="#{inventario.tabla.stock}">
+                        Stock
+                    </th>
+
+                    <th th:text="#{inventario.tabla.estado}">
+                        Estado
+                    </th>
+
+                    <th th:text="#{inventario.tabla.administrar}">
+                        Administrar
+                    </th>
+
+                </tr>
+
+                </thead>
+
+                <tbody>
+
+                <tr th:each="producto : ${productos}"
+                    th:classappend="${
                         producto.stock == null or producto.stock <= 0
                             ? 'row-empty'
                             : (
@@ -447,99 +532,124 @@
                               )
                     }">
 
-                            <td th:text="${producto.productId}">
-                                1
-                            </td>
+                    <td th:text="${producto.productId}">
+                        1
+                    </td>
 
-                            <td>
-                                <div class="product-name" th:text="${producto.name}">
-                                    Producto
-                                </div>
+                    <td>
 
-                                <small class="text-muted" th:if="${producto.category != null}"
-                                    th:text="${producto.category.name}">
-                                    Categoría
-                                </small>
-                            </td>
+                        <div class="product-name"
+                             th:text="${producto.name}">
+                            Producto
+                        </div>
 
-                            <td th:text="'₡' + ${#numbers.formatDecimal(
+                        <small class="text-muted"
+                               th:if="${producto.category != null}"
+                               th:text="${producto.category.name}">
+                            Categoría
+                        </small>
+
+                    </td>
+
+                    <td th:text="'₡' + ${#numbers.formatDecimal(
                             producto.price, 1, 2
                         )}">
-                                ₡0.00
-                            </td>
+                        ₡0.00
+                    </td>
 
-                            <td th:text="'₡' + ${#numbers.formatDecimal(
+                    <td th:text="'₡' + ${#numbers.formatDecimal(
                             producto.costPrice, 1, 2
                         )}">
-                                ₡0.00
-                            </td>
+                        ₡0.00
+                    </td>
 
-                            <td class="fw-bold" th:text="${producto.stock}">
-                                0
-                            </td>
+                    <td class="fw-bold"
+                        th:text="${producto.stock}">
+                        0
+                    </td>
 
-                            <td>
-                                <span class="badge-status status-available" th:if="${
+                    <td>
+
+                        <span class="badge-status status-available"
+                              th:if="${
                                   producto.stock != null
                                   and producto.stock > 10
-                              }">
-                                    Disponible
-                                </span>
+                              }"
+                              th:text="#{inventario.estado.disponible}">
+                            Disponible
+                        </span>
 
-                                <span class="badge-status status-warning" th:if="${
+                        <span class="badge-status status-warning"
+                              th:if="${
                                   producto.stock != null
                                   and producto.stock > 0
                                   and producto.stock <= 10
-                              }">
-                                    Poco stock
-                                </span>
+                              }"
+                              th:text="#{inventario.estado.pocoStock}">
+                            Poco stock
+                        </span>
 
-                                <span class="badge-status status-empty" th:if="${
+                        <span class="badge-status status-empty"
+                              th:if="${
                                   producto.stock == null
                                   or producto.stock <= 0
-                              }">
-                                    Agotado
-                                </span>
-                            </td>
+                              }"
+                              th:text="#{inventario.estado.agotado}">
+                            Agotado
+                        </span>
 
-                            <td>
-                                <a class="btn-edit" th:href="@{/productos/editar/{id}(
+                    </td>
+
+                    <td>
+
+                        <a class="btn-edit"
+                           th:href="@{/productos/editar/{id}(
                                id=${producto.productId}
-                           )}">
-                                    Editar precio y stock
-                                </a>
-                            </td>
+                           )}"
+                           th:text="#{inventario.editar}">
+                            Editar precio y stock
+                        </a>
 
-                        </tr>
+                    </td>
 
-                    </tbody>
-                </table>
+                </tr>
 
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="empty-inventory"
+             th:if="${productos == null or productos.isEmpty()}">
+
+            <div style="font-size: 2.8rem;">
+                📦
             </div>
 
-            <div class="empty-inventory" th:if="${productos == null or productos.isEmpty()}">
+            <h4 class="mt-3"
+                th:text="#{inventario.vacio.titulo}">
+                No hay productos registrados
+            </h4>
 
-                <div style="font-size: 2.8rem;">📦</div>
+            <p th:text="#{inventario.vacio.descripcion}">
+                Cuando se registren productos, aparecerán en este inventario.
+            </p>
 
-                <h4 class="mt-3">No hay productos registrados</h4>
+            <a th:href="@{/productos/nuevo}"
+               class="btn-edit"
+               th:text="#{inventario.registrar}">
+                Registrar producto
+            </a>
 
-                <p>
-                    Cuando se registren productos, aparecerán en este inventario.
-                </p>
+        </div>
 
-                <a th:href="@{/productos/nuevo}" class="btn-edit">
-                    Registrar producto
-                </a>
+    </section>
 
-            </div>
+</main>
 
-        </section>
-
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
 
 </body>
-
 </html>
