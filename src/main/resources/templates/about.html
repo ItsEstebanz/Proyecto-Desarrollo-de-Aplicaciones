@@ -20,7 +20,7 @@
             min-height: 100vh;
         }
 
-        /* Navbar igual al resto del proyecto */
+        /* Navbar */
         .navbar {
             border-bottom: 1px solid #f0e0f5;
         }
@@ -48,6 +48,7 @@
             color: #2d1b6e;
             font-weight: 600;
             font-size: 0.9rem;
+            cursor: pointer;
             padding: 0 6px;
         }
 
@@ -70,8 +71,14 @@
             color: #2d1b6e;
         }
 
-        /* Contenido */
+        /* Nosotros */
+        .about-section {
+            padding: 3rem 1.5rem;
+        }
+
         .card-info {
+            max-width: 1000px;
+            margin: 0 auto;
             background: rgba(255, 255, 255, 0.95);
             border-radius: 18px;
             box-shadow: 0 20px 45px rgba(100, 30, 150, 0.18);
@@ -132,7 +139,7 @@
 
 <body>
 
-<!-- NAVBAR -->
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
 
     <div class="container-fluid px-4">
@@ -174,13 +181,13 @@
             </a>
 
             <a class="nav-link active"
-               th:href="@{/about}"
+               th:href="@{/nosotros}"
                th:text="#{menu.nosotros}">
                 Nosotros
             </a>
 
             <a class="nav-link"
-               th:href="@{/contact}"
+               th:href="@{/contacto}"
                th:text="#{menu.contacto}">
                 Contacto
             </a>
@@ -200,12 +207,12 @@
             </a>
 
             <a class="btn-lang text-decoration-none"
-               th:href="@{/about(lang='es')}">
+               th:href="@{/nosotros(lang='es')}">
                 ES
             </a>
 
             <a class="btn-lang text-decoration-none"
-               th:href="@{/about(lang='en')}">
+               th:href="@{/nosotros(lang='en')}">
                 EN
             </a>
 
@@ -221,9 +228,8 @@
 
 </nav>
 
-
-<!-- CONTENIDO -->
-<div class="container py-5">
+<!-- Nosotros -->
+<main class="about-section">
 
     <div class="card-info">
 
@@ -249,10 +255,9 @@
 
     </div>
 
-</div>
+</main>
 
-
-<!-- MODAL OPINIÓN -->
+<!-- Modal Opinión -->
 <div class="modal fade"
      id="opinionModal"
      tabindex="-1"
@@ -274,7 +279,8 @@
 
                 <button type="button"
                         class="btn-close"
-                        data-bs-dismiss="modal">
+                        data-bs-dismiss="modal"
+                        th:attr="aria-label=#{opinion.cerrar}">
                 </button>
 
             </div>
@@ -327,7 +333,6 @@
 
 </div>
 
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
 
@@ -343,7 +348,6 @@
     const starPlural = ratingText.dataset.starPlural;
 
     function actualizarTextoValoracion() {
-
         const palabraEstrella =
             rating === 1 ? starSingular : starPlural;
 
