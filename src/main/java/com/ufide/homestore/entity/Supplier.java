@@ -27,7 +27,8 @@ public class Supplier {
     @Column(length = 150)
     private String email;
 
-    public Supplier() {}
+    public Supplier() {
+    }
 
     public Supplier(String name, String phone, String email) {
         this.name = name;
