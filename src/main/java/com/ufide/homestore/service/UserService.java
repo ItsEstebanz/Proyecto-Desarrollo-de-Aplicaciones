@@ -38,10 +38,10 @@ public class UserService {
             throw new IllegalArgumentException(
                     "Ya existe una cuenta registrada con ese correo.");
         }
-
-        Role rolCliente = roleRepository.findByName("Comprador")
-                .orElseThrow(() -> new IllegalStateException(
-                        "No se encontró el rol Comprador en la base de datos."));
+        Role rolCliente = roleRepository.findByName("ROLE_USER")
+                .orElseGet(() -> roleRepository.findByName("USER")
+                        .orElseThrow(() -> new IllegalStateException(
+                                "No se encontró el rol de cliente en la base de datos.")));
 
         User usuario = new User();
         usuario.setName(name.trim());
