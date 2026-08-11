@@ -1,7 +1,7 @@
 package com.ufide.homestore.controller;
 
-import com.ufide.homestore.entity.CartItem;
-import com.ufide.homestore.service.CartService;
+import java.util.List;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
+import com.ufide.homestore.entity.CartItem;
+import com.ufide.homestore.service.CartService;
 
 @Controller
 @RequestMapping("/cart")
@@ -27,15 +28,12 @@ public class CartController {
     @GetMapping
     public String verCarrito(
             Authentication authentication,
-            Model model
-    ) {
+            Model model) {
         List<CartItem> items = cartService.listarItems(
-                authentication.getName()
-        );
+                authentication.getName());
 
         model.addAttribute("items", items);
-        model.addAttribute("total", cartService.calcularTotal(items)
-        );
+        model.addAttribute("total", cartService.calcularTotal(items));
 
         return "cart";
     }
@@ -45,19 +43,16 @@ public class CartController {
             @PathVariable Integer productId,
             @RequestParam(defaultValue = "1") Integer cantidad,
             Authentication authentication,
-            RedirectAttributes ra
-    ) {
+            RedirectAttributes ra) {
         try {
             cartService.agregarProducto(
                     authentication.getName(),
                     productId,
-                    cantidad
-            );
+                    cantidad);
 
             ra.addFlashAttribute(
                     "ok",
-                    "Producto agregado al carrito"
-            );
+                    "Producto agregado al carrito");
         } catch (IllegalArgumentException ex) {
             ra.addFlashAttribute("error", ex.getMessage());
         }
@@ -69,13 +64,11 @@ public class CartController {
     public String aumentar(
             @PathVariable Integer itemId,
             Authentication authentication,
-            RedirectAttributes ra
-    ) {
+            RedirectAttributes ra) {
         try {
             cartService.aumentarCantidad(
                     authentication.getName(),
-                    itemId
-            );
+                    itemId);
         } catch (IllegalArgumentException ex) {
             ra.addFlashAttribute("error", ex.getMessage());
         }
@@ -87,13 +80,11 @@ public class CartController {
     public String disminuir(
             @PathVariable Integer itemId,
             Authentication authentication,
-            RedirectAttributes ra
-    ) {
-        try { 
+            RedirectAttributes ra) {
+        try {
             cartService.disminuirCantidad(
                     authentication.getName(),
-                    itemId
-            );
+                    itemId);
         } catch (IllegalArgumentException ex) {
             ra.addFlashAttribute("error", ex.getMessage());
         }
@@ -105,18 +96,15 @@ public class CartController {
     public String eliminar(
             @PathVariable Integer itemId,
             Authentication authentication,
-            RedirectAttributes ra
-    ) {
+            RedirectAttributes ra) {
         try {
             cartService.eliminarItem(
                     authentication.getName(),
-                    itemId
-            );
+                    itemId);
 
             ra.addFlashAttribute(
                     "ok",
-                    "Producto eliminado del carrito"
-            );
+                    "Producto eliminado del carrito");
         } catch (IllegalArgumentException ex) {
             ra.addFlashAttribute("error", ex.getMessage());
         }

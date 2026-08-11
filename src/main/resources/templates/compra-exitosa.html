@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="es"
-      th:lang="${#locale.language}"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="es" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -121,121 +119,111 @@
 
 <body>
 
-<section class="success-card">
+    <section class="success-card">
 
-    <div class="icon">✓</div>
+        <div class="icon">✓</div>
 
-    <h1 th:text="#{compraExitosa.titulo}">
-        ¡Compra realizada!
-    </h1>
+        <h1 th:text="#{compraExitosa.titulo}">
+            ¡Compra realizada!
+        </h1>
 
-    <p class="message"
-       th:text="#{compraExitosa.mensaje}">
-        Tu compra fue registrada correctamente en HomeStore.
-    </p>
+        <p class="message" th:text="#{compraExitosa.mensaje}">
+            Tu compra fue registrada correctamente en HomeStore.
+        </p>
 
-    <div class="details">
+        <div class="details">
 
-        <div class="detail-row">
+            <div class="detail-row">
 
-            <span class="label"
-                  th:text="#{compraExitosa.factura}">
-                Número de factura
-            </span>
-
-            <span th:text="${venta.invoiceNumber}">
-                HS-0000
-            </span>
-
-        </div>
-
-        <div class="detail-row">
-
-            <span class="label"
-                  th:text="#{compraExitosa.estado}">
-                Estado
-            </span>
-
-            <span th:text="${venta.status}">
-                COMPLETED
-            </span>
-
-        </div>
-
-        <div class="detail-row">
-
-            <span class="label"
-                  th:text="#{compraExitosa.metodoPago}">
-                Método de pago
-            </span>
-
-            <span th:text="${venta.paymentMethod.name}">
-                Pago
-            </span>
-
-        </div>
-
-        <div class="detail-row">
-
-            <span class="label"
-                  th:text="#{compraExitosa.metodoEnvio}">
-                Método de envío
-            </span>
-
-            <span th:text="${venta.shippingMethod.name}">
-                Envío
-            </span>
-
-        </div>
-
-        <div class="detail-row">
-
-            <span class="label"
-                  th:text="#{compraExitosa.sucursal}">
-                Sucursal
-            </span>
-
-            <span th:text="${venta.location.name}">
-                Sucursal
-            </span>
-
-        </div>
-
-        <div class="detail-row total">
-
-            <span th:text="#{compraExitosa.total}">
-                Total
-            </span>
-
-            <span>
-                ₡<span th:text="${#numbers.formatDecimal(venta.total, 1, 2)}">
-                    0.00
+                <span class="label" th:text="#{compraExitosa.factura}">
+                    Número de factura
                 </span>
-            </span>
+
+                <span th:text="${venta.invoiceNumber}">
+                    HS-0000
+                </span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <span class="label" th:text="#{compraExitosa.estado}">
+                    Estado
+                </span>
+
+                <span th:text="${venta.status}">
+                    COMPLETED
+                </span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <span class="label" th:text="#{compraExitosa.metodoPago}">
+                    Método de pago
+                </span>
+
+                <span th:text="${venta.paymentMethod.name}">
+                    Pago
+                </span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <span class="label" th:text="#{compraExitosa.metodoEnvio}">
+                    Método de envío
+                </span>
+
+                <span th:text="${venta.shippingMethod.name}">
+                    Envío
+                </span>
+
+            </div>
+
+            <div class="detail-row">
+
+                <span class="label" th:text="#{compraExitosa.sucursal}">
+                    Sucursal
+                </span>
+
+                <span th:text="${venta.location.name}">
+                    Sucursal
+                </span>
+
+            </div>
+
+            <div class="detail-row total">
+
+                <span th:text="#{compraExitosa.total}">
+                    Total
+                </span>
+
+                <span>
+                    ₡<span th:text="${#numbers.formatDecimal(venta.total, 1, 2)}">
+                        0.00
+                    </span>
+                </span>
+
+            </div>
 
         </div>
 
-    </div>
+        <div class="actions">
 
-    <div class="actions">
+            <a th:href="@{/productos}" href="/productos" class="btn btn-primary"
+                th:text="#{compraExitosa.seguirComprando}">
+                Seguir comprando
+            </a>
 
-        <a th:href="@{/productos}"
-           href="/productos"
-           class="btn btn-primary"
-           th:text="#{compraExitosa.seguirComprando}">
-            Seguir comprando
-        </a>
+            <a th:href="@{/}" href="/" class="btn btn-secondary" th:text="#{compraExitosa.volverInicio}">
+                Volver al inicio
+            </a>
 
-        <a th:href="@{/}"
-           href="/"
-           class="btn btn-secondary"
-           th:text="#{compraExitosa.volverInicio}">
-            Volver al inicio
-        </a>
+        </div>
 
-    </div>
-
-</section>
+    </section>
 
 </body>
+
 </html>

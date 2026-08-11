@@ -35,16 +35,6 @@ public class HomeController {
         return "contacto";
     }
 
-    @GetMapping("/ubicacion")
-    public String ubicacion() {
-        return "ubicacion";
-    }
-
-    @GetMapping("/products")
-    public String products() {
-        return "products";
-    }
-
     @GetMapping("/categories")
     public String categories(Model model) {
 

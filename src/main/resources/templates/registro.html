@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="es"
-      th:lang="${#locale.language}"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="es" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -282,196 +281,153 @@
 
 <body>
 
-<header class="navbar">
+    <header class="navbar">
 
-    <a th:href="@{/}"
-       href="/"
-       class="logo-container">
+        <a th:href="@{/}" href="/" class="logo-container">
 
-        <div class="logo-icon">🏠</div>
+            <div class="logo-icon">🏠</div>
 
-        <span class="logo-text">
-            HomeStore
-        </span>
+            <span class="logo-text">
+                HomeStore
+            </span>
 
-    </a>
+        </a>
 
-    <a th:href="@{/}"
-       href="/"
-       class="home-link"
-       th:text="#{registro.volverInicio}">
-        Volver al inicio
-    </a>
+        <a th:href="@{/}" href="/" class="home-link" th:text="#{registro.volverInicio}">
+            Volver al inicio
+        </a>
 
-</header>
+    </header>
 
-<main class="page-container">
+    <main class="page-container">
 
-    <section class="register-card">
+        <section class="register-card">
 
-        <div class="form-section">
+            <div class="form-section">
 
-            <h1 th:text="#{registro.titulo}">
-                Crear una cuenta
-            </h1>
+                <h1 th:text="#{registro.titulo}">
+                    Crear una cuenta
+                </h1>
 
-            <p class="subtitle"
-               th:text="#{registro.subtitulo}">
-                Regístrate para realizar compras y administrar tu información.
-            </p>
+                <p class="subtitle" th:text="#{registro.subtitulo}">
+                    Regístrate para realizar compras y administrar tu información.
+                </p>
 
-            <div class="alert alert-success"
-                 th:if="${mensajeExito}"
-                 th:text="${mensajeExito}">
-            </div>
-
-            <div class="alert alert-error"
-                 th:if="${mensajeError}"
-                 th:text="${mensajeError}">
-            </div>
-
-            <form th:action="@{/registro}"
-                  action="/registro"
-                  method="post">
-
-                <div class="form-group">
-
-                    <label for="nombre"
-                           th:text="#{registro.nombre}">
-                        Nombre completo
-                    </label>
-
-                    <input
-                        type="text"
-                        id="nombre"
-                        name="nombre"
-                        th:placeholder="#{registro.nombre.placeholder}"
-                        placeholder="Ejemplo: María Rodríguez"
-                        minlength="3"
-                        maxlength="100"
-                        autocomplete="name"
-                        required>
-
-                    <small class="help-text"
-                           th:text="#{registro.nombre.ayuda}">
-                        Ingresa al menos 3 caracteres.
-                    </small>
-
+                <div class="alert alert-success" th:if="${mensajeExito}" th:text="${mensajeExito}">
                 </div>
 
-                <div class="form-group">
-
-                    <label for="correo"
-                           th:text="#{registro.correo}">
-                        Correo electrónico
-                    </label>
-
-                    <input
-                        type="email"
-                        id="correo"
-                        name="correo"
-                        th:placeholder="#{registro.correo.placeholder}"
-                        placeholder="nombre@correo.com"
-                        maxlength="120"
-                        autocomplete="email"
-                        required>
-
+                <div class="alert alert-error" th:if="${mensajeError}" th:text="${mensajeError}">
                 </div>
 
-                <div class="form-group">
+                <form th:action="@{/registro}" action="/registro" method="post">
 
-                    <label for="contrasena"
-                           th:text="#{registro.contrasena}">
-                        Contraseña
-                    </label>
+                    <div class="form-group">
 
-                    <div class="password-wrapper">
+                        <label for="nombre" th:text="#{registro.nombre}">
+                            Nombre completo
+                        </label>
 
-                        <input
-                            type="password"
-                            id="contrasena"
-                            name="contrasena"
-                            th:placeholder="#{registro.contrasena.placeholder}"
-                            placeholder="Crea una contraseña segura"
-                            minlength="6"
-                            maxlength="100"
-                            autocomplete="new-password"
+                        <input type="text" id="nombre" name="nombre" th:placeholder="#{registro.nombre.placeholder}"
+                            placeholder="Ejemplo: María Rodríguez" minlength="3" maxlength="100" autocomplete="name"
                             required>
 
-                        <button
-                            type="button"
-                            class="show-password"
-                            id="showPassword"
-                            th:attr="aria-label=#{registro.contrasena.mostrar}"
-                            aria-label="Mostrar u ocultar contraseña">
-                            👁️
-                        </button>
+                        <small class="help-text" th:text="#{registro.nombre.ayuda}">
+                            Ingresa al menos 3 caracteres.
+                        </small>
 
                     </div>
 
-                    <small class="help-text"
-                           th:text="#{registro.contrasena.ayuda}">
-                        Debe contener al menos 6 caracteres.
-                    </small>
+                    <div class="form-group">
 
-                </div>
+                        <label for="correo" th:text="#{registro.correo}">
+                            Correo electrónico
+                        </label>
 
-                <button type="submit"
-                        class="register-button"
-                        th:text="#{registro.crearCuenta}">
-                    Crear mi cuenta
-                </button>
+                        <input type="email" id="correo" name="correo" th:placeholder="#{registro.correo.placeholder}"
+                            placeholder="nombre@correo.com" maxlength="120" autocomplete="email" required>
 
-            </form>
+                    </div>
 
-            <p class="login-text">
+                    <div class="form-group">
 
-                <span th:text="#{registro.yaCuenta}">
-                    ¿Ya tienes una cuenta?
-                </span>
+                        <label for="contrasena" th:text="#{registro.contrasena}">
+                            Contraseña
+                        </label>
 
-                <a th:href="@{/}"
-                   href="/"
-                   th:text="#{registro.iniciarSesion}">
-                    Inicia sesión
-                </a>
+                        <div class="password-wrapper">
 
-            </p>
+                            <input type="password" id="contrasena" name="contrasena"
+                                th:placeholder="#{registro.contrasena.placeholder}"
+                                placeholder="Crea una contraseña segura" minlength="6" maxlength="100"
+                                autocomplete="new-password" required>
 
-        </div>
+                            <button type="button" class="show-password" id="showPassword"
+                                th:attr="aria-label=#{registro.contrasena.mostrar}"
+                                aria-label="Mostrar u ocultar contraseña">
+                                👁️
+                            </button>
 
-        <div class="visual-section">
+                        </div>
 
-            <div class="visual-icon">
-                🛒
+                        <small class="help-text" th:text="#{registro.contrasena.ayuda}">
+                            Debe contener al menos 6 caracteres.
+                        </small>
+
+                    </div>
+
+                    <button type="submit" class="register-button" th:text="#{registro.crearCuenta}">
+                        Crear mi cuenta
+                    </button>
+
+                </form>
+
+                <p class="login-text">
+
+                    <span th:text="#{registro.yaCuenta}">
+                        ¿Ya tienes una cuenta?
+                    </span>
+
+                    <a th:href="@{/}" href="/" th:text="#{registro.iniciarSesion}">
+                        Inicia sesión
+                    </a>
+
+                </p>
+
             </div>
 
-            <h2 th:text="#{registro.bienvenida}">
-                Bienvenido a HomeStore
-            </h2>
+            <div class="visual-section">
 
-            <p th:text="#{registro.bienvenida.descripcion}">
-                Crea tu cuenta para explorar productos, utilizar el carrito
-                y disfrutar de una experiencia de compra más sencilla.
-            </p>
+                <div class="visual-icon">
+                    🛒
+                </div>
 
-        </div>
+                <h2 th:text="#{registro.bienvenida}">
+                    Bienvenido a HomeStore
+                </h2>
 
-    </section>
+                <p th:text="#{registro.bienvenida.descripcion}">
+                    Crea tu cuenta para explorar productos, utilizar el carrito
+                    y disfrutar de una experiencia de compra más sencilla.
+                </p>
 
-</main>
+            </div>
 
-<script>
-    const passwordInput = document.getElementById("contrasena");
-    const showPasswordButton = document.getElementById("showPassword");
+        </section>
 
-    showPasswordButton.addEventListener("click", function () {
-        const isPassword = passwordInput.type === "password";
+    </main>
 
-        passwordInput.type = isPassword ? "text" : "password";
-        showPasswordButton.textContent = isPassword ? "🙈" : "👁️";
-    });
-</script>
+    <script>
+        const passwordInput = document.getElementById("contrasena");
+        const showPasswordButton = document.getElementById("showPassword");
+
+        showPasswordButton.addEventListener("click", function () {
+            const isPassword = passwordInput.type === "password";
+
+            passwordInput.type = isPassword ? "text" : "password";
+            showPasswordButton.textContent = isPassword ? "🙈" : "👁️";
+        });
+    </script>
 
 </body>
+
 </html>

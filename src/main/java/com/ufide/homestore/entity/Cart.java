@@ -34,11 +34,7 @@ public class Cart {
     @Column(nullable = false, length = 50)
     private String status = "ACTIVE";
 
-    @OneToMany(
-            mappedBy = "cart",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CartItem> items = new ArrayList<>();
 
     public Cart() {
