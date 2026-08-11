@@ -15,7 +15,6 @@
           rel="stylesheet">
 
     <style>
-
         body {
             margin: 0;
             background-color: #e8c8f0;
@@ -23,6 +22,7 @@
             font-family: Arial, sans-serif;
         }
 
+        /* Navbar */
         .navbar {
             border-bottom: 1px solid #f0e0f5;
         }
@@ -73,7 +73,7 @@
             color: #2d1b6e;
         }
 
-
+        /* Contacto */
         .contact-section {
             padding: 3.5rem 1.5rem;
         }
@@ -143,6 +143,7 @@
             transform: translateY(-1px);
         }
 
+        /* Opinión */
         .star-rating {
             font-size: 2rem;
             color: #d6c2e8;
@@ -169,7 +170,6 @@
         }
 
         @media (max-width: 991px) {
-
             .navbar .container-fluid,
             .navbar .d-flex {
                 flex-wrap: wrap;
@@ -179,12 +179,12 @@
                 padding: 2rem 1.5rem;
             }
         }
-
     </style>
 </head>
 
 <body>
 
+<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-light bg-white">
 
     <div class="container-fluid px-4">
@@ -231,8 +231,9 @@
                 Nosotros
             </a>
 
+            <!-- Contacto -->
             <a class="nav-link active"
-               th:href="@{/contact}"
+               th:href="@{/contacto}"
                th:text="#{menu.contacto}">
                 Contacto
             </a>
@@ -251,13 +252,15 @@
                 Opinión
             </a>
 
+            <!-- Español -->
             <a class="btn-lang text-decoration-none"
-               th:href="@{/contact(lang='es')}">
+               th:href="@{/contacto(lang='es')}">
                 ES
             </a>
 
+            <!-- Inglés -->
             <a class="btn-lang text-decoration-none"
-               th:href="@{/contact(lang='en')}">
+               th:href="@{/contacto(lang='en')}">
                 EN
             </a>
 
@@ -273,6 +276,7 @@
 
 </nav>
 
+<!-- Contacto -->
 <main class="contact-section">
 
     <section class="contact-card">
@@ -307,10 +311,10 @@
 
         </div>
 
-        <form th:action="@{/contact}"
+        <!-- Formulario -->
+        <form th:action="@{/contacto}"
               method="post">
 
-            <!-- Nombre -->
             <div class="mb-4">
 
                 <label for="nombre"
@@ -329,8 +333,6 @@
 
             </div>
 
-
-            <!-- Correo -->
             <div class="mb-4">
 
                 <label for="correo"
@@ -349,8 +351,6 @@
 
             </div>
 
-
-            <!-- Asunto -->
             <div class="mb-4">
 
                 <label for="asunto"
@@ -369,8 +369,6 @@
 
             </div>
 
-
-            <!-- Mensaje -->
             <div class="mb-4">
 
                 <label for="mensaje"
@@ -384,13 +382,10 @@
                           class="form-control"
                           th:placeholder="#{contacto.mensaje.placeholder}"
                           placeholder="Escribe tu mensaje"
-                          required>
-                </textarea>
+                          required></textarea>
 
             </div>
 
-
-            <!-- Enviar -->
             <button type="submit"
                     class="btn-contacto"
                     th:text="#{contacto.enviar}">
@@ -403,6 +398,7 @@
 
 </main>
 
+<!-- Modal Opinión -->
 <div class="modal fade"
      id="opinionModal"
      tabindex="-1"
@@ -436,20 +432,11 @@
 
                 <div class="star-rating mb-3">
 
-                    <span class="star"
-                          data-value="1">★</span>
-
-                    <span class="star"
-                          data-value="2">★</span>
-
-                    <span class="star"
-                          data-value="3">★</span>
-
-                    <span class="star"
-                          data-value="4">★</span>
-
-                    <span class="star"
-                          data-value="5">★</span>
+                    <span class="star" data-value="1">★</span>
+                    <span class="star" data-value="2">★</span>
+                    <span class="star" data-value="3">★</span>
+                    <span class="star" data-value="4">★</span>
+                    <span class="star" data-value="5">★</span>
 
                 </div>
 
@@ -466,7 +453,6 @@
     </div>
 
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
