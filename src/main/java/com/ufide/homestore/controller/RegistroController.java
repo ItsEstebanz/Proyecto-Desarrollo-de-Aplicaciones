@@ -19,7 +19,7 @@ public class RegistroController {
 
     @GetMapping("/registro")
     public String registro() {
-        return "registro";
+        return "registration";
     }
 
     @PostMapping("/registro")

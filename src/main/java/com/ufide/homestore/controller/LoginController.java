@@ -25,6 +25,6 @@ public class LoginController {
 
         model.addAttribute("usuario", usuario);
 
-        return "inicio";
+        return "welcome";
     }
 }
