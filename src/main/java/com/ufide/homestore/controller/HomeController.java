@@ -27,12 +27,12 @@ public class HomeController {
 
     @GetMapping("/nosotros")
     public String nosotros() {
-        return "nosotros";
+        return "about";
     }
 
     @GetMapping("/contacto")
     public String contacto() {
-        return "contacto";
+        return "contact";
     }
 
     @GetMapping("/categories")

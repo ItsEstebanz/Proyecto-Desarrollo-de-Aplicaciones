@@ -30,7 +30,7 @@ public class ProductController {
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("productos", productRepository.findAll());
-        return "productos";
+        return "products";
     }
 
     @GetMapping("/inventario")
@@ -40,7 +40,7 @@ public class ProductController {
                 "productos",
                 productRepository.findAll());
 
-        return "inventario";
+        return "inventory";
     }
 
     @GetMapping("/nuevo")
@@ -48,7 +48,7 @@ public class ProductController {
         model.addAttribute("producto", new Product());
         model.addAttribute("categorias", categoryRepository.findAll());
         model.addAttribute("proveedores", supplierRepository.findAll());
-        return "producto-form";
+        return "product-form";
     }
 
     @PostMapping("/guardar")
@@ -61,7 +61,7 @@ public class ProductController {
         if (bindingResult.hasErrors()) {
             model.addAttribute("categorias", categoryRepository.findAll());
             model.addAttribute("proveedores", supplierRepository.findAll());
-            return "producto-form";
+            return "product-form";
         }
 
         productRepository.save(producto);
@@ -81,7 +81,7 @@ public class ProductController {
         model.addAttribute("producto", producto);
         model.addAttribute("categorias", categoryRepository.findAll());
         model.addAttribute("proveedores", supplierRepository.findAll());
-        return "producto-form";
+        return "product-form";
     }
 
     @GetMapping("/eliminar/{id}")

@@ -154,6 +154,6 @@ public class CheckoutController {
 
                 model.addAttribute("venta", venta);
 
-                return "compra-exitosa";
+                return "purchase-success";
         }
 }
