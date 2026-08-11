@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title th:text="${producto.productId == null
-            ? 'Agregar producto | HomeStore'
-            : 'Editar producto | HomeStore'}">
+            ? #messages.msg('productoForm.pagina.agregar')
+            : #messages.msg('productoForm.pagina.editar')}">
         Producto | HomeStore
     </title>
 
@@ -284,26 +284,62 @@
         </div>
 
         <nav class="menu">
-            <a th:href="@{/inicio}" href="/inicio">Dashboard</a>
+
+            <a th:href="@{/inicio}"
+               href="/inicio"
+               th:text="#{productos.menu.dashboard}">
+                Dashboard
+            </a>
 
             <a th:href="@{/productos}"
                href="/productos"
-               class="active">
+               class="active"
+               th:text="#{menu.productos}">
                 Productos
             </a>
 
-            <a th:href="@{/cart}" href="/cart">Carrito</a>
+            <a th:href="@{/cart}"
+               href="/cart"
+               th:text="#{menu.carrito}">
+                Carrito
+            </a>
 
-            <a href="#">Inventario</a>
-            <a href="#">Ventas</a>
-            <a href="#">Clientes</a>
-            <a href="#">Reportes</a>
-            <a href="#">Usuarios</a>
-            <a href="#">Configuración</a>
+            <a href="#"
+               th:text="#{inicio.inventario}">
+                Inventario
+            </a>
 
-            <a th:href="@{/logout}" href="/logout">
+            <a href="#"
+               th:text="#{inicio.ventas}">
+                Ventas
+            </a>
+
+            <a href="#"
+               th:text="#{productos.menu.clientes}">
+                Clientes
+            </a>
+
+            <a href="#"
+               th:text="#{inicio.reportes}">
+                Reportes
+            </a>
+
+            <a href="#"
+               th:text="#{productos.menu.usuarios}">
+                Usuarios
+            </a>
+
+            <a href="#"
+               th:text="#{productos.menu.configuracion}">
+                Configuración
+            </a>
+
+            <a th:href="@{/logout}"
+               href="/logout"
+               th:text="#{productos.menu.cerrarSesion}">
                 Cerrar sesión
             </a>
+
         </nav>
 
     </aside>
@@ -313,8 +349,8 @@
         <div class="topbar">
 
             <h2 th:text="${producto.productId == null
-                    ? 'Agregar producto'
-                    : 'Actualizar producto'}">
+                    ? #messages.msg('productoForm.titulo.agregar')
+                    : #messages.msg('productoForm.titulo.actualizar')}">
                 Agregar producto
             </h2>
 
@@ -323,7 +359,8 @@
 
         <section class="form-card">
 
-            <h3 class="form-title">
+            <h3 class="form-title"
+                th:text="#{productoForm.informacion}">
                 Información del producto
             </h3>
 
@@ -336,7 +373,8 @@
 
                 <div class="form-group">
 
-                    <label for="name">
+                    <label for="name"
+                           th:text="#{productoForm.nombre}">
                         Nombre del producto
                     </label>
 
@@ -346,6 +384,7 @@
                         class="form-control"
                         th:classappend="${#fields.hasErrors('name')} ? ' error'"
                         th:field="*{name}"
+                        th:placeholder="#{productoForm.nombre.placeholder}"
                         placeholder="Ejemplo: Silla de oficina">
 
                     <div
@@ -357,7 +396,8 @@
 
                 <div class="form-group">
 
-                    <label for="description">
+                    <label for="description"
+                           th:text="#{productoForm.descripcion}">
                         Descripción
                     </label>
 
@@ -366,6 +406,7 @@
                         class="form-control"
                         th:classappend="${#fields.hasErrors('description')} ? ' error'"
                         th:field="*{description}"
+                        th:placeholder="#{productoForm.descripcion.placeholder}"
                         placeholder="Escriba una descripción del producto">
                     </textarea>
 
@@ -380,7 +421,8 @@
 
                     <div class="form-group">
 
-                        <label for="category">
+                        <label for="category"
+                               th:text="#{productoForm.categoria}">
                             Categoría
                         </label>
 
@@ -390,7 +432,8 @@
                             th:classappend="${#fields.hasErrors('category')} ? ' error'"
                             th:field="*{category}">
 
-                            <option value="">
+                            <option value=""
+                                    th:text="#{productoForm.categoria.seleccionar}">
                                 Seleccione una categoría
                             </option>
 
@@ -399,6 +442,7 @@
                                 th:value="${categoria.categoryId}"
                                 th:text="${categoria.name}">
                             </option>
+
                         </select>
 
                         <div
@@ -410,7 +454,8 @@
 
                     <div class="form-group">
 
-                        <label for="supplier">
+                        <label for="supplier"
+                               th:text="#{productoForm.proveedor}">
                             Proveedor
                         </label>
 
@@ -420,7 +465,8 @@
                             th:classappend="${#fields.hasErrors('supplier')} ? ' error'"
                             th:field="*{supplier}">
 
-                            <option value="">
+                            <option value=""
+                                    th:text="#{productoForm.proveedor.seleccionar}">
                                 Seleccione un proveedor
                             </option>
 
@@ -429,6 +475,7 @@
                                 th:value="${proveedor.supplierId}"
                                 th:text="${proveedor.name}">
                             </option>
+
                         </select>
 
                         <div
@@ -440,7 +487,8 @@
 
                     <div class="form-group">
 
-                        <label for="price">
+                        <label for="price"
+                               th:text="#{productoForm.precioVenta}">
                             Precio de venta
                         </label>
 
@@ -463,7 +511,8 @@
 
                     <div class="form-group">
 
-                        <label for="costPrice">
+                        <label for="costPrice"
+                               th:text="#{productoForm.precioCosto}">
                             Precio de costo
                         </label>
 
@@ -486,7 +535,8 @@
 
                     <div class="form-group full-width">
 
-                        <label for="stock">
+                        <label for="stock"
+                               th:text="#{productoForm.cantidad}">
                             Cantidad disponible
                         </label>
 
@@ -504,6 +554,7 @@
                             th:if="${#fields.hasErrors('stock')}"
                             th:errors="*{stock}">
                         </div>
+
                     </div>
 
                 </div>
@@ -512,15 +563,16 @@
 
                     <a th:href="@{/productos}"
                        href="/productos"
-                       class="btn btn-secondary">
+                       class="btn btn-secondary"
+                       th:text="#{productoForm.cancelar}">
                         Cancelar
                     </a>
 
                     <button type="submit"
                             class="btn btn-primary"
                             th:text="${producto.productId == null
-                                    ? 'Guardar producto'
-                                    : 'Actualizar producto'}">
+                                    ? #messages.msg('productoForm.guardar')
+                                    : #messages.msg('productoForm.actualizar')}">
                         Guardar producto
                     </button>
 
