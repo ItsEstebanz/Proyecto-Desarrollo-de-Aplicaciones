@@ -1,0 +1,17 @@
+.git
+.github
+.idea
+.vscode
+target
+*.iml
+*.log
+*.class
+hs_err_pid*
+replay_pid*
+compose*.yml
+
+# Local secrets
+.env
+*.env
+application-local.properties
+src/main/resources/application-local.properties
