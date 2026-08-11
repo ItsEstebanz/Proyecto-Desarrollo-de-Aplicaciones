@@ -10,7 +10,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 /**
- * Representa un usuario del sistema. Mapea la tabla "user", que es palabra reservada en MySQL.
+ * Representa un usuario del sistema. Mapea la tabla "user", que es palabra
+ * reservada en MySQL.
  */
 @Entity
 @Table(name = "user")
@@ -34,21 +35,22 @@ public class User {
     @Column(nullable = false)
     private Boolean isActive = true;
 
-    // JoinColumn indica que la columna role_id en la tabla user es la FK hacia role.
+    // JoinColumn indica que la columna role_id en la tabla user es la FK hacia
+    // role.
     // Many to one explica que muchos usuarios pueden tener un mismo rol.
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
-    public User() {}
+    public User() {
+    }
 
     public User(
-        String name,
-        String email,
-        String password,
-        Boolean isActive,
-        Role role
-    ) {
+            String name,
+            String email,
+            String password,
+            Boolean isActive,
+            Role role) {
         this.name = name;
         this.email = email;
         this.password = password;
