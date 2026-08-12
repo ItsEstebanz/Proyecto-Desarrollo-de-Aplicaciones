@@ -5,38 +5,65 @@
     "description": "Endpoints REST del sistema HomeStore - Proyecto Final SC-403",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
+
   "variable": [
-    {"key": "base_url", "value": "http://localhost:8080", "type": "string"}
+    {
+      "key": "base_url",
+      "value": "http://localhost:8081",
+      "type": "string"
+    }
   ],
+
   "item": [
     {
-      "name": "GET /api/mascotas (listar)",
+      "name": "GET /api/productos (listar)",
       "request": {
         "method": "GET",
-        "header": [{"key": "Accept", "value": "application/json"}],
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
         "url": {
-          "raw": "{{base_url}}/api/mascotas",
-          "host": ["{{base_url}}"],
-          "path": ["api", "mascotas"]
+          "raw": "{{base_url}}/api/productos",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "productos"
+          ]
         },
-        "description": "Lista todas las mascotas activas."
+        "description": "Lista los productos registrados en HomeStore."
       }
     },
+
     {
-      "name": "POST /api/citas (crear)",
+      "name": "POST /api/productos (crear)",
       "request": {
         "method": "POST",
-        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"mascotaId\": 1,\n  \"veterinarioId\": 1,\n  \"fechaHora\": \"2025-09-25T10:00:00\",\n  \"motivo\": \"Control anual\"\n}"
+          "raw": "{\n  \"name\": \"Lampara de escritorio\",\n  \"description\": \"Lampara LED para escritorio\",\n  \"price\": 18000.00,\n  \"costPrice\": 12000.00,\n  \"stock\": 15\n}"
         },
         "url": {
-          "raw": "{{base_url}}/api/citas",
-          "host": ["{{base_url}}"],
-          "path": ["api", "citas"]
+          "raw": "{{base_url}}/api/productos",
+          "host": [
+            "{{base_url}}"
+          ],
+          "path": [
+            "api",
+            "productos"
+          ]
         },
-        "description": "Crea una nueva cita."
+        "description": "Crea un nuevo producto en HomeStore."
       }
     }
   ]

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" th:lang="${#locale.language}" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmar compra | HomeStore</title>
+
+    <title th:text="#{checkout.pagina.titulo}">
+        Confirmar compra | HomeStore
+    </title>
 
     <style>
         * {
@@ -169,198 +172,227 @@
 
 <body>
 
-<main class="container">
+    <main class="container">
 
-    <div class="header">
-        <h1>Confirmar compra</h1>
-        <a th:href="@{/cart}" href="/cart" class="back-link">
-            Volver al carrito
-        </a>
-    </div>
+        <div class="header">
 
-    <div class="alert alert-error"
-         th:if="${mensajeError}"
-         th:text="${mensajeError}">
-    </div>
+            <h1 th:text="#{checkout.titulo}">
+                Confirmar compra
+            </h1>
 
-    <div class="checkout-grid">
+            <a th:href="@{/cart}" href="/cart" class="back-link" th:text="#{checkout.volverCarrito}">
+                Volver al carrito
+            </a>
 
-        <section class="card">
+        </div>
 
-            <h2>Productos</h2>
+        <div class="alert alert-error" th:if="${mensajeError}" th:text="${mensajeError}">
+        </div>
 
-            <div class="product-item"
-                 th:each="item : ${carrito.items}">
+        <div class="checkout-grid">
 
-                <div>
-                    <div class="product-name"
-                         th:text="${item.product.name}">
-                        Producto
+            <section class="card">
+
+                <h2 th:text="#{checkout.productos}">
+                    Productos
+                </h2>
+
+                <div class="product-item" th:each="item : ${carrito.items}">
+
+                    <div>
+
+                        <div class="product-name" th:text="${item.product.name}">
+                            Producto
+                        </div>
+
+                        <div class="product-details">
+
+                            <span th:text="#{checkout.cantidad}">
+                                Cantidad
+                            </span>:
+
+                            <span th:text="${item.quantity}">
+                                1
+                            </span>
+
+                            ·
+
+                            <span th:text="#{checkout.precio}">
+                                Precio
+                            </span>:
+
+                            ₡<span th:text="${#numbers.formatDecimal(item.unitPrice, 1, 2)}">
+                                0.00
+                            </span>
+
+                        </div>
+
                     </div>
 
-                    <div class="product-details">
-                        Cantidad:
-                        <span th:text="${item.quantity}">1</span>
+                    <div class="subtotal">
 
-                        · Precio:
-                        ₡<span th:text="${#numbers.formatDecimal(item.unitPrice, 1, 2)}">
+                        ₡<span th:text="${#numbers.formatDecimal(item.subtotal, 1, 2)}">
                             0.00
                         </span>
+
                     </div>
+
                 </div>
 
-                <div class="subtotal">
-                    ₡<span th:text="${#numbers.formatDecimal(item.subtotal, 1, 2)}">
-                        0.00
-                    </span>
-                </div>
+            </section>
 
-            </div>
+            <section class="card">
 
-        </section>
+                <h2 th:text="#{checkout.datosCompra}">
+                    Datos de la compra
+                </h2>
 
-        <section class="card">
+                <form th:action="@{/checkout/confirmar}" method="post">
 
-            <h2>Datos de la compra</h2>
+                    <div class="form-group">
 
-            <form th:action="@{/checkout/confirmar}"
-                  method="post">
+                        <label for="paymentMethodId" th:text="#{checkout.metodoPago}">
+                            Método de pago
+                        </label>
 
-                <div class="form-group">
-                    <label for="paymentMethodId">
-                        Método de pago
-                    </label>
+                        <select id="paymentMethodId" name="paymentMethodId" required>
 
-                    <select id="paymentMethodId"
-                            name="paymentMethodId"
-                            required>
+                            <option value="" th:text="#{checkout.seleccionarOpcion}">
+                                Seleccione una opción
+                            </option>
 
-                        <option value="">
-                            Seleccione una opción
-                        </option>
-
-                        <option th:each="metodo : ${metodosPago}"
-                                th:value="${metodo.methodId}"
+                            <option th:each="metodo : ${metodosPago}" th:value="${metodo.methodId}"
                                 th:text="${metodo.name}">
-                        </option>
-                    </select>
-                </div>
+                            </option>
 
-                <div class="form-group">
-                    <label for="shippingMethodId">
-                        Método de envío
-                    </label>
+                        </select>
 
-                    <select id="shippingMethodId"
-                            name="shippingMethodId"
-                            required>
+                    </div>
 
-                        <option value="">
-                            Seleccione una opción
-                        </option>
+                    <div class="form-group">
 
-                        <option th:each="envio : ${metodosEnvio}"
-                                th:value="${envio.methodId}"
-                                th:text="${envio.name + ' - ₡' + envio.cost}"
-                                th:attr="data-cost=${envio.cost}">
-                        </option>
-                    </select>
-                </div>
+                        <label for="shippingMethodId" th:text="#{checkout.metodoEnvio}">
+                            Método de envío
+                        </label>
 
-                <div class="form-group">
-                    <label for="locationId">
-                        Sucursal
-                    </label>
+                        <select id="shippingMethodId" name="shippingMethodId" required>
 
-                    <select id="locationId"
-                            name="locationId"
-                            required>
+                            <option value="" th:text="#{checkout.seleccionarOpcion}">
+                                Seleccione una opción
+                            </option>
 
-                        <option value="">
-                            Seleccione una sucursal
-                        </option>
+                            <option th:each="envio : ${metodosEnvio}" th:value="${envio.methodId}"
+                                th:text="${envio.name + ' - ₡' + envio.cost}" th:attr="data-cost=${envio.cost}">
+                            </option>
 
-                        <option th:each="sucursal : ${sucursales}"
-                                th:value="${sucursal.locationId}"
+                        </select>
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label for="locationId" th:text="#{checkout.sucursal}">
+                            Sucursal
+                        </label>
+
+                        <select id="locationId" name="locationId" required>
+
+                            <option value="" th:text="#{checkout.seleccionarSucursal}">
+                                Seleccione una sucursal
+                            </option>
+
+                            <option th:each="sucursal : ${sucursales}" th:value="${sucursal.locationId}"
                                 th:text="${sucursal.name}">
-                        </option>
-                    </select>
-                </div>
+                            </option>
 
-                <div class="summary-row">
-                    <span>Subtotal</span>
+                        </select>
 
-                    <span>
-                        ₡<span id="subtotal"
-                               th:text="${#numbers.formatDecimal(subtotal, 1, 2)}">
-                            0.00
+                    </div>
+
+                    <div class="summary-row">
+
+                        <span th:text="#{checkout.subtotal}">
+                            Subtotal
                         </span>
-                    </span>
-                </div>
 
-                <div class="summary-row">
-                    <span>Costo de envío</span>
-
-                    <span class="shipping-cost">
-                        ₡<span id="shippingCost">0.00</span>
-                    </span>
-                </div>
-
-                <div class="summary-row summary-total">
-                    <span>Total</span>
-
-                    <span>
-                        ₡<span id="total"
-                               th:text="${#numbers.formatDecimal(subtotal, 1, 2)}">
-                            0.00
+                        <span>
+                            ₡<span id="subtotal" th:text="${#numbers.formatDecimal(subtotal, 1, 2)}">
+                                0.00
+                            </span>
                         </span>
-                    </span>
-                </div>
 
-                <button type="submit"
-                        class="btn-confirm">
-                    Confirmar compra
-                </button>
+                    </div>
 
-            </form>
+                    <div class="summary-row">
 
-        </section>
+                        <span th:text="#{checkout.costoEnvio}">
+                            Costo de envío
+                        </span>
 
-    </div>
+                        <span class="shipping-cost">
+                            ₡<span id="shippingCost">0.00</span>
+                        </span>
 
-</main>
+                    </div>
 
-<script>
-    const shippingSelect = document.getElementById("shippingMethodId");
-    const subtotalElement = document.getElementById("subtotal");
-    const shippingCostElement = document.getElementById("shippingCost");
-    const totalElement = document.getElementById("total");
+                    <div class="summary-row summary-total">
 
-    function parseAmount(value) {
-        return Number(
-            String(value)
-                .replace(/\s/g, "")
-                .replace(/,/g, "")
-        ) || 0;
-    }
+                        <span th:text="#{checkout.total}">
+                            Total
+                        </span>
 
-    shippingSelect.addEventListener("change", function () {
-        const selectedOption =
-            shippingSelect.options[shippingSelect.selectedIndex];
+                        <span>
+                            ₡<span id="total" th:text="${#numbers.formatDecimal(subtotal, 1, 2)}">
+                                0.00
+                            </span>
+                        </span>
 
-        const shippingCost =
-            parseAmount(selectedOption.dataset.cost);
+                    </div>
 
-        const subtotal =
-            parseAmount(subtotalElement.textContent);
+                    <button type="submit" class="btn-confirm" th:text="#{checkout.confirmar}">
+                        Confirmar compra
+                    </button>
 
-        shippingCostElement.textContent =
-            shippingCost.toFixed(2);
+                </form>
 
-        totalElement.textContent =
-            (subtotal + shippingCost).toFixed(2);
-    });
-</script>
+            </section>
+
+        </div>
+
+    </main>
+
+    <script>
+        const shippingSelect = document.getElementById("shippingMethodId");
+        const subtotalElement = document.getElementById("subtotal");
+        const shippingCostElement = document.getElementById("shippingCost");
+        const totalElement = document.getElementById("total");
+
+        function parseAmount(value) {
+            return Number(
+                String(value)
+                    .replace(/\s/g, "")
+                    .replace(/,/g, "")
+            ) || 0;
+        }
+
+        shippingSelect.addEventListener("change", function () {
+            const selectedOption =
+                shippingSelect.options[shippingSelect.selectedIndex];
+
+            const shippingCost =
+                parseAmount(selectedOption.dataset.cost);
+
+            const subtotal =
+                parseAmount(subtotalElement.textContent);
+
+            shippingCostElement.textContent =
+                shippingCost.toFixed(2);
+
+            totalElement.textContent =
+                (subtotal + shippingCost).toFixed(2);
+        });
+    </script>
 
 </body>
+
 </html>

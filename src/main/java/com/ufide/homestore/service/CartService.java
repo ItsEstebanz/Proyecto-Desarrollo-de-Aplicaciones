@@ -1,5 +1,11 @@
 package com.ufide.homestore.service;
 
+import java.math.BigDecimal;
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.ufide.homestore.entity.Cart;
 import com.ufide.homestore.entity.CartItem;
 import com.ufide.homestore.entity.Product;
@@ -8,10 +14,6 @@ import com.ufide.homestore.repository.CartItemRepository;
 import com.ufide.homestore.repository.CartRepository;
 import com.ufide.homestore.repository.ProductRepository;
 import com.ufide.homestore.repository.UserRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 public class CartService {
@@ -27,8 +29,7 @@ public class CartService {
             CartRepository cartRepository,
             CartItemRepository cartItemRepository,
             ProductRepository productRepository,
-            UserRepository userRepository
-    ) {
+            UserRepository userRepository) {
         this.cartRepository = cartRepository;
         this.cartItemRepository = cartItemRepository;
         this.productRepository = productRepository;
@@ -40,8 +41,8 @@ public class CartService {
         User usuario = buscarUsuario(correo);
 
         return cartRepository.findFirstByUserAndStatusOrderByCreatedAtDesc(
-                        usuario,
-                        ESTADO_ACTIVO).map(cartItemRepository::findByCartOrderByCartItemIdAsc).orElseGet(List::of);
+                usuario,
+                ESTADO_ACTIVO).map(cartItemRepository::findByCartOrderByCartItemIdAsc).orElseGet(List::of);
     }
 
     public BigDecimal calcularTotal(List<CartItem> items) {
@@ -52,8 +53,7 @@ public class CartService {
     public void agregarProducto(String correo, Integer productId, Integer cantidad) {
         if (cantidad == null || cantidad < 1) {
             throw new IllegalArgumentException(
-                    "La cantidad debe ser mayor a cero"
-            );
+                    "La cantidad debe ser mayor a cero");
         }
 
         User usuario = buscarUsuario(correo);
@@ -70,8 +70,7 @@ public class CartService {
                     carrito,
                     producto,
                     cantidad,
-                    producto.getPrice()
-            );
+                    producto.getPrice());
         } else {
             int nuevaCantidad = item.getQuantity() + cantidad;
 
@@ -114,28 +113,24 @@ public class CartService {
 
     private Cart obtenerOCrearCarrito(User usuario) {
         return cartRepository.findFirstByUserAndStatusOrderByCreatedAtDesc(
-                        usuario,
-                        ESTADO_ACTIVO).orElseGet(() -> cartRepository.save(new Cart(usuario)));
+                usuario,
+                ESTADO_ACTIVO).orElseGet(() -> cartRepository.save(new Cart(usuario)));
     }
 
-    private CartItem buscarItemDelUsuario(String correo,Integer itemId) {
+    private CartItem buscarItemDelUsuario(String correo, Integer itemId) {
         User usuario = buscarUsuario(correo);
 
         CartItem item = cartItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException(
-                                "El producto no está en el carrito"
-                        )
-                );
+                "El producto no está en el carrito"));
 
         boolean perteneceAlUsuario = item.getCart().getUser().getUserId().equals(usuario.getUserId());
 
         boolean carritoActivo = ESTADO_ACTIVO.equals(
-                item.getCart().getStatus()
-        );
+                item.getCart().getStatus());
 
         if (!perteneceAlUsuario || !carritoActivo) {
             throw new IllegalArgumentException(
-                    "No se puede modificar este carrito"
-            );
+                    "No se puede modificar este carrito");
         }
 
         return item;
@@ -143,16 +138,12 @@ public class CartService {
 
     private User buscarUsuario(String correo) {
         return userRepository.findByEmail(correo).orElseThrow(() -> new IllegalArgumentException(
-                                "Usuario no encontrado"
-                        )
-                );
+                "Usuario no encontrado"));
     }
 
     private Product buscarProducto(Integer productId) {
         return productRepository.findById(productId).orElseThrow(() -> new IllegalArgumentException(
-                                "Producto no encontrado"
-                        )
-                );
+                "Producto no encontrado"));
     }
 
     private void validarStock(Product producto, int cantidad) {
@@ -162,20 +153,18 @@ public class CartService {
 
         if (cantidad > stockDisponible) {
             throw new IllegalArgumentException(
-                    "No hay suficientes unidades de " + producto.getName()
-            );
+                    "No hay suficientes unidades de " + producto.getName());
         }
     }
+
     @Transactional(readOnly = true)
-public Cart obtenerCarritoActivo(User usuario) {
-    return cartRepository
-            .findFirstByUserAndStatusOrderByCreatedAtDesc(
-                    usuario,
-                    ESTADO_ACTIVO
-            )
-            .orElseThrow(() -> new IllegalStateException(
-                    "No existe un carrito activo."
-            ));
-}
+    public Cart obtenerCarritoActivo(User usuario) {
+        return cartRepository
+                .findFirstByUserAndStatusOrderByCreatedAtDesc(
+                        usuario,
+                        ESTADO_ACTIVO)
+                .orElseThrow(() -> new IllegalStateException(
+                        "No existe un carrito activo."));
+    }
 
 }

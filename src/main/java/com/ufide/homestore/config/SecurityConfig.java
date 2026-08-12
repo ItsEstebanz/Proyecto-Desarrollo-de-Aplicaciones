@@ -3,53 +3,71 @@ package com.ufide.homestore.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 public class SecurityConfig {
+
         @Bean
         public PasswordEncoder passwordEncoder() {
                 return new BCryptPasswordEncoder();
         }
 
         @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity http)
-                        throws Exception {
-
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 http
-                                /*
-                                 * Se protege únicamente /inicio.
-                                 * Las demás rutas conservan el comportamiento actual.
-                                 */
                                 .authorizeHttpRequests(auth -> auth
-                                                .requestMatchers("/inicio", "/cart/**",
-                                                                "/productos/**")
-                                                .authenticated()
-                                                .anyRequest().permitAll())
 
-                                /*
-                                 * Spring Security procesa automáticamente el formulario
-                                 * que actualmente existe en home.html.
-                                 */
+                                                .requestMatchers(
+                                                                "/",
+                                                                "/registro",
+                                                                "/nosotros",
+                                                                "/contacto",
+                                                                "/location",
+                                                                "/images/**",
+                                                                "/css/**",
+                                                                "/js/**")
+                                                .permitAll()
+
+                                                .requestMatchers(
+                                                                "/productos/nuevo",
+                                                                "/productos/guardar",
+                                                                "/productos/editar/**",
+                                                                "/productos/eliminar/**")
+                                                .hasAnyRole(
+                                                                "ADMIN",
+                                                                "Supervisor",
+                                                                "Gerente",
+                                                                "Dueno")
+
+                                                .requestMatchers(
+                                                                "/inicio",
+                                                                "/productos/**",
+                                                                "/cart/**",
+                                                                "/checkout/**")
+                                                .authenticated()
+
+                                                .anyRequest()
+                                                .permitAll())
+
                                 .formLogin(form -> form
                                                 .loginPage("/")
                                                 .loginProcessingUrl("/login")
                                                 .usernameParameter("correo")
                                                 .passwordParameter("contrasena")
-                                                .defaultSuccessUrl("/productos", true)
+                                                .defaultSuccessUrl(
+                                                                "/productos",
+                                                                true)
                                                 .failureUrl("/?error=true")
                                                 .permitAll())
 
-                                /*
-                                 * Se permite cerrar sesión con el enlace GET /logout
-                                 * que ya existe en inicio.html.
-                                 */
                                 .logout(logout -> logout
-                                                .logoutRequestMatcher(
-                                                                new AntPathRequestMatcher("/logout", "GET"))
+                                                .logoutRequestMatcher(new AntPathRequestMatcher(
+                                                                "/logout",
+                                                                "GET"))
                                                 .logoutSuccessUrl("/")
                                                 .invalidateHttpSession(true)
                                                 .clearAuthentication(true)
@@ -58,11 +76,6 @@ public class SecurityConfig {
 
                                 .httpBasic(httpBasic -> httpBasic.disable())
 
-                                /*
-                                 * Se mantiene desactivado porque así estaba el proyecto.
-                                 * De esta manera no se afectan formularios ni solicitudes
-                                 * que actualmente funcionan sin token CSRF.
-                                 */
                                 .csrf(csrf -> csrf.disable());
 
                 return http.build();

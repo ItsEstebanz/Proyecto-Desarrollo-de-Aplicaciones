@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carrito | HomeStore</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-          rel="stylesheet">
+    <title th:text="#{cart.pagina.titulo}">
+        Carrito | HomeStore
+    </title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
-          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
     <style>
         body {
@@ -119,231 +121,296 @@
 
 <body>
 
-<div class="layout">
+    <div class="layout">
 
-    <aside class="sidebar">
+        <aside class="sidebar">
 
-        <div class="logo">
-            <img th:src="@{/images/logo.png}"
-                 src="/images/logo.png"
-                 alt="HomeStore">
-        </div>
-
-        <div class="menu">
-            <a th:href="@{/}">Dashboard</a>
-            <a th:href="@{/productos}">Productos</a>
-            <a th:href="@{/cart}" class="active">Carrito</a>
-            <a href="#">Inventario</a>
-            <a href="#">Ventas</a>
-            <a href="#">Clientes</a>
-            <a href="#">Reportes</a>
-            <a href="#">Usuarios</a>
-            <a href="#">Configuración</a>
-            <a th:href="@{/logout}">Cerrar sesión</a>
-        </div>
-
-    </aside>
-
-    <main class="content">
-
-        <div class="topbar">
-            <div>
-                <h2 class="mb-1">Carrito de compras</h2>
-                <p class="text-muted mb-0">
-                    Revisa los productos antes de continuar.
-                </p>
+            <div class="logo">
+                <img th:src="@{/images/logo.png}" src="/images/logo.png" alt="HomeStore">
             </div>
 
-            <a th:href="@{/productos}" class="btn-purple">
-                <i class="bi bi-arrow-left me-1"></i>
-                Seguir comprando
-            </a>
-        </div>
+            <div class="menu">
 
-        <div class="alert alert-success alert-dismissible fade show"
-             th:if="${ok}">
-            <span th:text="${ok}">Operación realizada</span>
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
-        </div>
-
-        <div class="alert alert-danger alert-dismissible fade show"
-             th:if="${error}">
-            <span th:text="${error}">
-                No se pudo completar la operación
-            </span>
-            <button type="button"
-                    class="btn-close"
-                    data-bs-dismiss="alert">
-            </button>
-        </div>
-
-        <div class="row g-4" th:if="${!items.isEmpty()}">
-
-            <div class="col-12 col-xl-9">
-
-                <div class="card-box">
-
-                    <div class="table-responsive">
-
-                        <table class="table align-middle mb-0">
-
-                            <thead>
-                            <tr>
-                                <th>Producto</th>
-                                <th>Precio</th>
-                                <th>Cantidad</th>
-                                <th>Subtotal</th>
-                                <th></th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-
-                            <tr th:each="item : ${items}">
-
-                                <td>
-                                    <div class="product-name"
-                                         th:text="${item.product.name}">
-                                        Producto
-                                    </div>
-
-                                    <small class="text-muted"
-                                           th:text="${item.product.category.name}">
-                                        Categoría
-                                    </small>
-                                </td>
-
-                                <td th:text="'₡' + ${#numbers.formatDecimal(item.unitPrice, 1, 2)}">
-                                    ₡0.00
-                                </td>
-
-                                <td>
-
-                                    <div class="quantity-control">
-
-                                        <form th:action="@{/cart/items/{id}/disminuir(id=${item.cartItemId})}"
-                                              method="post">
-
-                                            <button type="submit"
-                                                    class="btn btn-outline-secondary btn-sm">
-                                                <i class="bi bi-dash"></i>
-                                            </button>
-
-                                        </form>
-
-                                        <span class="fw-bold"
-                                              th:text="${item.quantity}">
-                                            1
-                                        </span>
-
-                                        <form th:action="@{/cart/items/{id}/aumentar(id=${item.cartItemId})}"
-                                              method="post">
-
-                                            <button type="submit"
-                                                    class="btn btn-outline-secondary btn-sm">
-                                                <i class="bi bi-plus"></i>
-                                            </button>
-
-                                        </form>
-
-                                    </div>
-
-                                </td>
-
-                                <td class="fw-bold"
-                                    th:text="'₡' + ${#numbers.formatDecimal(item.subtotal, 1, 2)}">
-                                    ₡0.00
-                                </td>
-
-                                <td class="text-end">
-
-                                    <form th:action="@{/cart/items/{id}/eliminar(id=${item.cartItemId})}"
-                                          method="post">
-
-                                        <button type="submit"
-                                                class="btn btn-outline-danger btn-sm"
-                                                title="Eliminar">
-                                            <i class="bi bi-trash"></i>
-                                        </button>
-
-                                    </form>
-
-                                </td>
-
-                            </tr>
-
-                            </tbody>
-
-                        </table>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="col-12 col-xl-3">
-
-                <div class="summary-box">
-
-                    <h5 class="mb-3">Resumen</h5>
-
-                    <div class="d-flex justify-content-between mb-3">
-                        <span>Productos</span>
-                        <span th:text="${items.size()}">0</span>
-                    </div>
-
-                    <hr>
-
-                    <div class="d-flex justify-content-between fs-5 fw-bold mb-4">
-                        <span>Total</span>
-
-                        <span th:text="'₡' + ${#numbers.formatDecimal(total, 1, 2)}">
-                            ₡0.00
-                        </span>
-                    </div>
-
-                   <a th:href="@{/checkout}"
-                     href="/checkout"
-                     class="btn btn-purple w-100"
-                     th:classappend="${items.isEmpty()} ? ' disabled'"
-                     th:attr="aria-disabled=${items.isEmpty()}">
-                     Continuar al pago
+                <a th:href="@{/}" th:text="#{productos.menu.dashboard}">
+                    Dashboard
                 </a>
 
+                <a th:href="@{/productos}" th:text="#{menu.productos}">
+                    Productos
+                </a>
+
+                <a th:href="@{/cart}" class="active" th:text="#{menu.carrito}">
+                    Carrito
+                </a>
+
+                <a href="#" th:text="#{inicio.inventario}">
+                    Inventario
+                </a>
+
+                <a href="#" th:text="#{inicio.ventas}">
+                    Ventas
+                </a>
+
+                <a href="#" th:text="#{productos.menu.clientes}">
+                    Clientes
+                </a>
+
+                <a href="#" th:text="#{inicio.reportes}">
+                    Reportes
+                </a>
+
+                <a href="#" th:text="#{productos.menu.usuarios}">
+                    Usuarios
+                </a>
+
+                <a href="#" th:text="#{productos.menu.configuracion}">
+                    Configuración
+                </a>
+
+                <a th:href="@{/logout}" th:text="#{productos.menu.cerrarSesion}">
+                    Cerrar sesión
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="content">
+
+            <div class="topbar">
+                <div>
+
+                    <h2 class="mb-1" th:text="#{cart.titulo}">
+                        Carrito de compras
+                    </h2>
+
+                    <p class="text-muted mb-0" th:text="#{cart.subtitulo}">
+                        Revisa los productos antes de continuar.
+                    </p>
+
+                </div>
+
+                <a th:href="@{/productos}" class="btn-purple">
+
+                    <i class="bi bi-arrow-left me-1"></i>
+
+                    <span th:text="#{cart.seguirComprando}">
+                        Seguir comprando
+                    </span>
+
+                </a>
+            </div>
+
+            <div class="alert alert-success alert-dismissible fade show" th:if="${ok}">
+
+                <span th:text="${ok}">
+                    Operación realizada
+                </span>
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert">
+                </button>
+
+            </div>
+
+            <div class="alert alert-danger alert-dismissible fade show" th:if="${error}">
+
+                <span th:text="${error}">
+                    No se pudo completar la operación
+                </span>
+
+                <button type="button" class="btn-close" data-bs-dismiss="alert">
+                </button>
+
+            </div>
+
+            <div class="row g-4" th:if="${!items.isEmpty()}">
+
+                <div class="col-12 col-xl-9">
+
+                    <div class="card-box">
+
+                        <div class="table-responsive">
+
+                            <table class="table align-middle mb-0">
+
+                                <thead>
+                                    <tr>
+
+                                        <th th:text="#{cart.tabla.producto}">
+                                            Producto
+                                        </th>
+
+                                        <th th:text="#{cart.tabla.precio}">
+                                            Precio
+                                        </th>
+
+                                        <th th:text="#{cart.tabla.cantidad}">
+                                            Cantidad
+                                        </th>
+
+                                        <th th:text="#{cart.tabla.subtotal}">
+                                            Subtotal
+                                        </th>
+
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <tr th:each="item : ${items}">
+
+                                        <td>
+
+                                            <div class="product-name" th:text="${item.product.name}">
+                                                Producto
+                                            </div>
+
+                                            <small class="text-muted" th:text="${item.product.category.name}">
+                                                Categoría
+                                            </small>
+
+                                        </td>
+
+                                        <td th:text="'₡' + ${#numbers.formatDecimal(item.unitPrice, 1, 2)}">
+                                            ₡0.00
+                                        </td>
+
+                                        <td>
+
+                                            <div class="quantity-control">
+
+                                                <form th:action="@{/cart/items/{id}/disminuir(id=${item.cartItemId})}"
+                                                    method="post">
+
+                                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                                        th:title="#{cart.disminuir}">
+                                                        <i class="bi bi-dash"></i>
+                                                    </button>
+
+                                                </form>
+
+                                                <span class="fw-bold" th:text="${item.quantity}">
+                                                    1
+                                                </span>
+
+                                                <form th:action="@{/cart/items/{id}/aumentar(id=${item.cartItemId})}"
+                                                    method="post">
+
+                                                    <button type="submit" class="btn btn-outline-secondary btn-sm"
+                                                        th:title="#{cart.aumentar}">
+                                                        <i class="bi bi-plus"></i>
+                                                    </button>
+
+                                                </form>
+
+                                            </div>
+
+                                        </td>
+
+                                        <td class="fw-bold"
+                                            th:text="'₡' + ${#numbers.formatDecimal(item.subtotal, 1, 2)}">
+                                            ₡0.00
+                                        </td>
+
+                                        <td class="text-end">
+
+                                            <form th:action="@{/cart/items/{id}/eliminar(id=${item.cartItemId})}"
+                                                method="post">
+
+                                                <button type="submit" class="btn btn-outline-danger btn-sm"
+                                                    th:title="#{cart.eliminar}">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+
+                                            </form>
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-12 col-xl-3">
+
+                    <div class="summary-box">
+
+                        <h5 class="mb-3" th:text="#{cart.resumen}">
+                            Resumen
+                        </h5>
+
+                        <div class="d-flex justify-content-between mb-3">
+
+                            <span th:text="#{cart.productos}">
+                                Productos
+                            </span>
+
+                            <span th:text="${items.size()}">
+                                0
+                            </span>
+
+                        </div>
+
+                        <hr>
+
+                        <div class="d-flex justify-content-between fs-5 fw-bold mb-4">
+
+                            <span th:text="#{cart.total}">
+                                Total
+                            </span>
+
+                            <span th:text="'₡' + ${#numbers.formatDecimal(total, 1, 2)}">
+                                ₡0.00
+                            </span>
+
+                        </div>
+
+                        <a th:href="@{/checkout}" href="/checkout" class="btn btn-purple w-100"
+                            th:classappend="${items.isEmpty()} ? ' disabled'" th:attr="aria-disabled=${items.isEmpty()}"
+                            th:text="#{cart.continuarPago}">
+                            Continuar al pago
+                        </a>
+
+                    </div>
+
                 </div>
 
             </div>
 
-        </div>
+            <div class="card-box text-center py-5" th:if="${items.isEmpty()}">
 
-        <div class="card-box text-center py-5"
-             th:if="${items.isEmpty()}">
+                <i class="bi bi-cart-x" style="font-size: 3rem; color: #7b35d8;">
+                </i>
 
-            <i class="bi bi-cart-x"
-               style="font-size: 3rem; color: #7b35d8;">
-            </i>
+                <h4 class="mt-3" th:text="#{cart.vacio.titulo}">
+                    Tu carrito está vacío
+                </h4>
 
-            <h4 class="mt-3">Tu carrito está vacío</h4>
+                <p class="text-muted" th:text="#{cart.vacio.descripcion}">
+                    Agrega productos para verlos aquí.
+                </p>
 
-            <p class="text-muted">
-                Agrega productos para verlos aquí.
-            </p>
+                <a th:href="@{/productos}" class="btn-purple" th:text="#{cart.verProductos}">
+                    Ver productos
+                </a>
 
-            <a th:href="@{/productos}" class="btn-purple">
-                Ver productos
-            </a>
+            </div>
 
-        </div>
+        </main>
 
-    </main>
+    </div>
 
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>

@@ -23,7 +23,8 @@ public class Role {
     private String name;
 
     // Constructor vacío requerido por JPA
-    public Role() {}
+    public Role() {
+    }
 
     public Role(String name) {
         this.name = name;
