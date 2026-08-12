@@ -5,7 +5,6 @@
     "description": "Endpoints REST del sistema HomeStore - Proyecto Final SC-403",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
-
   "variable": [
     {
       "key": "base_url",
@@ -13,58 +12,133 @@
       "type": "string"
     }
   ],
-
   "item": [
     {
-      "name": "GET /api/productos (listar)",
-      "request": {
-        "method": "GET",
-        "header": [
-          {
-            "key": "Accept",
-            "value": "application/json"
+      "name": "Productos",
+      "item": [
+        {
+          "name": "GET /api/productos (listar)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/productos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos"]
+            },
+            "description": "Lista todos los productos registrados en HomeStore."
           }
-        ],
-        "url": {
-          "raw": "{{base_url}}/api/productos",
-          "host": [
-            "{{base_url}}"
-          ],
-          "path": [
-            "api",
-            "productos"
-          ]
         },
-        "description": "Lista los productos registrados en HomeStore."
-      }
+        {
+          "name": "GET /api/productos/:id (obtener uno)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/productos/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos", "1"]
+            },
+            "description": "Obtiene un producto por su id. Responde 404 si no existe."
+          }
+        },
+        {
+          "name": "POST /api/productos (crear)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Destornillador eléctrico 12V\",\n  \"description\": \"Destornillador inalámbrico recargable con set de puntas\",\n  \"price\": 22500.00,\n  \"costPrice\": 15800.00,\n  \"stock\": 40,\n  \"categoryId\": 2,\n  \"supplierId\": 1\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/productos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "productos"]
+            },
+            "description": "Crea un nuevo producto en HomeStore. categoryId y supplierId deben existir (ver GET /api/categorias). Responde 201 con el producto creado, 400 si el body es inválido o las IDs no existen."
+          }
+        }
+      ]
     },
-
     {
-      "name": "POST /api/productos (crear)",
-      "request": {
-        "method": "POST",
-        "header": [
-          {
-            "key": "Content-Type",
-            "value": "application/json"
+      "name": "Categorias",
+      "item": [
+        {
+          "name": "GET /api/categorias (listar)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/categorias",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categorias"]
+            },
+            "description": "Lista todas las categorías de producto."
           }
-        ],
-        "body": {
-          "mode": "raw",
-          "raw": "{\n  \"name\": \"Lampara de escritorio\",\n  \"description\": \"Lampara LED para escritorio\",\n  \"price\": 18000.00,\n  \"costPrice\": 12000.00,\n  \"stock\": 15\n}"
         },
-        "url": {
-          "raw": "{{base_url}}/api/productos",
-          "host": [
-            "{{base_url}}"
-          ],
-          "path": [
-            "api",
-            "productos"
-          ]
-        },
-        "description": "Crea un nuevo producto en HomeStore."
-      }
+        {
+          "name": "GET /api/categorias/:id/productos (productos por categoria)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/categorias/1/productos",
+              "host": ["{{base_url}}"],
+              "path": ["api", "categorias", "1", "productos"]
+            },
+            "description": "Lista los productos que pertenecen a una categoría. Responde 404 si la categoría no existe."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Sucursales",
+      "item": [
+        {
+          "name": "GET /api/sucursales (listar)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/sucursales",
+              "host": ["{{base_url}}"],
+              "path": ["api", "sucursales"]
+            },
+            "description": "Lista las sucursales físicas activas, con dirección y URL de Google Maps."
+          }
+        }
+      ]
     }
   ]
 }
