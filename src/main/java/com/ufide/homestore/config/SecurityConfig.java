@@ -46,6 +46,13 @@ public class SecurityConfig {
                                                                 "Dueno")
 
                                                 .requestMatchers(
+                                                                "/empleados",
+                                                                "/empleados/**")
+                                                .hasAnyRole(
+                                                                "Gerente",
+                                                                "Dueno")
+
+                                                .requestMatchers(
                                                                 "/inicio",
                                                                 "/productos/**",
                                                                 "/cart/**",
