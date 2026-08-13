@@ -2,6 +2,8 @@ package com.ufide.homestore.repository;
 
 import java.util.Optional;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ufide.homestore.entity.User;
@@ -9,5 +11,7 @@ import com.ufide.homestore.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByEmail(String email);
+
+    List<User> findByRole_Name(String name);
 
 }
