@@ -122,30 +122,7 @@
 
     <div class="layout">
 
-        <aside class="sidebar">
-
-            <div class="logo">
-                <img th:src="@{/images/logo.png}" src="/images/logo.png" alt="HomeStore">
-            </div>
-
-            <div class="menu">
-                <a th:href="@{/}">Dashboard</a>
-                <a th:href="@{/productos}">Productos</a>
-                <a th:href="@{/cart}">Carrito</a>
-                <a th:href="@{/productos/inventario}">Inventario</a>
-                <a href="#" th:text="#{inicio.ventas}">
-                    Ventas
-                </a>
-                <a th:href="@{/clientes}">
-                    Clientes
-                </a>
-                <a th:href="@{/reportes}" class="active">Reportes</a>
-                <a th:href="@{/empleados}">Usuarios</a>
-                <a href="#">Configuración</a>
-                <a th:href="@{/logout}">Cerrar sesión</a>
-            </div>
-
-        </aside>
+        <aside th:replace="~{fragments/navbar :: sidebar('reportes')}"></aside>
 
         <main class="content">
 
