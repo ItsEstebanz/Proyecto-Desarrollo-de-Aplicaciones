@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas | HomeStore</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #efd6f7;
+            color: #1d1640;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* MENÚ LATERAL */
+        .sidebar {
+            width: 280px;
+            background: white;
+            padding: 35px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .sidebar a {
+            display: block;
+            text-decoration: none;
+            color: #21134f;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 17px 20px;
+            margin-bottom: 8px;
+            border-radius: 15px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #7c32e3;
+            color: white;
+        }
+
+        /* CONTENIDO */
+        .main {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .header {
+            background: white;
+            padding: 28px;
+            border-radius: 22px;
+            margin-bottom: 28px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+        }
+
+        .card h2 {
+            margin-bottom: 22px;
+            color: #26135c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f3e7f8;
+            text-align: left;
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        td {
+            padding: 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        .estado {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .completada {
+            background: #d9f5df;
+            color: #17853a;
+        }
+
+        .pendiente {
+            background: #fff1c7;
+            color: #9b6a00;
+        }
+
+        .vacio {
+            text-align: center;
+            color: #666;
+            padding: 35px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layout">
+
+    
+        <aside class="sidebar">
+
+            <div class="logo">HomeStore</div>
+
+            <a th:href="@{/productos}">Dashboard</a>
+
+            <a th:href="@{/productos}">Productos</a>
+
+            <a th:href="@{/cart}">Carrito</a>
+
+            <a th:href="@{/productos/inventario}">Inventario</a>
+
+            <a th:href="@{/ventas}" class="active">Ventas</a>
+
+            <a th:href="@{/clientes}">Clientes</a>
+
+            <a th:href="@{/empleados}">Empleados</a>
+
+            <a th:href="@{/reportes}">Reportes</a>
+
+            <a href="#">Configuración</a>
+
+            <a th:href="@{/logout}">Cerrar sesión</a>
+
+        </aside>
+
+
+      
+        <main class="main">
+
+            <section class="header">
+
+                <h1>Ventas</h1>
+
+                <p>
+                    Consulta las ventas registradas en HomeStore.
+                </p>
+
+            </section>
+
+
+            <section class="card">
+
+                <h2>Historial de ventas</h2>
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                      
+                        <tr th:each="venta : ${ventas}">
+
+                            <td th:text="${venta.saleId}">
+                                1
+                            </td>
+
+                            <td th:text="${venta.user != null ? venta.user.name : 'Sin cliente'}">
+                                Cliente
+                            </td>
+
+                            <td th:text="${venta.saleDate}">
+                                12/08/2026
+                            </td>
+
+                            <td th:text="${venta.total}">
+                                ₡0
+                            </td>
+
+                            <td>
+                                <span class="estado completada" th:text="${venta.status}">
+                                    Completada
+                                </span>
+                            </td>
+
+                        </tr>
+
+                       
+                        <tr th:if="${ventas == null or #lists.isEmpty(ventas)}">
+                            <td colspan="5" class="vacio">
+                                No hay ventas registradas.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ventas | HomeStore</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #efd6f7;
+            color: #1d1640;
+        }
+
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+       
+        .sidebar {
+            width: 280px;
+            background: white;
+            padding: 35px 20px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 40px;
+        }
+
+        .sidebar a {
+            display: block;
+            text-decoration: none;
+            color: #21134f;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 17px 20px;
+            margin-bottom: 8px;
+            border-radius: 15px;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #7c32e3;
+            color: white;
+        }
+
+    
+        .main {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .header {
+            background: white;
+            padding: 28px;
+            border-radius: 22px;
+            margin-bottom: 28px;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 17px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+        }
+
+        .card h2 {
+            margin-bottom: 22px;
+            color: #26135c;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f3e7f8;
+            text-align: left;
+            padding: 15px;
+            font-size: 16px;
+        }
+
+        td {
+            padding: 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        .estado {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 15px;
+            font-weight: bold;
+        }
+
+        .completada {
+            background: #d9f5df;
+            color: #17853a;
+        }
+
+        .pendiente {
+            background: #fff1c7;
+            color: #9b6a00;
+        }
+
+        .vacio {
+            text-align: center;
+            color: #666;
+            padding: 35px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layout">
+
+      
+        <aside class="sidebar">
+
+            <div class="logo">HomeStore</div>
+
+            <a th:href="@{/productos}">Dashboard</a>
+
+            <a th:href="@{/productos}">Productos</a>
+
+            <a th:href="@{/cart}">Carrito</a>
+
+            <a th:href="@{/productos/inventario}">Inventario</a>
+
+            <a th:href="@{/ventas}" class="active">Ventas</a>
+
+            <a th:href="@{/clientes}">Clientes</a>
+
+            <a th:href="@{/empleados}">Empleados</a>
+
+            <a th:href="@{/reportes}">Reportes</a>
+
+            <a href="#">Configuración</a>
+
+            <a th:href="@{/logout}">Cerrar sesión</a>
+
+        </aside>
+
+
+    
+        <main class="main">
+
+            <section class="header">
+
+                <h1>Ventas</h1>
+
+                <p>
+                    Consulta las ventas registradas en HomeStore.
+                </p>
+
+            </section>
+
+
+            <section class="card">
+
+                <h2>Historial de ventas</h2>
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                       
+                        <tr th:each="venta : ${ventas}">
+
+                            <td th:text="${venta.saleId}">
+                                1
+                            </td>
+
+                            <td th:text="${venta.user != null ? venta.user.name : 'Sin cliente'}">
+                                Cliente
+                            </td>
+
+                            <td th:text="${venta.saleDate}">
+                                12/08/2026
+                            </td>
+
+                            <td th:text="${venta.total}">
+                                ₡0
+                            </td>
+
+                            <td>
+                                <span class="estado completada" th:text="${venta.status}">
+                                    Completada
+                                </span>
+                            </td>
+
+                        </tr>
+
+                       
+                        <tr th:if="${ventas == null or #lists.isEmpty(ventas)}">
+                            <td colspan="5" class="vacio">
+                                No hay ventas registradas.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>
