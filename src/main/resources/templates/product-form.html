@@ -275,57 +275,7 @@
 
     <div class="layout">
 
-        <aside class="sidebar">
-
-            <div class="logo">
-                <img th:src="@{/images/logo.png}" src="/images/logo.png" alt="HomeStore">
-            </div>
-
-            <nav class="menu">
-
-                <a th:href="@{/inicio}" href="/inicio" th:text="#{productos.menu.dashboard}">
-                    Dashboard
-                </a>
-
-                <a th:href="@{/productos}" href="/productos" class="active" th:text="#{menu.productos}">
-                    Productos
-                </a>
-
-                <a th:href="@{/cart}" href="/cart" th:text="#{menu.carrito}">
-                    Carrito
-                </a>
-
-                <a href="#" th:text="#{inicio.inventario}">
-                    Inventario
-                </a>
-
-                <a href="#" th:text="#{inicio.ventas}">
-                    Ventas
-                </a>
-
-                <a href="#" th:text="#{productos.menu.clientes}">
-                    Clientes
-                </a>
-
-                <a href="#" th:text="#{inicio.reportes}">
-                    Reportes
-                </a>
-
-                <a href="#" th:text="#{productos.menu.usuarios}">
-                    Usuarios
-                </a>
-
-                <a href="#" th:text="#{productos.menu.configuracion}">
-                    Configuración
-                </a>
-
-                <a th:href="@{/logout}" href="/logout" th:text="#{productos.menu.cerrarSesion}">
-                    Cerrar sesión
-                </a>
-
-            </nav>
-
-        </aside>
+        <aside th:replace="~{fragments/navbar :: sidebar('productos')}"></aside>
 
         <main class="content">
 

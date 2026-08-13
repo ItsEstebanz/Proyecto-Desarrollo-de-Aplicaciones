@@ -38,9 +38,10 @@ public class SecurityConfig {
                                                                 "/productos/editar/**",
                                                                 "/productos/eliminar/**",
                                                                 "/productos/inventario",
-                                                                "/reportes")
+                                                                "/reportes",
+                                                                "/ventas",
+                                                                "/ventas/**")
                                                 .hasAnyRole(
-                                                                "ADMIN",
                                                                 "Supervisor",
                                                                 "Gerente",
                                                                 "Dueno")

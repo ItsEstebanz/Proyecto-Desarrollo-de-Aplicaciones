@@ -281,23 +281,7 @@
 
 <body>
 
-    <header class="navbar">
-
-        <a th:href="@{/}" href="/" class="logo-container">
-
-            <div class="logo-icon">🏠</div>
-
-            <span class="logo-text">
-                HomeStore
-            </span>
-
-        </a>
-
-        <a th:href="@{/}" href="/" class="home-link" th:text="#{registro.volverInicio}">
-            Volver al inicio
-        </a>
-
-    </header>
+    <nav th:replace="~{fragments/navbar :: topNavbar('', '/registro')}"></nav>
 
     <main class="page-container">
 

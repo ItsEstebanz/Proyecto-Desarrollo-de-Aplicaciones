@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+    <nav th:fragment="topNavbar(active, path)" class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid px-4">
+
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/logo.png}" src="/images/logo.png" alt="HomeStore" style="height: 80px;">
+            </a>
+
+            <div class="d-flex align-items-center gap-4 ms-auto">
+
+                <a class="nav-link" th:classappend="${active == 'inicio'} ? 'active'" th:href="@{/}"
+                    th:text="#{menu.inicio}">
+                    Inicio
+                </a>
+
+                <a class="nav-link" th:classappend="${active == 'productos'} ? 'active'" th:href="@{/productos}"
+                    th:text="#{menu.productos}">
+                    Productos
+                </a>
+
+                <a class="nav-link" th:classappend="${active == 'categorias'} ? 'active'" th:href="@{/categories}"
+                    th:text="#{menu.categorias}">
+                    Categorías
+                </a>
+
+                <a class="nav-link" th:classappend="${active == 'carrito'} ? 'active'" th:href="@{/cart}"
+                    th:text="#{menu.carrito}">
+                    Carrito
+                </a>
+
+                <a class="nav-link" th:classappend="${active == 'nosotros'} ? 'active'" th:href="@{/nosotros}"
+                    th:text="#{menu.nosotros}">
+                    Nosotros
+                </a>
+
+                <a class="nav-link" th:classappend="${active == 'contacto'} ? 'active'" th:href="@{/contacto}"
+                    th:text="#{menu.contacto}">
+                    Contacto
+                </a>
+
+                <a class="nav-link" th:classappend="${active == 'ubicacion'} ? 'active'" th:href="@{/location}"
+                    th:text="#{menu.ubicacion}">
+                    Ubicación
+                </a>
+
+                <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#opinionModal"
+                    th:text="#{menu.opinion}">
+                    Opinión
+                </a>
+
+                <a class="btn-lang text-decoration-none" th:href="@{${path}(lang='es')}">
+                    ES
+                </a>
+
+                <a class="btn-lang text-decoration-none" th:href="@{${path}(lang='en')}">
+                    EN
+                </a>
+
+                <a class="btn-sesion ms-2 text-decoration-none" th:href="@{/inicio}"
+                    th:text="#{menu.iniciarSesion}">
+                    Inicio de Sesión
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <aside th:fragment="sidebar(active)" class="sidebar">
+
+        <div class="logo">
+            <img th:src="@{/images/logo.png}" src="/images/logo.png" alt="HomeStore">
+        </div>
+
+        <div class="menu">
+
+            <a th:href="@{/inicio}" th:classappend="${active == 'dashboard'} ? 'active'"
+                th:text="#{productos.menu.dashboard}">
+                Dashboard
+            </a>
+
+            <a th:href="@{/productos}" th:classappend="${active == 'productos'} ? 'active'"
+                th:text="#{menu.productos}">
+                Productos
+            </a>
+
+            <a th:href="@{/categories}" th:classappend="${active == 'categorias'} ? 'active'"
+                th:text="#{menu.categorias}">
+                Categorías
+            </a>
+
+            <a th:href="@{/cart}" th:classappend="${active == 'carrito'} ? 'active'" th:text="#{menu.carrito}">
+                Carrito
+            </a>
+
+            <a th:href="@{/productos/inventario}" th:classappend="${active == 'inventario'} ? 'active'"
+                th:text="#{inicio.inventario}">
+                Inventario
+            </a>
+
+            <a th:href="@{/ventas}" th:classappend="${active == 'ventas'} ? 'active'" th:text="#{inicio.ventas}">
+                Ventas
+            </a>
+
+            <a th:href="@{/clientes}" th:classappend="${active == 'clientes'} ? 'active'"
+                th:text="#{productos.menu.clientes}">
+                Clientes
+            </a>
+
+            <a th:href="@{/reportes}" th:classappend="${active == 'reportes'} ? 'active'"
+                th:text="#{inicio.reportes}">
+                Reportes
+            </a>
+
+            <a th:href="@{/empleados}" th:classappend="${active == 'usuarios'} ? 'active'"
+                th:text="#{productos.menu.usuarios}">
+                Usuarios
+            </a>
+
+            <a href="#" th:text="#{productos.menu.configuracion}">
+                Configuración
+            </a>
+
+            <a th:href="@{/logout}" th:text="#{productos.menu.cerrarSesion}">
+                Cerrar sesión
+            </a>
+
+        </div>
+
+    </aside>
+
+</body>
+
+</html>

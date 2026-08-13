@@ -251,93 +251,59 @@
                 text-align: center;
             }
         }
+        .layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 230px;
+            background: white;
+            padding: 25px 15px;
+            border-right: 1px solid #eee;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo img {
+            width: 95px;
+        }
+
+        .menu a {
+            display: block;
+            padding: 12px 18px;
+            margin-bottom: 8px;
+            text-decoration: none;
+            color: #2b195c;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .menu a.active,
+        .menu a:hover {
+            background: #7b35d8;
+            color: white;
+        }
+
+        .content {
+            flex: 1;
+            padding: 35px;
+        }
     </style>
 </head>
 
 <body>
 
-<nav class="navbar navbar-expand-xl navbar-light bg-white">
+<div class="layout">
 
-    <div class="container-fluid px-4">
+    <aside th:replace="~{fragments/navbar :: sidebar('inventario')}"></aside>
 
-        <a class="navbar-brand" th:href="@{/}">
-            <img th:src="@{/images/logo.png}"
-                 src="/images/logo.png"
-                 alt="HomeStore"
-                 style="height: 80px;">
-        </a>
+    <main class="content">
 
-        <div class="d-flex align-items-center gap-4 ms-auto">
-
-            <a class="nav-link"
-               th:href="@{/}"
-               th:text="#{menu.inicio}">
-                Inicio
-            </a>
-
-            <a class="nav-link"
-               th:href="@{/productos}"
-               th:text="#{menu.productos}">
-                Productos
-            </a>
-
-            <a class="nav-link active"
-               th:href="@{/productos/inventario}"
-               th:text="#{inventario.menu.inventario}">
-                Inventario
-            </a>
-
-            <a class="nav-link"
-               th:href="@{/categories}"
-               th:text="#{menu.categorias}">
-                Categorías
-            </a>
-
-            <a class="nav-link"
-               th:href="@{/cart}"
-               th:text="#{menu.carrito}">
-                Carrito
-            </a>
-
-            <a class="nav-link"
-               th:href="@{/nosotros}"
-               th:text="#{menu.nosotros}">
-                Nosotros
-            </a>
-
-            <a class="nav-link"
-               th:href="@{/contacto}"
-               th:text="#{menu.contacto}">
-                Contacto
-            </a>
-
-            <a class="nav-link"
-               th:href="@{/location}"
-               th:text="#{menu.ubicacion}">
-                Ubicación
-            </a>
-
-            <a class="btn-lang text-decoration-none"
-               th:href="@{/productos/inventario(lang='es')}">
-                ES
-            </a>
-
-            <a class="btn-lang text-decoration-none"
-               th:href="@{/productos/inventario(lang='en')}">
-                EN
-            </a>
-
-            <a class="btn-sesion ms-2 text-decoration-none"
-               th:href="@{/logout}"
-               th:text="#{inventario.cerrarSesion}">
-                Cerrar sesión
-            </a>
-
-        </div>
-    </div>
-</nav>
-
-<main class="inventory-container">
+<div class="inventory-container">
 
     <section class="page-header">
 
@@ -646,7 +612,11 @@
 
     </section>
 
-</main>
+</div>
+
+    </main>
+
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
 </script>
